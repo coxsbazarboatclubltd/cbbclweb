@@ -190,6 +190,23 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
       ] as const);
   // One or more addresses, comma-separated.
   const contactEmails = splitList((director.socials?.email || "").replace(/,/g, ";"));
+  // Career milestones show newest first: current/ongoing roles, then by latest year, undated items last.
+  const milestoneKey = (label: string): [number, number] => {
+    const ongoing = /current|present/i.test(label);
+    const years = (label.match(/\d{4}/g) || []).map(Number);
+    if (ongoing) return [9999, years.length ? Math.min(...years) : 9999];
+    if (years.length) return [Math.max(...years), Math.min(...years)];
+    return [-1, -1];
+  };
+  const sortedTimeline = (director.timeline || [])
+    .map((step, i) => ({ step, i }))
+    .sort((a, b) => {
+      const [ae, as] = milestoneKey(a.step.year);
+      const [be, bs] = milestoneKey(b.step.year);
+      return be - ae || bs - as || a.i - b.i;
+    })
+    .map((x) => x.step);
+
   const BulletList = ({ items }: { items: string[] }) => (
     <ul className="space-y-1 mt-1">
       {items.map((c) => (
@@ -540,7 +557,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                   </h4>
 
                   <div className="relative border-l border-gold-dark/40 ml-4 pl-6 space-y-6">
-                    {director.timeline?.map((step, idx) => (
+                    {sortedTimeline.map((step, idx) => (
                       <div key={idx} className="relative">
                         {/* Circle marker */}
                         <div className="absolute -left-[31px] top-1 bg-navy text-gold font-sans font-bold text-[8px] border border-gold w-4 h-4 rounded-full flex items-center justify-center">

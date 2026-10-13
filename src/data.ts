@@ -117,7 +117,7 @@ export const DIRECTORS_DATA: Director[] = [
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-002",
     profileSubmitted: true,
-    profileRevision: 8,
+    profileRevision: 15,
     quote: "We make mistakes, and mistakes make us.",
     photoAlt: "Official portrait of Farhan Bin Rafiq, Founding Director, Cox's Bazar Boat Club Ltd.",
     bio: [
@@ -153,12 +153,16 @@ export const DIRECTORS_DATA: Director[] = [
     community: [
       "Project Green Cox's Bazar — environmental and tree plantation initiative with JCI Cox's Bazar",
       "ECCHE PURAN — community welfare initiative",
+      "Jiboner Nilayon — community engagement under JCI Cox's Bazar",
+      "Phire Pawa Hashi — community engagement under JCI Cox's Bazar",
       "JCI Cox's Bazar youth leadership, community development and social welfare initiatives"
     ],
     timeline: [
       { year: "2023", event: "Joined JCI Cox's Bazar as a Member" },
-      { year: "Current", event: "Local Director, JCI Cox's Bazar" },
-      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." }
+      { year: "2023", event: "Attended the Bangladesh–Thai Chamber of Commerce delegation to Bangkok, Thailand, under Thailand's Ministry of Foreign Affairs" },
+      { year: "2025", event: "Hosted the 2025 JCI Cox's Bazar Chain Handover Ceremony as the event's Emcee" },
+      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." },
+      { year: "2026", event: "Local Director, JCI Cox's Bazar" }
     ]
   },
   {
