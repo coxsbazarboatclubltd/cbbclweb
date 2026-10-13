@@ -6,7 +6,7 @@ import amzadMahmudPortrait from "./assets/images/board/amzad-mahmud.png";
 // @ts-ignore
 import mohammedEliasPortrait from "./assets/images/board/mohammed-elias.png";
 // @ts-ignore
-import mdYousufPortrait from "./assets/images/board/md-yousuf.png";
+import mdYousufPortrait from "./assets/images/board/md-yousuf.jpg";
 // @ts-ignore
 import nurulAbsarPortrait from "./assets/images/board/nurul-absar.png";
 // @ts-ignore
