@@ -47,7 +47,7 @@ export interface Director {
   quote?: string;
   /** Professional strengths shown as tags under "Areas of Expertise". */
   expertise?: string[];
-  socials?: { linkedin?: string; facebook?: string; twitter?: string; instagram?: string; email?: string };
+  socials?: { linkedin?: string; facebook?: string; twitter?: string; instagram?: string; email?: string; wechat?: string };
   // Set once the director has submitted their profile form: only their real data is shown,
   // and sections they left empty are hidden instead of being filled with placeholder text.
   profileSubmitted?: boolean;

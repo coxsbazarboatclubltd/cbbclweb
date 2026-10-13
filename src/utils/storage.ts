@@ -143,7 +143,8 @@ export function saveProfiles(profiles: Profile[]): void {
 // Directors whose name spelling was corrected; cached board lists still holding an old spelling are updated.
 const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = {
   "reshedul-evu": { name: "Rasadul Maimun Evo", oldNames: ["Reshedul Evu"] },
-  "mohammed-elias": { name: "Mohammad Eliyas", oldNames: ["Mohammed Elias"] }
+  "mohammed-elias": { name: "Mohammad Eliyas", oldNames: ["Mohammed Elias"] },
+  "maimunal-karim-jisan": { name: "Maimunul Karim Jisan", oldNames: ["Maimunal Karim Jisan"] }
 };
 
 // Directors whose board seat changed; cached lists still holding the old seat are moved.

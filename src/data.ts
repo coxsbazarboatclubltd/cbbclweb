@@ -264,9 +264,56 @@ export const DIRECTORS_DATA: Director[] = [
   },
   {
     id: "maimunal-karim-jisan",
-    name: "Maimunal Karim Jisan",
+    name: "Maimunul Karim Jisan",
     designation: "Founding Director",
-    membershipCode: "CBBCL-FOUNDER-007"
+    membershipCode: "CBBCL-FOUNDER-007",
+    profileSubmitted: true,
+    profileRevision: 2,
+    photoAlt: "Maimunul Karim Jisan, Director, Cox's Bazar Boat Club Ltd., and Founder & Managing Director, BengalWeft",
+    bio: [
+      "Maimunul Karim Jisan is a young entrepreneur and technology-driven business leader from Cox's Bazar, building an export-oriented garments enterprise that connects Bangladesh with international markets.",
+      "He is the Founder and Managing Director of BengalWeft, a garments manufacturing business based in Chattogram that exports garments abroad. He leads the company's overall direction and growth and takes its strategic business decisions. He is directly involved in managing buyers, including building and maintaining relationships with international clients, and oversees production management so that quality, efficiency and delivery commitments are met. Through his leadership, he focuses on running a professionally managed, export-oriented enterprise.",
+      "Alongside his business, he has a strong academic and technical background. He holds a B.Sc. in Computer Science and Engineering from East Delta University, Chattogram, and was named to the University's Dean's List of Honor Students. He completed a data science internship with Brainwave Matrix Solutions in Noida, Uttar Pradesh, India, and applies skills in data analysis, artificial intelligence and problem-solving to production planning, operational efficiency and data-driven decision-making. He is also an active researcher in machine learning and computer vision: his peer-reviewed work on lightweight deep learning models was published in Applied Soft Computing (Elsevier, 2026), and he is a Kaggle Legacy Expert.",
+      "His entrepreneurial approach combines practical business leadership with modern technology. He aims to build an efficient, sustainable enterprise that contributes to Bangladesh's garments export sector and to local economic development. Beyond business, he is committed to community welfare, having volunteered with Volunteer for Bangladesh on the \"My Road, My Responsibility\" road-safety campaign in Chittagong.",
+      "As a Director of Cox's Bazar Boat Club Ltd., he supports the club's goal of becoming a distinguished socio-cultural and nautical institution in Cox's Bazar, bringing an entrepreneurial, transparent and technology-oriented perspective to its management and member services. As a son of Cox's Bazar, he is committed to the growth of the club and the wider community."
+    ],
+    businessProfile: {
+      // Multiple entries are separated by "; ".
+      role: "Founder & Managing Director, BengalWeft",
+      company: "BengalWeft",
+      industry: "Garments Manufacturing and Export (Readymade Garments, RMG)",
+      interests: "Garments Manufacturing; Export & International Trade; Sustainable Business Growth; Employment Generation",
+      website: "https://www.bengalweft.com"
+    },
+    achievements: [
+      "2026 — Peer-reviewed journal publication: LiteCNN4Rice, Applied Soft Computing, Elsevier (Vol. 199, 115356)",
+      "2025 — Kaggle Legacy Expert, Kaggle (Google LLC)"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Limited — Board of Directors / Executive Member",
+      "Junior Chamber International (JCI), Cox's Bazar — Member",
+      "Volunteer for Bangladesh (VBD), Chittagong — Member",
+      "EDU Computer Club — Member"
+    ],
+    community: [
+      "Employment generation & local economic development — BengalWeft, 18 factory employees in Chattogram; Founder & Managing Director, ongoing",
+      "Community development & social initiatives — local communities in Chattogram and Cox's Bazar; ongoing",
+      "Responsible corporate practices — promotes professionally managed and sustainable business ventures for business stakeholders and local communities; ongoing",
+      "\"My Road, My Responsibility\" road safety awareness campaign — Volunteer for Bangladesh (VBD), Chittagong; volunteer, Dec 2019 – Jan 2020, promoting responsible road behavior and traffic rule awareness to help reduce accidents"
+    ],
+    socials: {
+      linkedin: "https://www.linkedin.com/in/maimunul-karim-jisan-6371a7140",
+      facebook: "https://www.facebook.com/maimunulkjisan",
+      instagram: "https://www.instagram.com/maimunul_k_thisan",
+      wechat: "maimunul0",
+      email: "maimunulkjisan0@gmail.com, maimunul@bengalweft.com"
+    },
+    timeline: [
+      { year: "2025", event: "Started leading BengalWeft, a garments manufacturing and export business in Chattogram." },
+      { year: "2025", event: "Became a Kaggle Legacy Expert." },
+      { year: "2024–2025", event: "Completed a data science internship with Brainwave Matrix Solutions, India." },
+      { year: "2024", event: "Graduated with a B.Sc. in CSE and was named to the Dean's List of Honor Students." }
+    ]
   },
   {
     id: "md-rezaul-kabir-reza",

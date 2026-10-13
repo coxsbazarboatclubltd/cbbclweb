@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DIRECTORS_DATA, MASTER_HERO_VIDEO } from "../../data";
 import { getBoardMembers, getDirectorPortrait } from "../../utils/storage";
 import { getClubMembers } from "../../utils/memberStorage";
@@ -10,6 +10,15 @@ import BackgroundVideo from "../BackgroundVideo";
 // "The Executive's Sailing Chronicles" stock-photo gallery is archived for now. Set true to restore.
 const SHOW_SAILING_CHRONICLES = false;
 
+// WeChat logo (Lucide has no WeChat icon).
+function WeChatIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M8.7 3C4.9 3 1.8 5.6 1.8 8.9c0 1.9 1 3.6 2.6 4.7L3.8 15.6l2.3-1.2c.8.2 1.7.4 2.6.4h.6a5.8 5.8 0 0 1-.2-1.5c0-3.2 3-5.8 6.8-5.8h.6C15.7 4.9 12.5 3 8.7 3Zm-2.3 3.4a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.6 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.9 2.6c-3.3 0-5.9 2.2-5.9 4.9s2.6 4.9 5.9 4.9c.7 0 1.4-.1 2-.3l1.9 1-.5-1.7c1.4-.9 2.3-2.3 2.3-3.9 0-2.7-2.6-4.9-5.7-4.9Zm-2 2.6a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Zm3.9 0a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Z" />
+    </svg>
+  );
+}
+
 interface BoardProfileProps {
   directorId?: string;
   navigate?: (path: RoutePath) => void;
@@ -18,6 +27,7 @@ interface BoardProfileProps {
 export default function BoardProfile({ directorId = "humayun-kabir-robel", navigate }: BoardProfileProps) {
   // Pull all members dynamically
   const boardList = getBoardMembers();
+  const [wechatCopied, setWechatCopied] = useState(false);
   const clubList = getClubMembers();
 
   // Determine if this person is dynamically on the board
@@ -189,6 +199,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         ["twitter", "https://twitter.com", Twitter, "X / Twitter"]
       ] as const);
   // One or more addresses, comma-separated.
+  const wechatId = director.socials?.wechat;
   const contactEmails = splitList((director.socials?.email || "").replace(/,/g, ";"));
   // Career milestones show newest first: current/ongoing roles, then by latest year, undated items last.
   const milestoneKey = (label: string): [number, number] => {
@@ -314,12 +325,12 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
               </div>
 
               {/* Social Channels Links */}
-              {(socialLinks.length > 0 || contactEmails.length > 0) && (
+              {(socialLinks.length > 0 || contactEmails.length > 0 || !!wechatId) && (
                 <div className="border-t border-slate-100 pt-6">
                   <span className="block text-[9px] font-sans text-slate-400 font-bold uppercase tracking-widest mb-3 text-center">
                     Social Registries
                   </span>
-                  {socialLinks.length > 0 && (
+                  {(socialLinks.length > 0 || wechatId) && (
                     <div className="flex flex-wrap justify-center gap-x-5 gap-y-3">
                       {socialLinks.map(([key, url, Icon, label]) => (
                         <a key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors">
@@ -329,6 +340,26 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                           <span className="font-sans text-[10px] leading-none">{label}</span>
                         </a>
                       ))}
+                      {/* WeChat has no web profile link: show the ID; clicking copies it */}
+                      {wechatId && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard?.writeText(wechatId).then(() => {
+                              setWechatCopied(true);
+                              setTimeout(() => setWechatCopied(false), 2000);
+                            }).catch(() => {});
+                          }}
+                          aria-label={`WeChat ID ${wechatId} (click to copy)`}
+                          title="Click to copy WeChat ID"
+                          className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors"
+                        >
+                          <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
+                            <WeChatIcon className="w-4 h-4" />
+                          </span>
+                          <span className="font-sans text-[10px] leading-none">{wechatCopied ? "Copied!" : `WeChat: ${wechatId}`}</span>
+                        </button>
+                      )}
                     </div>
                   )}
                   {contactEmails.length > 0 && (
