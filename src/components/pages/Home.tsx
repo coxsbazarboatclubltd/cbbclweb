@@ -803,6 +803,8 @@ export default function Home({ navigate }: HomeProps) {
                         Row III: Core Secretariat Directors
                       </span>
                       <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-3xl w-full mx-auto">
+                        {/* Director Administration seat is vacant until someone holds it */}
+                        {!coreSecretariat.some((d) => /administration/i.test(d.designation)) && <VacantBoardCard title="Director Administration" />}
                         {coreSecretariat.map((dir) => (
                           <BoardProfileCard key={dir.id} director={dir} navigate={navigate} variant="main" />
                         ))}
