@@ -327,42 +327,41 @@ export const DIRECTORS_DATA: Director[] = [
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-012",
     profileSubmitted: true,
-    profileRevision: 2,
+    profileRevision: 3,
     photoAlt: "Md Yousuf, Founding Director, Cox's Bazar Boat Club Ltd.",
     bio: [
       "Md Yousuf is a dynamic business leader, entrepreneur, and prominent community organizer based in Cox's Bazar, Bangladesh. He serves as a Founding Director of Cox's Bazar Boat Club Ltd., contributing to the strategic establishment and executive leadership of the regional maritime club.",
-      "In his principal commercial venture, Mr. Yousuf is the Proprietor of M/S Yusuf & Brothers Filling Station and LPG Auto Gas Station, located at Palongkhali, Ukhia, Cox's Bazar. Established in May 2016, his business serves as a critical fuel supply and energy distribution hub in the region. Under his leadership, the company maintains key strategic fuel distribution agreements with major international humanitarian organizations, including Save the Children, Médecins Sans Frontières (MSF), and Handicap International (HI), supporting vital logistics across Ukhiya and Cox's Bazar.",
-      "Beyond his business success, Mr. Yousuf is actively engaged in corporate networking and youth leadership. He serves as an Officer at JCI Cox's Bazar and is a Member of Club JCI Limited. In 2026, he represented Bangladesh as an official delegate at the JCI Asia and the Pacific Conference held in Niigata, Japan. As a Founding Director of Cox's Bazar Boat Club Ltd., he is dedicated to fostering regional tourism, premium hospitality, and sustainable maritime development in Cox's Bazar."
+      "In his principal commercial venture, Mr. Yousuf is the Proprietor of M/S Yusuf & Brothers Filling Station, located at Palongkhali, Ukhia, Cox's Bazar. Established in May 2016, his business serves as a critical fuel, energy, and LPG supply logistics hub in the region. Under his leadership, the company maintains key strategic fuel and gas distribution agreements with major international humanitarian organizations, including Save the Children, Médecins Sans Frontières (MSF), and Handicap International (HI), supporting vital logistics across Ukhiya and Cox's Bazar.",
+      "Beyond his business success, Mr. Yousuf is actively engaged in corporate networking and youth leadership. He holds a key leadership position as Treasurer of JCI Cox's Bazar for 2026. In 2026, he represented Bangladesh as an official delegate at the JCI Asia and the Pacific Conference held in Niigata, Japan. As a Founding Director of Cox's Bazar Boat Club Ltd., he is dedicated to fostering regional tourism, premium hospitality, and sustainable maritime development in Cox's Bazar."
     ],
     businessProfile: {
       // Multiple entries are separated by "; ".
-      role: "Proprietor, M/S Yusuf & Brothers Filling Station and LPG Auto Gas Station",
-      company: "M/S Yusuf & Brothers Filling Station and LPG Auto Gas Station",
-      industry: "Energy & Fuel Supply Logistics",
-      interests: "Petroleum & LPG Auto Gas Distribution; Humanitarian Supply Chain Logistics; Maritime Leisure; Club Management"
+      role: "Proprietor, M/S Yusuf & Brothers Filling Station",
+      company: "M/S Yusuf & Brothers Filling Station",
+      industry: "Energy, Fuel & LPG Supply Logistics",
+      interests: "Petroleum & LPG Distribution; Institutional Fuel Supply Partnerships; Regional Commerce"
     },
     achievements: [
       "2026 — Founding Director appointment, Cox's Bazar Boat Club Ltd.",
       "2026 — Official Delegate, JCI Asia and the Pacific Conference (JCI International, Niigata, Japan)",
-      "2016 – Present — Key humanitarian energy logistics partner for Save the Children, MSF and Handicap International in Ukhiya & Cox's Bazar"
+      "2016 – Present — Key humanitarian energy & LPG logistics partner for Save the Children, MSF and Handicap International in Ukhiya & Cox's Bazar"
     ],
     memberships: [
       "Cox's Bazar Boat Club Ltd. — Founding Director / Board Member",
-      "JCI Cox's Bazar — Officer / Active Member",
-      "Club JCI Limited — General Member"
+      "JCI Cox's Bazar — Treasurer (2026)"
     ],
     community: [
-      "Humanitarian logistics support — energy supply partner (ongoing) for Save the Children, MSF and Handicap International, ensuring critical fuel supply for humanitarian operations in Cox's Bazar and Ukhiya",
-      "Civic & youth development — Officer & contributor (ongoing) with JCI Cox's Bazar / Club JCI Limited, taking part in community service, leadership growth and civic welfare projects"
+      "Humanitarian logistics support — energy, fuel & LPG supply partner (ongoing) for Save the Children, MSF and Handicap International, ensuring critical fuel and gas supply for humanitarian operations in Cox's Bazar and Ukhiya",
+      "Civic & youth development — Treasurer (2026) & contributor (ongoing) with JCI Cox's Bazar, taking part in financial governance, community service, leadership growth and civic welfare projects"
     ],
     socials: {
       facebook: "https://www.facebook.com/md.yousuf.353",
       instagram: "https://www.instagram.com/md_yousuf_ib",
-      email: "yousufm503@gmail.com, msyousufbrothersfillingstation@gmail.com, yousuf_ib@yahoo.com"
+      email: "yousufm503@gmail.com"
     },
     timeline: [
       { year: "2026", event: "Appointed as Founding Director of Cox's Bazar Boat Club Ltd. (Estd. 2026)." },
-      { year: "2026", event: "Represented Bangladesh at the 2026 JCI Asia and the Pacific Conference in Niigata, Japan." },
+      { year: "2026", event: "Assumed office as Treasurer of JCI Cox's Bazar for 2026 and represented Bangladesh at the JCI Asia and the Pacific Conference in Niigata, Japan." },
       { year: "2016", event: "Established M/S Yusuf & Brothers Filling Station (commenced 26 May 2016) at Palongkhali, Ukhia, Cox's Bazar." }
     ]
   },
