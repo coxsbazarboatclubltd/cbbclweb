@@ -2,6 +2,12 @@
 @import "tailwindcss";
 
 @theme {
+  /* In-between slate shades used across the site (Tailwind ships only 50/100/200/...).
+     Without these, e.g. "border-slate-150" fell back to a dark currentColor border. */
+  --color-slate-150: #e9eef4;
+  --color-slate-350: #b0bccd;
+  --color-slate-450: #7c8ba2;
+  --color-slate-650: #3d4b5f;
   --color-navy: #1a2744;
   --color-navy-mid: #1f3158;
   --color-navy-light: #263a6b;

@@ -500,7 +500,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                   </h4>
                   <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 font-sans text-xs text-text-body font-light leading-relaxed">
                     {director.community?.map((comm, idx) => (
-                      <li key={idx} className="p-4 bg-bg-secondary rounded-xs border border-slate-150">
+                      <li key={idx} className="p-4 bg-bg-secondary rounded-xs border border-gold">
                         <span className="text-gold font-bold block mb-1">Activism {idx + 1}</span>
                         <span>{comm}</span>
                       </li>
