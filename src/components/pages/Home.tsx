@@ -3,7 +3,7 @@ import { RoutePath } from "../../types";
 import { getBoardMembers, getNewsPosts, getDirectorPortrait } from "../../utils/storage";
 import { getPageContent, getCMSFacilities, getCMSEvents, getCMSAffiliations, fetchFooterSettings, getFooterSettingsSync } from "../../utils/cmsStorage";
 import { FooterSettings } from "../../types";
-import BoardProfileCard from "../BoardProfileCard";
+import BoardProfileCard, { VacantBoardCard } from "../BoardProfileCard";
 import CardMedia from "../CardMedia";
 import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
@@ -787,6 +787,7 @@ export default function Home({ navigate }: HomeProps) {
                         Row II: Vice Presidency
                       </span>
                       <div className="flex justify-center gap-6 flex-wrap">
+                        {vicePresidents.length === 0 && <VacantBoardCard title="Founding Vice President" />}
                         {vicePresidents.map((vp) => (
                           <BoardProfileCard key={vp.id} director={vp} navigate={navigate} variant="main" />
                         ))}

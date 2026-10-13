@@ -146,6 +146,11 @@ const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = 
   "mohammed-elias": { name: "Mohammad Eliyas", oldNames: ["Mohammed Elias"] }
 };
 
+// Directors whose board seat changed; cached lists still holding the old seat are moved.
+const ROLE_CHANGES: Record<string, { fromLevel: number; level: number; designation: string }> = {
+  "farhan-bin-rafiq": { fromLevel: 2, level: 4, designation: "Founding Director" }
+};
+
 // Directors removed from the board; filtered out of any cached board list.
 const RETIRED_DIRECTOR_IDS = ["syfuddin-khaled"];
 
@@ -186,8 +191,15 @@ export function getBoardMembers(): Director[] {
     }
     // A director who has submitted their profile form: take their real profile whenever its revision is newer.
     if (staticDirector?.profileSubmitted && (updated.profileRevision ?? 0) < (staticDirector.profileRevision ?? 1)) {
-      const { bio, vision, quote, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileRevision } = staticDirector;
-      Object.assign(updated, { bio, vision, quote, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileSubmitted: true, profileRevision: profileRevision ?? 1 });
+      const { designation, bio, vision, quote, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileRevision } = staticDirector;
+      Object.assign(updated, { designation, bio, vision, quote, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileSubmitted: true, profileRevision: profileRevision ?? 1 });
+      changed = true;
+    }
+    // Role changes: directors moved out of an executive seat (that seat is then shown vacant).
+    const roleChange = ROLE_CHANGES[globalId];
+    if (roleChange && updated.level === roleChange.fromLevel) {
+      updated.level = roleChange.level;
+      updated.designation = roleChange.designation;
       changed = true;
     }
     const correctedName = RENAMED_DIRECTORS[globalId];
@@ -199,9 +211,6 @@ export function getBoardMembers(): Director[] {
       changed = true;
       if (updated.id === "humayun-kabir-robel") {
         updated.level = 1;
-        updated.orderIndex = 0;
-      } else if (updated.id === "farhan-bin-rafiq") {
-        updated.level = 2;
         updated.orderIndex = 0;
       } else if (updated.id === "arifur-rahman") {
         updated.level = 3;

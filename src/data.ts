@@ -114,18 +114,18 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "farhan-bin-rafiq",
     name: "Farhan Bin Rafiq",
-    designation: "Founding Vice President",
+    designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-002",
     profileSubmitted: true,
-    profileRevision: 7,
+    profileRevision: 8,
     quote: "We make mistakes, and mistakes make us.",
-    photoAlt: "Official portrait of Farhan Bin Rafiq, Founding Vice President, Cox's Bazar Boat Club Ltd.",
+    photoAlt: "Official portrait of Farhan Bin Rafiq, Founding Director, Cox's Bazar Boat Club Ltd.",
     bio: [
       "Farhan Bin Rafiq is a founding leader of Cox's Bazar Boat Club Ltd., and an entrepreneur and business professional with a diverse background spanning hospitality, operations, business development, technology and e-commerce.",
       "He is the Founder of Choosify Technologies Ltd., a technology and digital commerce venture focused on product discovery, comparison, trusted sellers and modern e-commerce experiences. He also serves as an advisor and consultant to EZBOOKING.GLOBAL, an online travel and accommodation booking platform, and has been involved in creative digital initiatives such as Artveen / Tanveen's Art Escape.",
       "With more than ten years of professional experience across business operations, hospitality, client and vendor relationship management, business development, service operations and digital platforms, his career has been marked by significant progression — including seven internal promotions — reflecting his leadership, adaptability and operational excellence. He has worked with corporate organizations, international NGOs, strategic stakeholders and cross-functional teams.",
       "Beyond business, Farhan is engaged in youth and community leadership through JCI Cox's Bazar. Joining as a member in 2023, he has progressed to his current role as Local Director, taking part in community, environmental and social development initiatives.",
-      "As Founding Vice President of Cox's Bazar Boat Club Ltd., he contributes his experience in entrepreneurship, hospitality, tourism, technology, branding and digital presence, operations, and community and stakeholder engagement toward the growth and strategic development of the Club. He also built the Club's official website, cbbcl.org."
+      "As a Founding Director of Cox's Bazar Boat Club Ltd., he contributes his experience in entrepreneurship, hospitality, tourism, technology, branding and digital presence, operations, and community and stakeholder engagement toward the growth and strategic development of the Club. He also built the Club's official website, cbbcl.org."
     ],
     businessProfile: {
       // Multiple entries are separated by "; ".
@@ -147,7 +147,7 @@ export const DIRECTORS_DATA: Director[] = [
       "Bachelor of Business Administration (BBA)"
     ],
     memberships: [
-      "Cox's Bazar Boat Club Ltd. — Founding Vice President",
+      "Cox's Bazar Boat Club Ltd. — Founding Director",
       "JCI Cox's Bazar — Local Director (member since 2023)"
     ],
     community: [
@@ -158,7 +158,7 @@ export const DIRECTORS_DATA: Director[] = [
     timeline: [
       { year: "2023", event: "Joined JCI Cox's Bazar as a Member" },
       { year: "Current", event: "Local Director, JCI Cox's Bazar" },
-      { year: "Current", event: "Founding Vice President, Cox's Bazar Boat Club Ltd." }
+      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." }
     ]
   },
   {

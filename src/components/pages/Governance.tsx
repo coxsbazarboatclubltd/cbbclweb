@@ -44,7 +44,7 @@ export default function Governance({ initialSection = "articles" }: GovernancePr
     { title: "Sports & Snooker Committee", chair: "Founding Director Nurul Absar", duty: "Arranges billiard tournaments, squash challenges, tennis championships, and maintains sports facilities." },
     { title: "Cultural & Literary Circle", chair: "Founding Director Maimunal Karim Jisan", duty: "Organizes symphony evenings, library recitals, national day tributes, and coastal art festivals." },
     { title: "Ecological CSR Commission", chair: "Founding Director Mehedi Hasan", duty: "Initiates beachfront plastic cleanups, manages bio-engineering sand-dune stabilization." },
-    { title: "Disciplinary & Ethics Panel", chair: "Founding Vice President Farhan Bin Rafiq", duty: "Maintains member conduct guidelines, solves grievances, enforces strict dress code codes." }
+    { title: "Disciplinary & Ethics Panel", chair: "Founding Director Farhan Bin Rafiq", duty: "Maintains member conduct guidelines, solves grievances, enforces strict dress code codes." }
   ];
 
   return (

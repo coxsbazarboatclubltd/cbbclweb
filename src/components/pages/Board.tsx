@@ -4,7 +4,7 @@ import { RoutePath, Director } from "../../types";
 import { getBoardMembers, getDirectorPortrait } from "../../utils/storage";
 import { User, ShieldAlert, Award, Anchor, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import BoardProfileCard from "../BoardProfileCard";
+import BoardProfileCard, { VacantBoardCard } from "../BoardProfileCard";
 import BackgroundVideo from "../BackgroundVideo";
 
 interface BoardProps {
@@ -25,11 +25,10 @@ export default function Board({ navigate }: BoardProps) {
   const level4Arr = boardList.filter((d) => d.level === 4).sort((a, b) => (a.orderIndex ?? 0) - (b.orderIndex ?? 0));
 
   const president = level1Arr[0] || boardList.find((d) => d.id === "humayun-kabir-robel") || DIRECTORS_DATA[0];
-  const vicePresident = level2Arr[0] || boardList.find((d) => d.id === "farhan-bin-rafiq") || DIRECTORS_DATA[1];
   const secretariatDirectors = level3Arr.length > 0 ? level3Arr : boardList.filter((d) => d.id === "arifur-rahman");
   // The Director Administration seat is currently vacant; show a blank card in its place.
   const adminSeatVacant = !secretariatDirectors.some((d) => /administration/i.test(d.designation));
-  const rawFounding = level4Arr.length > 0 ? level4Arr : boardList.filter((d) => d.level === 4 || (d.id !== "humayun-kabir-robel" && d.id !== "farhan-bin-rafiq" && d.id !== "arifur-rahman"));
+  const rawFounding = level4Arr.length > 0 ? level4Arr : boardList.filter((d) => d.level === 4 || (d.id !== "humayun-kabir-robel" && d.id !== "arifur-rahman"));
   const foundingDirectors = [...rawFounding].sort((a, b) => a.name.localeCompare(b.name));
 
   const getPortrait = (dir: Director) => {
@@ -99,6 +98,7 @@ export default function Board({ navigate }: BoardProps) {
           </span>
 
           <div className="flex justify-center gap-6 flex-wrap">
+            {level2Arr.length === 0 && <VacantBoardCard title="Founding Vice President" />}
             {level2Arr.map((vp) => (
               <BoardProfileCard key={vp.id} director={vp} navigate={navigate} variant="main" />
             ))}
@@ -112,18 +112,7 @@ export default function Board({ navigate }: BoardProps) {
           </h5>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-3xl mx-auto w-full">
-            {adminSeatVacant && (
-              <div className="inline-block bg-white p-6 border border-dashed border-slate-300 rounded-sm w-[290px] sm:w-[320px] shadow-sm text-center">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full border-2 border-gold/30 bg-slate-50 mx-auto flex items-center justify-center">
-                  <User className="w-10 h-10 text-slate-300" />
-                </div>
-                <h4 className="font-display text-base sm:text-lg font-bold text-slate-800 tracking-tight mt-3">&nbsp;</h4>
-                <p className="font-sans text-[9px] sm:text-[10px] text-text-gold uppercase tracking-[0.15em] font-semibold mt-1">
-                  Director Administration
-                </p>
-                <div className="mt-4 pt-3 border-t border-slate-100 h-[30px]" />
-              </div>
-            )}
+            {adminSeatVacant && <VacantBoardCard title="Director Administration" />}
             {secretariatDirectors.map((dir) => (
               <BoardProfileCard key={dir.id} director={dir} navigate={navigate} variant="main" />
             ))}
