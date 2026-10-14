@@ -174,7 +174,7 @@ export const DIRECTORS_DATA: Director[] = [
     membershipCode: "CBBCL-FOUNDER-004",
     memberNumber: "LM-0008",
     profileSubmitted: true,
-    profileRevision: 7,
+    profileRevision: 8,
     bio: [
       "Arifur Rahman is a Bangladeshi entrepreneur, business professional, and experienced leader with diverse interests across hospitality, tourism, information technology, e-commerce, and digital business solutions. His professional journey reflects a strong commitment to business operations, financial management, organizational leadership, and sustainable business development.",
       "He serves as Director – Finance at Cox's Bazar Boat Club Ltd. (CBBCL), contributing to financial oversight, institutional development, strategic partnerships, and the club's long-term progress. He emphasizes financial transparency, responsible management, accountability, and the development of a well-structured and sustainable institutional framework.",
@@ -202,9 +202,6 @@ export const DIRECTORS_DATA: Director[] = [
       "Cox's Bazar Chamber of Commerce — Member (since 2021)",
       "Amreen Artistry — Advisor"
     ],
-    community: [
-      "SAAIL Cox's Bazar 2026 — Event Co‑COC"
-    ],
     socials: {
       // LinkedIn and Facebook were shared by profile name only.
       linkedin: "Arifur Rahman",
@@ -213,8 +210,7 @@ export const DIRECTORS_DATA: Director[] = [
     },
     timeline: [
       { year: "Current", event: "Director of Finance, Cox's Bazar Boat Club Ltd." },
-      { year: "2023", event: "Bangladesh–Thai Chamber of Commerce delegation to Bangkok, Thailand, associated with the Ministry of Foreign Affairs." },
-      { year: "2022–2023", event: "Founding Partner, Hopper Food Delivery." }
+      { year: "2023", event: "Bangladesh–Thai Chamber of Commerce delegation to Bangkok, Thailand, associated with the Ministry of Foreign Affairs." }
     ]
   },
   {
