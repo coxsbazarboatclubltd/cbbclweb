@@ -332,14 +332,24 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                   </span>
                   {(socialLinks.length > 0 || wechatId) && (
                     <div className="flex flex-wrap justify-center gap-x-5 gap-y-3">
-                      {socialLinks.map(([key, url, Icon, label]) => (
-                        <a key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors">
-                          <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
-                            <Icon className="w-4 h-4" />
+                      {socialLinks.map(([key, url, Icon, label]) =>
+                        /^https?:\/\//i.test(url) ? (
+                          <a key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors">
+                            <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
+                              <Icon className="w-4 h-4" />
+                            </span>
+                            <span className="font-sans text-[10px] leading-none">{label}</span>
+                          </a>
+                        ) : (
+                          // Profile name only (the director chose not to share a link): icon + name, not clickable.
+                          <span key={key} aria-label={`${label}: ${url}`} title={`${label}: ${url}`} className="flex flex-col items-center space-y-1.5 text-slate-600">
+                            <span className="p-2 border border-slate-200 rounded-full">
+                              <Icon className="w-4 h-4" />
+                            </span>
+                            <span className="font-sans text-[10px] leading-none">{url}</span>
                           </span>
-                          <span className="font-sans text-[10px] leading-none">{label}</span>
-                        </a>
-                      ))}
+                        )
+                      )}
                       {/* WeChat has no web profile link: show the ID; clicking copies it */}
                       {wechatId && (
                         <button
