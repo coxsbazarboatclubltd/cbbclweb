@@ -174,13 +174,13 @@ export const DIRECTORS_DATA: Director[] = [
     membershipCode: "CBBCL-FOUNDER-004",
     memberNumber: "LM-0008",
     profileSubmitted: true,
-    profileRevision: 8,
+    profileRevision: 12,
+    quote: "The best time to plant a tree was 20 years ago. The second best time is now.",
     bio: [
       "Arifur Rahman is a Bangladeshi entrepreneur, business professional, and experienced leader with diverse interests across hospitality, tourism, information technology, e-commerce, and digital business solutions. His professional journey reflects a strong commitment to business operations, financial management, organizational leadership, and sustainable business development.",
       "He serves as Director – Finance at Cox's Bazar Boat Club Ltd. (CBBCL), contributing to financial oversight, institutional development, strategic partnerships, and the club's long-term progress. He emphasizes financial transparency, responsible management, accountability, and the development of a well-structured and sustainable institutional framework.",
       "In the business sector, he serves as the Founder and Chairman of EZCOM.GLOBAL, Founder and Chief Executive Officer (CEO) of EZBOOKING.GLOBAL, and Managing Director of Shopno Bilash Holiday Suites. He is also associated with HELLO IT and HELLO Computer in a directorial capacity. Through these ventures, his professional activities extend across technology, digital services, hospitality, tourism, and service-oriented businesses.",
       "Tourism and accommodation services in Cox's Bazar constitute an important part of his business portfolio. He has experience in hotel operations, guest services, business development, corporate relations, and tourism-related services. His business activities also include providing accommodation and hospitality services to international guests, personnel associated with United Nations agencies, and other foreign professionals. Through EZBOOKING.GLOBAL, he is also working to make travel and accommodation services more accessible, efficient, and technology-driven.",
-      "Beyond his business activities, Arifur Rahman remains actively engaged in youth leadership, professional networking, and organizational development. His leadership journey with Junior Chamber International (JCI) began in 2022 as a Founding Member of JCI Cox's Bazar. He subsequently served as Local Treasurer in 2024, Local President in 2025, and Regional Vice President of JCI Bangladesh in 2026. A notable achievement during his leadership tenure was receiving the Asia Star Local President Award at JCI ASPAC 2025, in recognition of his leadership and organizational contributions.",
       "In 2023, he also participated in a Bangkok visit as part of a delegation associated with Bangladesh–Thailand business relations, further enriching his professional exposure and international networking experience.",
       "At Cox's Bazar Boat Club Ltd., his primary objective is to contribute to the club's sustainable growth through financial responsibility, institutional capacity building, strategic collaboration, and long-term planning. By drawing on his experience in business, technology, and hospitality, he remains committed to supporting broader efforts to strengthen tourism, encourage investment, and enhance service standards in Cox's Bazar as an international tourism destination."
     ],
@@ -210,7 +210,10 @@ export const DIRECTORS_DATA: Director[] = [
     },
     timeline: [
       { year: "Current", event: "Director of Finance, Cox's Bazar Boat Club Ltd." },
-      { year: "2023", event: "Bangladesh–Thai Chamber of Commerce delegation to Bangkok, Thailand, associated with the Ministry of Foreign Affairs." }
+      { year: "Current", event: "Founder & Chairman, EZCOM.GLOBAL." },
+      { year: "Current", event: "Founder & CEO, EZBOOKING.GLOBAL — making travel and accommodation services more accessible, efficient, and technology-driven." },
+      { year: "Current", event: "Managing Director, Shopno Bilash Holiday Suites — accommodation and hospitality services in Cox's Bazar." },
+      { year: "2023", event: "Participated in a Bangkok visit as part of a delegation associated with Bangladesh–Thailand business relations." }
     ]
   },
   {
