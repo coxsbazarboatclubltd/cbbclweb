@@ -308,6 +308,12 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                   <span className="text-slate-400 font-light">Founder Code:</span>
                   <span className="text-navy font-mono font-medium">{director.membershipCode}</span>
                 </div>
+                {director.memberNumber && (
+                  <div className="flex justify-between border-b border-slate-50 pb-2">
+                    <span className="text-slate-400 font-light">Member No.:</span>
+                    <span className="text-navy font-mono font-medium">{director.memberNumber}</span>
+                  </div>
+                )}
                 <div className="flex justify-between border-b border-slate-50 pb-2">
                   <span className="text-slate-400 font-light">Designation:</span>
                   <span className="text-navy font-semibold">{director.designation}</span>

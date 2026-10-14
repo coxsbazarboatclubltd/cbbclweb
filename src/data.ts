@@ -55,6 +55,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Humayun Kabir Robel",
     designation: "Founding President",
     membershipCode: "CBBCL-FOUNDER-001",
+    memberNumber: "LM-0001",
     appointed: "January 2026",
     profileSubmitted: true,
     profileRevision: 2,
@@ -116,6 +117,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Farhan Bin Rafiq",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-002",
+    memberNumber: "LM-0002",
     profileSubmitted: true,
     profileRevision: 16,
     quote: "We make mistakes, and mistakes make us.",
@@ -170,14 +172,14 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Arifur Rahman",
     designation: "Director Finance",
     membershipCode: "CBBCL-FOUNDER-004",
+    memberNumber: "LM-0008",
     profileSubmitted: true,
-    profileRevision: 2,
+    profileRevision: 6,
     bio: [
-      "Arifur Rahman is a business professional, entrepreneur, hospitality executive and investor with diverse interests across hospitality, tourism, information technology, e-commerce and digital business. As Director of Finance at Cox's Bazar Boat Club Ltd. and a Founding Director of JCI Cox's Bazar, he brings experience in business management, financial oversight, organizational leadership and strategic development.",
+      "Arifur Rahman is a business professional, entrepreneur, hospitality executive and investor with diverse interests across hospitality, tourism, information technology, e-commerce and digital business. As Director of Finance at Cox's Bazar Boat Club Ltd., he brings experience in business management, financial oversight, organizational leadership and strategic development.",
       "He is the Founder and Chairman of EZCOM.GLOBAL, CEO of EZBOOKING.GLOBAL, and Managing Director of Shopno Bilash Holiday Suites. He also serves as a Director of HELLO IT, HELLO Computer and Cafe 365 Ltd., reflecting his involvement across technology, retail, hospitality and service-oriented businesses. His entrepreneurial journey also includes serving as a Founding Partner of Hopper Food Delivery from 2022 to 2023.",
       "A significant part of his business focus lies in the hospitality and accommodation sector in Cox's Bazar, particularly providing accommodation and hospitality services to international visitors, including United Nations personnel and other foreign expatriates. His experience encompasses hotel operations, guest services, business development, corporate relationships and hospitality investment. Through EZBOOKING.GLOBAL, he is also involved in the development of digital solutions for travel and accommodation services.",
-      "Arifur has maintained an active commitment to youth leadership and professional networking through Junior Chamber International (JCI). His leadership journey includes serving as Local Treasurer of JCI Cox's Bazar in 2024, Local President in 2025, and Regional Vice President of JCI Bangladesh in 2026. His involvement as a Founding Director of JCI Cox's Bazar further reflects his commitment to organizational development, leadership and community engagement.",
-      "His international exposure includes participation in JCI ASPAC conventions in Indonesia in 2024, Vietnam in 2025 and Japan in 2026. He also participated in a Bangladesh–Thai Chamber of Commerce delegation to Bangkok in 2023 associated with the Ministry of Foreign Affairs.",
+      "His international exposure includes participation in a Bangladesh–Thai Chamber of Commerce delegation to Bangkok in 2023 associated with the Ministry of Foreign Affairs.",
       "Holding an MBA, Arifur combines academic grounding in business administration with practical experience in entrepreneurship, hospitality management, technology and organizational leadership. He also serves as an advisor to Amreen Artistry, reflecting an interest in supporting creative initiatives.",
       "As Director of Finance at Cox's Bazar Boat Club Ltd., he brings his business and hospitality experience to the Club's development, with a focus on responsible financial management, institutional growth, strategic partnerships and the continued development of Cox's Bazar as a leading tourism and hospitality destination."
     ],
@@ -190,24 +192,17 @@ export const DIRECTORS_DATA: Director[] = [
     },
     achievements: [
       "Master of Business Administration (MBA)",
-      "Regional Vice President, JCI Bangladesh (2026)",
-      "Local President, JCI Cox's Bazar (2025)",
-      "JCI ASPAC conventions — Indonesia (2024), Vietnam (2025) and Japan (2026)"
+      "Master of Laws (LLM)",
+      "Bachelor of Business Administration (BBA)",
+      "Journalism"
     ],
     memberships: [
       "Cox's Bazar Boat Club Ltd. — Director of Finance",
-      "JCI Bangladesh — Regional Vice President, 2026",
-      "JCI Cox's Bazar — Local President, 2025",
-      "JCI Cox's Bazar — Local Treasurer, 2024",
-      "JCI Cox's Bazar — Founding Director",
+      "Cox's Bazar Chamber of Commerce — Member (since 2021)",
       "Amreen Artistry — Advisor"
     ],
     community: [
-      "Phire Pawa Hashi — established during his year as Local President of JCI Cox's Bazar, 2025",
-      "Project Green Cox's Bazar — maintained the project with JCI Cox's Bazar, 2025",
-      "ECCHE PURAN — maintained the project with JCI Cox's Bazar, 2025",
-      "SAAIL Cox's Bazar 2026 — Event Co‑COC",
-      "JCI National Carnival 2026 — Co‑COC"
+      "SAAIL Cox's Bazar 2026 — Event Co‑COC"
     ],
     socials: {
       // LinkedIn and Facebook were shared by profile name only.
@@ -217,12 +212,6 @@ export const DIRECTORS_DATA: Director[] = [
     },
     timeline: [
       { year: "Current", event: "Director of Finance, Cox's Bazar Boat Club Ltd." },
-      { year: "2026", event: "Regional Vice President, JCI Bangladesh." },
-      { year: "2026", event: "Attended JCI ASPAC 2026 in Japan." },
-      { year: "2025", event: "Local President, JCI Cox's Bazar." },
-      { year: "2025", event: "Attended JCI ASPAC 2025 in Vietnam." },
-      { year: "2024", event: "Local Treasurer, JCI Cox's Bazar." },
-      { year: "2024", event: "Attended JCI ASPAC 2024 in Indonesia." },
       { year: "2023", event: "Bangladesh–Thai Chamber of Commerce delegation to Bangkok, Thailand, associated with the Ministry of Foreign Affairs." },
       { year: "2022–2023", event: "Founding Partner, Hopper Food Delivery." }
     ]
@@ -232,6 +221,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Mehedi Hasan",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-005",
+    memberNumber: "LM-0003",
     profileSubmitted: true,
     profileRevision: 3,
     bio: [
@@ -271,6 +261,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Md Imran Alam",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-006",
+    memberNumber: "LM-0004",
     profileSubmitted: true,
     profileRevision: 7,
     bio: [
@@ -323,6 +314,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Maimunul Karim Jisan",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-007",
+    memberNumber: "LM-0006",
     profileSubmitted: true,
     profileRevision: 2,
     photoAlt: "Maimunul Karim Jisan, Director, Cox's Bazar Boat Club Ltd., and Founder & Managing Director, BengalWeft",
@@ -375,19 +367,22 @@ export const DIRECTORS_DATA: Director[] = [
     id: "md-rezaul-kabir-reza",
     name: "Md Rezaul Kabir Reza",
     designation: "Founding Director",
-    membershipCode: "CBBCL-FOUNDER-008"
+    membershipCode: "CBBCL-FOUNDER-008",
+    memberNumber: "LM-0007"
   },
   {
     id: "amzad-mahmud",
     name: "Amzad Mahmud",
     designation: "Founding Director",
-    membershipCode: "CBBCL-FOUNDER-009"
+    membershipCode: "CBBCL-FOUNDER-009",
+    memberNumber: "LM-0009"
   },
   {
     id: "ak-rubel",
     name: "Ahmedul Karim Rubel",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-010",
+    memberNumber: "LM-0010",
     profileSubmitted: true,
     profileRevision: 4,
     photoAlt: "Official portrait of Ahmedul Karim Rubel, Member of the Board of Directors, Cox's Bazar Boat Club Ltd.",
@@ -429,6 +424,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Md Yousuf",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-012",
+    memberNumber: "LM-0011",
     profileSubmitted: true,
     profileRevision: 3,
     photoAlt: "Md Yousuf, Founding Director, Cox's Bazar Boat Club Ltd.",
@@ -473,6 +469,7 @@ export const DIRECTORS_DATA: Director[] = [
     name: "Nurul Absar",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-013",
+    memberNumber: "LM-0012",
     profileSubmitted: true,
     profileRevision: 2,
     bio: [
@@ -496,13 +493,15 @@ export const DIRECTORS_DATA: Director[] = [
     id: "ziaul-haque",
     name: MD_ZIAUL_HOQUE.name,
     designation: "Founding Director",
-    membershipCode: "CBBCL-FOUNDER-014"
+    membershipCode: "CBBCL-FOUNDER-014",
+    memberNumber: "LM-0013"
   },
   {
     id: "reshedul-evu",
     name: "Rasadul Maimun Evo",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-015",
+    memberNumber: "LM-0014",
     photoUrl: RESHEDUL_EVU_IMAGE,
     businessProfile: {
       // Multiple businesses are separated by "; " so they survive the admin form's single-line company field.

@@ -186,6 +186,10 @@ export function getBoardMembers(): Director[] {
     }
     // Pick up business details added to the static directory after this list was cached.
     const staticDirector = DIRECTORS_DATA.find((d) => d.id === updated.id);
+    if (staticDirector && staticDirector.memberNumber !== updated.memberNumber) {
+      updated.memberNumber = staticDirector.memberNumber;
+      changed = true;
+    }
     if (staticDirector?.businessProfile && !updated.businessProfile) {
       updated.businessProfile = staticDirector.businessProfile;
       changed = true;
