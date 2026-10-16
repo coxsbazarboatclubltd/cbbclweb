@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DIRECTORS_DATA, MASTER_HERO_VIDEO } from "../../data";
 import { getBoardMembers, getDirectorPortrait } from "../../utils/storage";
 import { getClubMembers } from "../../utils/memberStorage";
-import { User, Award, Briefcase, Calendar, Globe, Linkedin, Facebook, Twitter, Instagram, Mail, Anchor, Compass, CheckCircle, ArrowLeft } from "lucide-react";
+import { User, Award, Briefcase, Calendar, Globe, Linkedin, Facebook, Twitter, Instagram, Mail, Anchor, Compass, CheckCircle, ArrowLeft, Landmark } from "lucide-react";
 import { motion } from "motion/react";
 import { RoutePath, Director } from "../../types";
 import BackgroundVideo from "../BackgroundVideo";
@@ -191,6 +191,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         ["facebook", director.socials?.facebook, Facebook, "Facebook"],
         ["twitter", director.socials?.twitter, Twitter, "X / Twitter"],
         ["instagram", director.socials?.instagram, Instagram, "Instagram"],
+        ["fbcci", director.socials?.fbcci, Landmark, "FBCCI"],
         ["website", website, Globe, (website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
       ] as const).filter(([, url]) => !!url)
     : ([

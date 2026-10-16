@@ -28,11 +28,14 @@ import rasadulMaimunEvoPortrait from "./assets/images/board/reshedul-evu.webp";
 // @ts-ignore
 import ziaulHoquePortrait from "./assets/images/board/ziaul-haque.webp";
 // @ts-ignore
+import abuMurshedChowdhuryPortrait from "./assets/images/board/abu-murshed-chowdhury.webp";
+// @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
 // @ts-ignore
 import heroPoster from "./assets/images/hero-poster.webp";
 
 export const PRESIDENT_IMAGE = presidentPortrait;
+export const ABU_MURSHED_CHOWDHURY_IMAGE = abuMurshedChowdhuryPortrait;
 export const FARHAN_BIN_RAFIQ_IMAGE = farhanBinRafiqPortrait;
 export const ARIFUR_RAHMAN_IMAGE = arifurRahmanPortrait;
 export const AMZAD_MAHMUD_IMAGE = amzadMahmudPortrait;
@@ -115,6 +118,93 @@ export const DIRECTORS_DATA: Director[] = [
       { year: "Current", event: "Director, Rotary Club of Cox's Bazar City — contributes to professional and community-oriented activities." },
       { year: "13+ Years", event: "Entrepreneurial and corporate career spanning real estate, construction, logistics, tourism, agro-business and related sectors." }
     ]
+  },
+  {
+    id: "abu-murshed-chowdhury",
+    name: "Abu Murshed Chowdhury",
+    designation: "Founding Vice President",
+    membershipCode: "CBBCL-FOUNDER-016",
+    memberNumber: "LM-0015",
+    level: 2,
+    orderIndex: 0,
+    profileSubmitted: true,
+    profileRevision: 4,
+    photoAlt: "Abu Murshed Chowdhury, Founding Vice President of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Abu Murshed Chowdhury is the Founding Vice President of Cox's Bazar Boat Club Ltd. (CBBCL). He is a banker by training, an entrepreneur, and a development and humanitarian leader whose career spans international trade, banking, business, trade-body leadership and community development in Cox's Bazar.",
+      "He began his career in 1987 as a Foreign Trade Officer at Banque Indosuez, a French bank, where he served until 1995. From 1996 to 2007 he served at Dhaka Bank, rising to Assistant Vice President (AVP). In 1999 he established Abu Center Shopping Complex, which he continues to lead as Chairman, and in 2016 he founded Green Hope Products, a manufacturing and import business, of which he is Proprietor.",
+      "In 1996 he founded PHALS (Program for Helpless And Lagged Society) to serve vulnerable communities, and he leads it as Founder and Executive Director. Through PHALS and partner organizations he manages and implements programmes in humanitarian response, livelihoods and job creation, disaster and climate-change support, child protection and child education, working with partners including IOM, the UK Foreign, Commonwealth & Development Office (FCDO), Global Affairs Canada and Malteser International. He has been part of pre-, during- and post-disaster response with the District Disaster Management Committee since 2012.",
+      "He is a Former Director and present General Body Member of the Federation of Bangladesh Chambers of Commerce & Industry (FBCCI), Chief Advisor and Former President of the Cox's Bazar Chamber of Commerce & Industry, and President of Cox's Bazar Civil Society.",
+      "For more than two decades he has represented Bangladesh at international forums. He spoke at the plenary session on poverty eradication at the 18th World IAVE Conference in Barcelona (2004), took part in the ECOSOC High-Level Segment on rural water and sanitation at the United Nations in Geneva (2003), and attended the Asian Civil Society Forum at the UN in Bangkok (2001). More recently he has taken part in the Grand Bargain and localization seminar in Switzerland (2018), the Charter for Change seminar in Denmark (2019), the Global Conference on Localization of Humanitarian Aid in Germany (2022), and South–South exchanges under the ToGETHER programme in Bangkok (2023) and Bali, Indonesia (2025).",
+      "He holds BSS (Hons) and MSS degrees from the University of Chittagong, and completed the Global Executive Leadership Initiative course on responsible negotiation with the Harvard Humanitarian Initiative (2022). His recognitions include the Justice Mahbub Murshed Award (2010) and the Begum Rokeya Memorial Award (2009).",
+      "As Founding Vice President of CBBCL, he brings this experience in business, trade bodies and community development to the club's leadership."
+    ],
+    businessProfile: {
+      role: "Chairman, Abu Center Shopping Complex; Proprietor, Green Hope Products; Founder & Executive Director, PHALS",
+      company: "Abu Center Shopping Complex; Green Hope Products",
+      industry: "Manufacturing & Import; Retail & Shopping Complex"
+    },
+    achievements: [
+      "2010 — Justice Mahbub Murshed Award",
+      "2010 — Shadinota Andolon Shahid Smriti Award",
+      "2009 — EDAF UN Day Award",
+      "2009 — Begum Rokeya Memorial Award",
+      "2009 — Sher-e-Bangla Award",
+      "Master of Social Science (MSS) — University of Chittagong",
+      "Bachelor of Social Science (BSS Hons) — University of Chittagong",
+      "2022 — Global Executive Leadership Initiative (GELI): Responsible Negotiation, with the Harvard Humanitarian Initiative",
+      "2018 — Short course on Refugee Rights, JAIN University, Bangalore, India",
+      "2016 — Forest Conservation Connecting to Farming, FES India",
+      "2014 — Disaster Risk Management training",
+      "2011 — Protection from Gender-Based Violence, Concern Worldwide",
+      "2010 — Child Protection and Child Rights, UNICEF and LETI Bangladesh",
+      "2005 — Anti-Money Laundering, South Asia Enterprise Development Facility",
+      "1999 — International Trade, BIBM, Dhaka",
+      "1984 — Youth Leadership Building, UNESCAP and the Ministry of Youth"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Founding Vice President",
+      "FBCCI — Former Director; present General Body Member",
+      "Cox's Bazar Chamber of Commerce & Industry — Chief Advisor, Member & Former President",
+      "Cox's Bazar Civil Society — President",
+      "PHALS (Program for Helpless And Lagged Society) — Founder & Executive Director",
+      "District Disaster Management Committee — Member",
+      "Asia Pacific Refugee Rights Network (APRRN) — Member",
+      "Bangladesh Red Crescent Society, Cox's Bazar — Life Member",
+      "ADAB (Association of Development Agencies in Bangladesh) — Member",
+      "Charter for Change (C4C) — Endorser Member",
+      "FNB (Federation of NGOs in Bangladesh) — Member"
+    ],
+    community: [
+      "Humanitarian Response — pre-, during- and post-disaster response with the District Disaster Management Committee, since 2012",
+      "Child Protection & Welfare — Executive Committee member, Cox's Bazar Child Protection Platform, since 2025",
+      "Livelihood & Job Creation — management and implementation with IOM and the UK FCDO, since 2025",
+      "Disaster & Climate Change Support — management, with Malteser International (Germany), since 2023",
+      "Child Education — management and implementation, with Global Affairs Canada, since 2023",
+      "Tayam Integrated Education Center — management of CSR education for vulnerable children",
+      "Environment Conservation — Executive Committee member, National Nishorga Network, since 2018"
+    ],
+    timeline: [
+      { year: "Current", event: "Founding Vice President, Cox's Bazar Boat Club Ltd." },
+      { year: "Current", event: "Chairman, Abu Center Shopping Complex" },
+      { year: "Current", event: "Proprietor, Green Hope Products" },
+      { year: "Current", event: "Founder & Executive Director, PHALS" },
+      { year: "2022", event: "Took part in the Global Conference on Localization of Humanitarian Aid, Germany" },
+      { year: "2016", event: "Established Green Hope Products" },
+      { year: "2010", event: "National delegate to the FWPA seminar in Japan" },
+      { year: "2004", event: "Plenary speaker on poverty eradication, 18th World IAVE Conference, Barcelona, Spain" },
+      { year: "2003", event: "Took part in the ECOSOC High-Level Segment, United Nations, Geneva" },
+      { year: "1999", event: "Established Abu Center Shopping Complex" },
+      { year: "1996–2007", event: "Served at Dhaka Bank, rising to Assistant Vice President (AVP)" },
+      { year: "1996", event: "Founded PHALS (Program for Helpless And Lagged Society) to serve vulnerable communities" },
+      { year: "1987–1995", event: "Foreign Trade Officer, Banque Indosuez (French bank)" }
+    ],
+    socials: {
+      // LinkedIn as name only (no link shared).
+      linkedin: "Abu Chowdhury",
+      facebook: "https://www.facebook.com/chowdhury.murshed.abu",
+      fbcci: "https://fbcci.org/web/profile/mr-abu-morshed-chowdhury"
+    }
   },
   {
     id: "farhan-bin-rafiq",
@@ -382,10 +472,47 @@ export const DIRECTORS_DATA: Director[] = [
   },
   {
     id: "md-rezaul-kabir-reza",
-    name: "Md Rezaul Kabir Reza",
+    name: "Mohammad Rezaul Kabir Reza",
     designation: "Founding Director",
     membershipCode: "CBBCL-FOUNDER-008",
-    memberNumber: "LM-0007"
+    memberNumber: "LM-0007",
+    profileSubmitted: true,
+    profileRevision: 2,
+    photoAlt: "Mohammad Rezaul Kabir Reza, Founding Director of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Mohammad Rezaul Kabir Reza is a business leader and entrepreneur based in Bangladesh, with extensive experience across agro-industries, healthcare, information technology, hospitality, corporate investment and construction.",
+      "He serves as Managing Director (Operation) of M/S Chaytara Group, where he is also Managing Director of M/S Chaytara Rice & Flour Mill, M/S Chaytara CRH Mill and M/S Chaytara Rice Agency, and a Director of M/S Chaytara Construction and M/S Chaytara Pushti Mill. He is Proprietor & CEO of Chaytara Agro.",
+      "He is the Founder, CEO & Chairman of Ultragen Ltd. and Beach Bistro Restaurant, Founder & CEO of Click Village Ltd., Founder & Proprietor of Bay Fresh Grocery, Founder, CEO & Proprietor of R.K Builders, and Proprietor of R.K Poultry. He is also a Director of Sharfians Hospital and of Organic Farm and Eco Park PLC.",
+      "Beyond his commercial ventures, he is an authorized E-Voucher vendor for the World Food Programme (WFP), supplying essential food items to support refugees through M/S Chaytara Rice & Flour Mill.",
+      "He is a Standing Committee Member of the Cox's Bazar Chamber of Commerce & Industry, a member of Junior Chamber International (JCI), and a Founding Director on the board of Cox's Bazar Boat Club Ltd."
+    ],
+    businessProfile: {
+      role: "Managing Director (Operation), M/S Chaytara Group; Proprietor & CEO, Chaytara Agro; Authorized E-Voucher Vendor, World Food Programme (WFP); Founder, CEO & Chairman, Beach Bistro Restaurant; Founder, CEO & Chairman, Ultragen Ltd.; Founder & Proprietor, Bay Fresh Grocery; Founder, CEO & Proprietor, R.K Builders; Proprietor, R.K Poultry; Founder & CEO, Click Village Ltd.; Managing Director, M/S Chaytara Rice & Flour Mill; Managing Director, M/S Chaytara CRH Mill; Managing Director, M/S Chaytara Rice Agency; Director, M/S Chaytara Construction; Director, M/S Chaytara Pushti Mill; Director, Sharfians Hospital; Director, Organic Farm and Eco Park PLC",
+      company: "Ultragen Ltd.; Chaytara Agro; Click Village Ltd.; M/S Chaytara Rice & Flour Mill; M/S Chaytara Construction; M/S Chaytara CRH Mill; M/S Chaytara Pushti Mill; M/S Chaytara Rice Agency; Beach Bistro Restaurant; Bay Fresh Grocery; M/S R.K Builders; R.K Poultry; Sharfians Hospital; Organic Farm and Eco Park PLC",
+      industry: "Rice & Flour Milling; CRH Milling; Supply & Distribution; Agro Business; Restaurant; Information Technology; Construction; Logistics; Real Estate; Tourism; Hospitality; Fish & Meat Supply; Poultry Farming",
+      interests: "Supply Chain; Sustainable Resource Management; Community Development; Business Development; Corporate Leadership; Sales Strategy; Financial Management; Strategic Partnership; Sustainable Business Growth; Tourism; Food Supply Management; Agro Business; IT Firm; Construction; Real Estate; Rice, Flour & CRH Milling; Milk Supply & Cattle Fattening",
+      website: "https://www.ultragen.bd"
+    },
+    achievements: [
+      "2026 — Founding Director, Cox's Bazar Boat Club Ltd. (CBBCL)",
+      "2020 — Agro Business",
+      "2019 — IT Business",
+      "2014 — Rice & Supply Business"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Founding Director",
+      "Cox's Bazar Chamber of Commerce & Industry — Standing Committee Member",
+      "Junior Chamber International (JCI) — Member"
+    ],
+    timeline: [
+      { year: "Current", event: "Managing Director (Operation), Chaytara Group — corporate and administrative leadership across the diversified business group's operations." },
+      { year: "Current", event: "Standing Committee Member, Cox's Bazar Chamber of Commerce & Industry — professional leadership within the local business and commercial community." },
+      { year: "2026", event: "Appointed Founding Director of Cox's Bazar Boat Club Ltd., leading the establishment and development of CBBCL as a prestigious social, cultural and nautical institution." },
+      { year: "8+ Years", event: "Founder, CEO & Chairman of Ultragen Ltd., Chaytara Agro, Beach Bistro Restaurant, Bay Fresh Grocery, R.K Builders and R.K Poultry — leading business development and operations across IT, milk supply and cattle fattening, food supply and related commercial activities." }
+    ],
+    socials: {
+      facebook: "https://www.facebook.com/rezaulkabir.shohel"
+    }
   },
   {
     id: "amzad-mahmud",

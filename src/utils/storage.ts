@@ -1,5 +1,5 @@
 import { User, Profile, Director, NewsPost } from "../types";
-import { DIRECTORS_DATA, NEWS_DATA, PRESIDENT_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_IMRAN_ALAM_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE } from "../data";
+import { DIRECTORS_DATA, NEWS_DATA, PRESIDENT_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_IMRAN_ALAM_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE } from "../data";
 
 const USERS_KEY = "cbbcl_users";
 const PROFILES_KEY = "cbbcl_profiles";
@@ -144,7 +144,8 @@ export function saveProfiles(profiles: Profile[]): void {
 const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = {
   "reshedul-evu": { name: "Rasadul Maimun Evo", oldNames: ["Reshedul Evu"] },
   "mohammed-elias": { name: "Mohammad Eliyas", oldNames: ["Mohammed Elias"] },
-  "maimunal-karim-jisan": { name: "Maimunul Karim Jisan", oldNames: ["Maimunal Karim Jisan"] }
+  "maimunal-karim-jisan": { name: "Maimunul Karim Jisan", oldNames: ["Maimunal Karim Jisan"] },
+  "md-rezaul-kabir-reza": { name: "Mohammad Rezaul Kabir Reza", oldNames: ["Md Rezaul Kabir Reza"] }
 };
 
 // Directors whose board seat changed; cached lists still holding the old seat are moved.
@@ -174,6 +175,12 @@ export function getBoardMembers(): Director[] {
   const activeList = list.filter((item) => item && !RETIRED_DIRECTOR_IDS.includes(item.id));
   if (activeList.length !== list.length) {
     list = activeList;
+    changed = true;
+  }
+  // Directors added to the static directory after this list was cached (e.g. a newly filled seat).
+  const missing = DIRECTORS_DATA.filter((d) => !list.some((item) => item.id === d.id));
+  if (missing.length > 0) {
+    list = [...list, ...missing];
     changed = true;
   }
   const normalized = list.map((item, idx) => {
@@ -351,6 +358,7 @@ export function setLoggedInUser(user: User | null): void {
 
 const DEFAULT_PORTRAITS: Record<string, string> = {
   "humayun-kabir-robel": PRESIDENT_IMAGE,
+  "abu-murshed-chowdhury": ABU_MURSHED_CHOWDHURY_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "arifur-rahman": ARIFUR_RAHMAN_IMAGE,
   "mehedi-hasan": MEHEDI_HASAN_IMAGE,
