@@ -12,6 +12,8 @@ import nurulAbsarPortrait from "./assets/images/board/nurul-absar.webp";
 // @ts-ignore
 import presidentPortrait from "./assets/images/board/humayun-kabir-robel.webp";
 // @ts-ignore
+import presidentFacePortrait from "./assets/images/board/humayun-kabir-robel-face.webp";
+// @ts-ignore
 import arifurRahmanPortrait from "./assets/images/board/arifur-rahman.webp";
 // @ts-ignore
 import akRubelPortrait from "./assets/images/board/ak-rubel.webp";
@@ -35,6 +37,8 @@ import heroVideo from "./assets/videos/hero.mp4";
 import heroPoster from "./assets/images/hero-poster.webp";
 
 export const PRESIDENT_IMAGE = presidentPortrait;
+/** Face-focused crop of the President's portrait for round frames (cards, profile, members). */
+export const PRESIDENT_FACE_IMAGE = presidentFacePortrait;
 export const ABU_MURSHED_CHOWDHURY_IMAGE = abuMurshedChowdhuryPortrait;
 export const FARHAN_BIN_RAFIQ_IMAGE = farhanBinRafiqPortrait;
 export const ARIFUR_RAHMAN_IMAGE = arifurRahmanPortrait;
@@ -753,86 +757,11 @@ export const NEWS_DATA: NewsPost[] = [
   }
 ];
 
-export const EVENTS_DATA: EventItem[] = [
-  {
-    id: "e1",
-    title: "Inaugural Charter Gala Dinner & Anchor Toast",
-    date: "July 18, 2026",
-    day: "18",
-    month: "July",
-    venue: "Main Oceanfront Lawn & Ballroom",
-    category: "Official Ceremony",
-    isUpcoming: true,
-    image: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=800",
-    description: "The grandest physical milestone on our 2026 schedule: the formal black-tie inaugural banquet celebrating the founding members of CBBCL under coastal stars.",
-    registrationInfo: "RSVP strictly required through Member Concierge Desk. Limited seating available. Strict formal attire required (Black Tie, Dinner Jacket, or National Formal)."
-  },
-  {
-    id: "e2",
-    title: "Monsoon Yachting Seminar & Coastal Navigation Masterclass",
-    date: "August 09, 2026",
-    day: "09",
-    month: "August",
-    venue: "Main Conference Hall & Yacht Deck",
-    category: "Educational",
-    isUpcoming: true,
-    image: "https://images.unsplash.com/photo-1505242844900-19279f22006?auto=format&fit=crop&q=80&w=800",
-    description: "An intensive day focused on tidal currents, monsoon wind patterns in the Bay of Bengal, and luxury sailboat operations guided by retired naval command staff.",
-    registrationInfo: "Complimentary admission for life and donor members. Corporate teams must pre-register by August 2."
-  },
-  {
-    id: "e3",
-    title: "Founders Ocean Cup: Autumn Snipe Class Regatta",
-    date: "September 12, 2026",
-    day: "12",
-    month: "September",
-    venue: "CBBCL Private Marina & High Sea Course",
-    category: "Water Sports",
-    isUpcoming: true,
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800",
-    description: "Our inaugural outdoor coastal sailing race. Multi-crew dinghy snipe sailboats will compete across a selective 5-nautical-mile coastal buoy loop.",
-    registrationInfo: "Open ONLY to CBBCL members and reciprocal club racers. Safety life-jackets, personal medical clearance, and basic sailing license are mandatory."
-  }
-];
+// Prototype events were removed (2026-10-17); real events are added from the admin dashboard.
+export const EVENTS_DATA: EventItem[] = [];
 
-export const PAST_EVENTS_DATA: EventItem[] = [
-  {
-    id: "pe1",
-    title: "Historic Sign-off Ceremony & Official Press Launch",
-    date: "June 05, 2026",
-    day: "05",
-    month: "June",
-    venue: "Hotel Sea Albatross VIP Suite, Cox's Bazar",
-    category: "Press Conference",
-    isUpcoming: false,
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800",
-    description: "Formal declaration of the registration of the CBBCL under The Companies Act, 1994, directly accompanied by regional government officials, environment advocates, and national hospitality partners."
-  },
-  {
-    id: "pe2",
-    title: "Eco-Stewardship Beach Cleanup Drive 2026",
-    date: "May 10, 2026",
-    day: "10",
-    month: "May",
-    venue: "Surrounding Beach Dunes & Coral Shallows",
-    category: "CSR",
-    isUpcoming: false,
-    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&q=80&w=800",
-    description: "Over 200 kilograms of coastal waste, microplastics, and discarded fishing nets successfully recycled. Sponsored as a primary bio-conservation step by our Board."
-  },
-  {
-    id: "pe3",
-    title: "VIP Nautical Conceptual Blueprint Exhibition",
-    date: "April 02, 2026",
-    day: "02",
-    month: "April",
-    venue: "Club Temporary Office Secretariat, Dhaka Club Lounge",
-    category: "Exhibition",
-    isUpcoming: false,
-    image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&q=80&w=800",
-    description: "Unveiling the premium marine clubhouse designs and structural engineering strategies created by famous lead architects."
-  }
-];
+// Prototype events were removed (2026-10-17); real events are added from the admin dashboard.
+export const PAST_EVENTS_DATA: EventItem[] = [];
 
 // No affiliations are published until real ones are confirmed.
 export const AFFILIATIONS_DATA: Affiliation[] = [];

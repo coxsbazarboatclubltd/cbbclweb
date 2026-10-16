@@ -232,6 +232,8 @@ export function saveCMSFacilities(facilities: Facility[]): void {
 }
 
 // EVENTS GET / SET
+const PROTOTYPE_EVENT_IDS = ["e1", "e2", "e3", "pe1", "pe2", "pe3"];
+
 export function getCMSEvents(): EventItem[] {
   try {
     const data = localStorage.getItem(EVENTS_KEY);
@@ -242,7 +244,12 @@ export function getCMSEvents(): EventItem[] {
     }
     const parsed = JSON.parse(data);
     if (Array.isArray(parsed)) {
-      return parsed;
+      // Drop the prototype events shipped with earlier builds; admin-added events are kept.
+      const real = parsed.filter((e: EventItem) => e && !PROTOTYPE_EVENT_IDS.includes(e.id));
+      if (real.length !== parsed.length) {
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(real));
+      }
+      return real;
     }
     localStorage.setItem(EVENTS_KEY, JSON.stringify(combined));
     return combined;

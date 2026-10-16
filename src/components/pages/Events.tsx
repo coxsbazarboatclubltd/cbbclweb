@@ -150,6 +150,11 @@ export default function Events() {
             </div>
           ))}
         </div>
+        {upcomingEvents.length === 0 && (
+          <p className="text-center font-sans text-xs text-text-light italic py-10">
+            No upcoming events registered currently.
+          </p>
+        )}
       </section>
 
       {/* 2. PAST EVENTS */}
@@ -201,6 +206,11 @@ export default function Events() {
             </div>
           ))}
         </div>
+        {pastEvents.length === 0 && (
+          <p className="text-center font-sans text-xs text-text-light italic py-6">
+            No past events recorded yet.
+          </p>
+        )}
       </section>
 
       {/* RSVP Booking Registration Modal */}

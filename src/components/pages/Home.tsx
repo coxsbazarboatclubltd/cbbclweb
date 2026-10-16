@@ -9,6 +9,8 @@ import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
 import { PRESIDENT_IMAGE, MASTER_HERO_VIDEO, MASTER_HERO_POSTER } from "../../data";
+// @ts-ignore
+import presidentSignature from "../../assets/images/signature-humayun-kabir.svg";
 import BackgroundVideo from "../BackgroundVideo";
 import { MEMBERSHIP_CATEGORIES } from "../../membershipCategories";
 import { hasTextSelection } from "../../utils/selection";
@@ -278,22 +280,25 @@ export default function Home({ navigate }: HomeProps) {
               presPhoto = PRESIDENT_IMAGE;
             }
             const presDesignation = p.designation || targetPresident?.designation || "Founding President";
-            const bioLines = p.bio && p.bio.length > 0 ? p.bio : (targetPresident?.bio || [
-              "In constructing the permanent pillars of Cox's Bazar Boat Club Limited, our mission transcends establishing a conventional leisure resort. We are erecting Bangladesh’s absolute benchmark for private oceanfront companionship and nautical lifestyle.",
-              "Cox's Bazar boasts the longest natural sea beach on earth. Yet, until now, it has lacked an integrated, elite socio-maritime harbor comparable in stature to historic South Asian hubs. CBBCL permanently bridges this gap."
-            ]);
+            const bioLines = p.bio && p.bio.length > 0 ? p.bio : (targetPresident?.bio || []);
+            // Message paragraphs mark emphasis as **text**.
+            const withBold = (text: string) =>
+              text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
+                i % 2 === 1 ? <strong key={i} className="font-medium text-text-dark">{part}</strong> : part
+              );
 
             return (
               <section key="president" id="president-session" className="py-24 px-6 bg-bg-primary">
-                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                  {/* Left Side: Photo Framed */}
+                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center xl:items-stretch">
+                  {/* Left Side: Photo Framed. Side by side (xl), the frame grows with the message and the
+                      portrait fills it. */}
                   <div className="lg:col-span-12 xl:col-span-5 relative group">
                     <div className="absolute -inset-2 border border-gold/40 transform translate-x-3 translate-y-3 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
-                    <div className="relative overflow-hidden bg-navy-mid border border-gold">
+                    <div className="relative overflow-hidden bg-[#12304c] border border-gold xl:h-full">
                       <img
                         src={presPhoto}
                         alt="President photo representation"
-                        className="w-full h-[460px] object-cover object-top transition-all duration-700"
+                        className="w-full h-[460px] object-cover object-top xl:h-full xl:min-h-[460px] xl:object-[50%_35%] transition-all duration-700"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.currentTarget;
@@ -324,6 +329,9 @@ export default function Home({ navigate }: HomeProps) {
                     <h2 className="font-display text-3xl md:text-4xl font-light text-text-dark tracking-tight">
                       A Message from the <span className="font-serif italic font-normal text-gold">{presDesignation}</span>
                     </h2>
+                    <p className="font-sans text-[10px] text-text-light uppercase tracking-[0.2em] font-semibold -mt-3">
+                      Cox's Bazar Boat Club Limited (CBBCL)
+                    </p>
 
                     <div className="text-gold-dark/40">
                       <Quote className="w-12 h-12" />
@@ -331,15 +339,24 @@ export default function Home({ navigate }: HomeProps) {
 
                     <div className="space-y-4 font-sans text-[13px] text-text-body font-light tracking-wide leading-relaxed">
                       {bioLines.map((para, idx) => (
-                        <p key={idx}>{para}</p>
+                        <p key={idx}>{withBold(para)}</p>
                       ))}
                     </div>
 
-                    <div className="pt-4 border-t border-slate-200">
-                      <p className="font-display text-base text-text-dark font-medium">{presName}</p>
+                    <div className="pt-4 border-t border-slate-200 space-y-1">
+                      <p className="font-sans text-[13px] text-text-body font-light">With sincere regards,</p>
+                      {/* Signature artwork (outlines from the OFL font Mr De Haviland with pen strokes; no font is loaded). */}
+                      <img
+                        src={presidentSignature}
+                        alt="Signature of Humayun Kabir"
+                        className="block h-[64px] sm:h-[84px] w-auto max-w-full -ml-2 select-none"
+                        draggable={false}
+                      />
+                      <p className="font-display text-base text-text-dark font-medium pt-1">The {presDesignation}</p>
                       <p className="font-sans text-[10px] text-text-light uppercase tracking-widest font-semibold">
-                        {presDesignation} — Cox's Bazar Boat Club Ltd.
+                        Cox's Bazar Boat Club Limited (CBBCL)
                       </p>
+                      <p className="font-serif italic text-gold-dark text-sm pt-2">Where Connections Meet the Sea.</p>
                     </div>
                   </div>
                 </div>
