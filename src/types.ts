@@ -45,6 +45,8 @@ export interface Director {
   community?: string[];
   timeline?: { year: string; event: string }[];
   vision?: string[];
+  /** One-line professional tagline shown under the designation in the profile header. */
+  tagline?: string;
   /** Short personal statement shown under the biography. */
   quote?: string;
   /** Who the quote is attributed to when it isn't the director's own words. */

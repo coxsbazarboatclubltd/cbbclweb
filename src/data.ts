@@ -264,11 +264,12 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "arifur-rahman",
     name: "Arifur Rahman",
-    designation: "Director Finance",
+    designation: "Director – Finance",
+    tagline: "Entrepreneur | Business Leader | Hospitality & Technology Professional",
     membershipCode: "CBBCL-FOUNDER-004",
     memberNumber: "LM-0008",
     profileSubmitted: true,
-    profileRevision: 15,
+    profileRevision: 17,
     quote: "The best time to plant a tree was 20 years ago. The second best time is now.",
     quoteAuthor: "Chinese Proverb",
     bio: [
@@ -289,13 +290,14 @@ export const DIRECTORS_DATA: Director[] = [
     },
     achievements: [
       "2025 — Asia Star Local President Award, JCI ASPAC 2025",
+      "2025 — Graduate, JCI Malaysia Academy, organized by JCI Lutong (Miri, Sarawak), 17 August 2025",
       "Master of Business Administration (MBA)",
       "Master of Laws (LLM)",
       "Bachelor of Business Administration (BBA)",
       "Journalism"
     ],
     memberships: [
-      "Cox's Bazar Boat Club Ltd. — Director of Finance",
+      "Cox's Bazar Boat Club Ltd. — Director – Finance",
       "JCI Bangladesh — Regional Vice President, 2026",
       "JCI Cox's Bazar — Local President, 2025",
       "JCI Cox's Bazar — Local Treasurer, 2024",
@@ -310,7 +312,7 @@ export const DIRECTORS_DATA: Director[] = [
       instagram: "https://www.instagram.com/arifurahman007"
     },
     timeline: [
-      { year: "Current", event: "Director of Finance, Cox's Bazar Boat Club Ltd." },
+      { year: "Current", event: "Director – Finance, Cox's Bazar Boat Club Ltd." },
       { year: "Current", event: "Founder & Chairman, EZCOM.GLOBAL." },
       { year: "Current", event: "Founder & CEO, EZBOOKING.GLOBAL — making travel and accommodation services more accessible, efficient, and technology-driven." },
       { year: "Current", event: "Managing Director, Shopno Bilash Holiday Suites — accommodation and hospitality services in Cox's Bazar." },

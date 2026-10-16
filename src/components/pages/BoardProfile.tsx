@@ -260,6 +260,9 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
           <p className="text-gold-light font-sans text-sm sm:text-base font-semibold uppercase tracking-widest">
             {director.designation}
           </p>
+          {director.tagline && (
+            <p className="font-sans text-[11px] sm:text-xs text-slate-300 tracking-wide">{director.tagline}</p>
+          )}
           <div className="font-sans text-[11px] text-slate-400 flex items-center justify-center space-x-2">
             <span 
               onClick={() => navigate?.(backPath)} 

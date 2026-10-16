@@ -203,8 +203,8 @@ export function getBoardMembers(): Director[] {
     }
     // A director who has submitted their profile form: take their real profile whenever its revision is newer.
     if (staticDirector?.profileSubmitted && (updated.profileRevision ?? 0) < (staticDirector.profileRevision ?? 1)) {
-      const { designation, bio, vision, quote, quoteAuthor, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileRevision } = staticDirector;
-      Object.assign(updated, { designation, bio, vision, quote, quoteAuthor, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileSubmitted: true, profileRevision: profileRevision ?? 1 });
+      const { designation, tagline, bio, vision, quote, quoteAuthor, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileRevision } = staticDirector;
+      Object.assign(updated, { designation, tagline, bio, vision, quote, quoteAuthor, expertise, businessProfile, achievements, memberships, community, timeline, socials, appointed, photoAlt, profileSubmitted: true, profileRevision: profileRevision ?? 1 });
       changed = true;
     }
     // Role changes: directors moved out of an executive seat (that seat is then shown vacant).
