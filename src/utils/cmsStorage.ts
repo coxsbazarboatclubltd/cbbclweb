@@ -1,7 +1,5 @@
 import { Facility, EventItem, Affiliation, RoutePath, FooterSettings } from "../types";
-import { FACILITIES_DATA, EVENTS_DATA, PAST_EVENTS_DATA, AFFILIATIONS_DATA } from "../data";
-// @ts-ignore
-import cruiseHero from "../assets/images/cruise_hero_1780825257603.png";
+import { FACILITIES_DATA, EVENTS_DATA, PAST_EVENTS_DATA, AFFILIATIONS_DATA, MASTER_HERO_POSTER } from "../data";
 
 // Interfaces
 export interface MediaItem {
@@ -86,7 +84,7 @@ const DEFAULT_PAGE_CONTENT: PageCMSContent = {
   home: {
     heroTitle: "COX'S BAZAR BOAT CLUB LTD.",
     heroSubtitle: "A Prestigious Socio-Cultural & Nautical Sanctuary Duly Chartered Under The Companies Act, 1994",
-    heroCover: cruiseHero,
+    heroCover: MASTER_HERO_POSTER,
     welcomeTitle: "Anchor of Camrades & Coastal Stewardship",
     welcomeText: "Proudly registered under the Joint Stock Companies & Firms (RJSC) of Bangladesh, Cox’s Bazar Boat Club Limited (CBBCL) stands as an elite private socio-recreational institution. Designed for shipping pioneers, corporate chiefs, and environment advocates, we offer a safe, luxurious marina haven that celebrates South Asia's maritime legacy on the longest sandy beach in the world.",
     metricMembers: "35+",
@@ -165,6 +163,10 @@ export function getPageContent(): PageCMSContent {
       const home = { ...DEFAULT_PAGE_CONTENT.home, ...(page.home || {}) };
       if (home.heroTitle === "COX'S BAZAR BOAT CLUB") {
         home.heroTitle = "COX'S BAZAR BOAT CLUB LTD.";
+      }
+      // The old default cover (a corrupt cruise_hero PNG) was replaced by the hero video still.
+      if (typeof home.heroCover === "string" && home.heroCover.includes("cruise_hero")) {
+        home.heroCover = DEFAULT_PAGE_CONTENT.home.heroCover;
       }
       return {
         home,

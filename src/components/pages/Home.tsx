@@ -8,12 +8,10 @@ import CardMedia from "../CardMedia";
 import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
-import { PRESIDENT_IMAGE, MASTER_HERO_VIDEO } from "../../data";
+import { PRESIDENT_IMAGE, MASTER_HERO_VIDEO, MASTER_HERO_POSTER } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 import { MEMBERSHIP_CATEGORIES } from "../../membershipCategories";
 import { hasTextSelection } from "../../utils/selection";
-// @ts-ignore
-import cruiseHero from "../../assets/images/cruise_hero_1780825257603.png";
 
 interface HomeProps {
   navigate: (path: RoutePath) => void;
@@ -154,7 +152,7 @@ export default function Home({ navigate }: HomeProps) {
     cms.home.heroCover.includes("photo-1507525428034-b723cf961d3e") || 
     cms.home.heroCover.includes("photo-1505242844900-19279f22006");
 
-  const currentHeroCoverImage = homeCms.sections.hero.image || (isOldCover ? cruiseHero : cms.home.heroCover);
+  const currentHeroCoverImage = homeCms.sections.hero.image || (isOldCover ? MASTER_HERO_POSTER : cms.home.heroCover);
 
   return (
     <div className="bg-bg-primary overflow-x-hidden">
@@ -169,6 +167,7 @@ export default function Home({ navigate }: HomeProps) {
                 {/* Background Video with overlays */}
                 <div className="absolute inset-0 w-full h-full">
                   <BackgroundVideo
+                    animated
                     src={MASTER_HERO_VIDEO}
                     poster={h.image || currentHeroCoverImage}
                   />
@@ -412,6 +411,7 @@ export default function Home({ navigate }: HomeProps) {
                 <section className="relative py-32 bg-navy flex items-center justify-center overflow-hidden">
                   <div className="absolute inset-0 w-full h-full">
                     <BackgroundVideo
+                      animated
                       src={MASTER_HERO_VIDEO}
                     />
                     <div className="absolute inset-0 bg-navy/85 mix-blend-multiply"></div>

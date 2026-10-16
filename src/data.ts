@@ -1,34 +1,36 @@
 import { Director, NewsPost, EventItem, Facility, Affiliation } from "./types";
 // @ts-ignore
-import farhanBinRafiqPortrait from "./assets/images/board/farhan-bin-rafiq.png";
+import farhanBinRafiqPortrait from "./assets/images/board/farhan-bin-rafiq.webp";
 // @ts-ignore
-import amzadMahmudPortrait from "./assets/images/board/amzad-mahmud.png";
+import amzadMahmudPortrait from "./assets/images/board/amzad-mahmud.webp";
 // @ts-ignore
-import mohammedEliasPortrait from "./assets/images/board/mohammed-elias.png";
+import mohammedEliasPortrait from "./assets/images/board/mohammed-elias.webp";
 // @ts-ignore
-import mdYousufPortrait from "./assets/images/board/md-yousuf.jpg";
+import mdYousufPortrait from "./assets/images/board/md-yousuf.webp";
 // @ts-ignore
-import nurulAbsarPortrait from "./assets/images/board/nurul-absar.png";
+import nurulAbsarPortrait from "./assets/images/board/nurul-absar.webp";
 // @ts-ignore
-import presidentPortrait from "./assets/images/board/humayun-kabir-robel.png";
+import presidentPortrait from "./assets/images/board/humayun-kabir-robel.webp";
 // @ts-ignore
-import arifurRahmanPortrait from "./assets/images/board/arifur-rahman.png";
+import arifurRahmanPortrait from "./assets/images/board/arifur-rahman.webp";
 // @ts-ignore
-import akRubelPortrait from "./assets/images/board/ak-rubel.jpg";
+import akRubelPortrait from "./assets/images/board/ak-rubel.webp";
 // @ts-ignore
-import maimunalKarimJisanPortrait from "./assets/images/board/maimunal-karim-jisan.jpg";
+import maimunalKarimJisanPortrait from "./assets/images/board/maimunal-karim-jisan.webp";
 // @ts-ignore
-import mdImranAlamPortrait from "./assets/images/board/md-imran-alam.png";
+import mdImranAlamPortrait from "./assets/images/board/md-imran-alam.webp";
 // @ts-ignore
-import mdRezaulKabirRezaPortrait from "./assets/images/board/md-rezaul-kabir-reza.png";
+import mdRezaulKabirRezaPortrait from "./assets/images/board/md-rezaul-kabir-reza.webp";
 // @ts-ignore
-import mehediHasanPortrait from "./assets/images/board/mehedi-hasan.png";
+import mehediHasanPortrait from "./assets/images/board/mehedi-hasan.webp";
 // @ts-ignore
-import rasadulMaimunEvoPortrait from "./assets/images/board/reshedul-evu.jpg";
+import rasadulMaimunEvoPortrait from "./assets/images/board/reshedul-evu.webp";
 // @ts-ignore
-import ziaulHoquePortrait from "./assets/images/board/ziaul-haque.png";
+import ziaulHoquePortrait from "./assets/images/board/ziaul-haque.webp";
 // @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
+// @ts-ignore
+import heroPoster from "./assets/images/hero-poster.webp";
 
 export const PRESIDENT_IMAGE = presidentPortrait;
 export const FARHAN_BIN_RAFIQ_IMAGE = farhanBinRafiqPortrait;
@@ -48,6 +50,8 @@ export const MD_ZIAUL_HOQUE = {
   image: ziaulHoquePortrait
 };
 export const MASTER_HERO_VIDEO = heroVideo;
+/** Still frame of the hero video: shown on inner pages and while the homepage video loads. */
+export const MASTER_HERO_POSTER = heroPoster;
 
 export const DIRECTORS_DATA: Director[] = [
   {
