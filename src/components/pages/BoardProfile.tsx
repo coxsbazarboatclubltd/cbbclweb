@@ -472,7 +472,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
             {director.quote && (
               <blockquote className="bg-navy text-white px-8 py-6 border-l-4 border-gold rounded-xs shadow-sm">
                 <p className="font-display text-lg md:text-xl font-light italic leading-relaxed">“{director.quote}”</p>
-                <footer className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold mt-3">— {director.name}</footer>
+                <footer className="font-sans text-[10px] uppercase tracking-[0.2em] text-gold mt-3">— {director.quoteAuthor || director.name}</footer>
               </blockquote>
             )}
 

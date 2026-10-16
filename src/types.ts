@@ -47,6 +47,8 @@ export interface Director {
   vision?: string[];
   /** Short personal statement shown under the biography. */
   quote?: string;
+  /** Who the quote is attributed to when it isn't the director's own words. */
+  quoteAuthor?: string;
   /** Professional strengths shown as tags under "Areas of Expertise". */
   expertise?: string[];
   socials?: { linkedin?: string; facebook?: string; twitter?: string; instagram?: string; email?: string; wechat?: string };
