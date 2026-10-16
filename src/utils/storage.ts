@@ -197,6 +197,10 @@ export function getBoardMembers(): Director[] {
       updated.memberNumber = staticDirector.memberNumber;
       changed = true;
     }
+    if (staticDirector?.membershipCode && staticDirector.membershipCode !== updated.membershipCode) {
+      updated.membershipCode = staticDirector.membershipCode;
+      changed = true;
+    }
     if (staticDirector?.businessProfile && !updated.businessProfile) {
       updated.businessProfile = staticDirector.businessProfile;
       changed = true;

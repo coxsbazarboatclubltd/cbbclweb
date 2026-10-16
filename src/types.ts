@@ -30,7 +30,7 @@ export interface Director {
   photoAlt?: string;
   bio?: string[];
   membershipCode?: string;
-  /** Life Member number, e.g. LM-0001. */
+  /** Life Member number, e.g. CBBCL-LM-0001. */
   memberNumber?: string;
   appointed?: string;
   businessProfile?: {

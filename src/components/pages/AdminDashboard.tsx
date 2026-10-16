@@ -640,7 +640,7 @@ export default function AdminDashboard({ navigate, onLogout, initialActiveTab }:
         id: "bd-" + Date.now(),
         name: "",
         designation: "Founding Director",
-        membershipCode: `CBBCL-FOUNDER-0${boardMembers.length + 1}`,
+        membershipCode: `CBBCL-FM-${String(boardMembers.length + 1).padStart(2, "0")}`,
         appointed: "January 2026",
         bio: "",
         company: "",
@@ -5361,7 +5361,7 @@ export default function AdminDashboard({ navigate, onLogout, initialActiveTab }:
                     value={boardForm.membershipCode}
                     onChange={(e) => setBoardForm({ ...boardForm, membershipCode: e.target.value })}
                     className="w-full border p-2 bg-slate-50 focus:bg-white text-xs font-mono"
-                    placeholder="e.g. CBBCL-FOUNDER-001"
+                    placeholder="e.g. CBBCL-FM-01"
                   />
                 </div>
 

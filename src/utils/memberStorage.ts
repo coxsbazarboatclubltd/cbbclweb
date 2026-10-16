@@ -48,7 +48,7 @@ const DEMO_MEMBER_IDS = [
   "syfuddin-khaled"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v16";
+const MEMBERS_SEED_VERSION = "founding-directors-v17";
 
 
 export function getClubMembers(): ClubMember[] {

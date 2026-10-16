@@ -299,7 +299,7 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
                 value={formData.proposerCode}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none font-mono"
-                placeholder="CBBCL-FOUNDER-XXX"
+                placeholder="CBBCL-FM-XX"
               />
             </div>
             <div className="space-y-1.5">

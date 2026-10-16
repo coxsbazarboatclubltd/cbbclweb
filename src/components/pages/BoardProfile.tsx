@@ -307,15 +307,15 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
               </div>
 
               {/* Specifications list */}
-              <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left">
+              <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left [&>div:last-child]:border-b-0">
                 <div className="flex justify-between border-b border-slate-50 pb-2">
                   <span className="text-slate-400 font-light">Founder Code:</span>
-                  <span className="text-navy font-mono font-medium">{director.membershipCode}</span>
+                  <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
                 </div>
                 {director.memberNumber && (
                   <div className="flex justify-between border-b border-slate-50 pb-2">
                     <span className="text-slate-400 font-light">Member No.:</span>
-                    <span className="text-navy font-mono font-medium">{director.memberNumber}</span>
+                    <span className="text-gold-dark font-mono font-semibold">{director.memberNumber}</span>
                   </div>
                 )}
                 <div className="flex justify-between border-b border-slate-50 pb-2">
@@ -328,10 +328,6 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                     <span className="text-navy font-semibold">{director.appointed}</span>
                   </div>
                 )}
-                <div className="flex justify-between pb-1">
-                  <span className="text-slate-400 font-light">Residency Seat:</span>
-                  <span className="text-gold-dark font-semibold">Founding Seat #{director.membershipCode?.split("-").pop()}</span>
-                </div>
               </div>
 
               {/* Social Channels Links */}
