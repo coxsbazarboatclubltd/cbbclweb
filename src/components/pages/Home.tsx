@@ -3,7 +3,7 @@ import { RoutePath } from "../../types";
 import { getBoardMembers, getNewsPosts, getDirectorPortrait } from "../../utils/storage";
 import { getPageContent, getCMSFacilities, getCMSEvents, getCMSAffiliations, fetchFooterSettings, getFooterSettingsSync } from "../../utils/cmsStorage";
 import { FooterSettings } from "../../types";
-import BoardProfileCard, { VacantBoardCard } from "../BoardProfileCard";
+import BoardProfileCard, { SecretariatContactPanel, SecretariatVacantCard, VacantBoardCard } from "../BoardProfileCard";
 import CardMedia from "../CardMedia";
 import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
@@ -841,6 +841,20 @@ export default function Home({ navigate }: HomeProps) {
                           <BoardProfileCard key={dir.id} director={dir} navigate={navigate} variant="compact" />
                         ))}
                       </div>
+                    </div>
+
+                    {/* Club Secretariat: appointed executive serving the Board (not a board seat) */}
+                    <div className="text-center w-full z-10 mt-8 pt-10 border-t border-slate-200 max-w-5xl mx-auto">
+                      <span className="font-sans text-[9px] text-[#1a2744] uppercase tracking-[0.2em] font-bold block">
+                        Club Secretariat
+                      </span>
+                      <span className="font-sans text-[11px] text-text-light font-light block mt-1 mb-5">
+                        Appointed by and serving the Board of Directors
+                      </span>
+                      <div className="flex justify-center">
+                        <SecretariatVacantCard />
+                      </div>
+                      <div className="mt-6 px-4"><SecretariatContactPanel /></div>
                     </div>
                   </div>
                 </div>

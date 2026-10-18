@@ -2,7 +2,11 @@ import React from "react";
 import { Director, RoutePath } from "../types";
 import { getDirectorPortrait } from "../utils/storage";
 import { hasTextSelection } from "../utils/selection";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight, Briefcase, Clock, Mail, MapPin, Phone, User } from "lucide-react";
+import { getFooterSettingsSync } from "../utils/cmsStorage";
+
+// Not recorded anywhere else on the site yet; update when the Secretariat confirms its hours.
+const SECRETARIAT_OFFICE_HOURS = "To be announced";
 
 interface BoardProfileCardProps {
   key?: React.Key | string | number;
@@ -138,6 +142,69 @@ export function VacantBoardCard({ title }: { title: string }) {
         {title}
       </p>
       <div className="mt-4 pt-3 border-t border-slate-100 h-[30px]" />
+    </div>
+  );
+}
+
+// The Club Secretariat sits outside the Board: an appointed executive who serves the Board, not a director.
+// Navy styling sets it apart from the white director cards. Empty until the post is filled.
+export function SecretariatVacantCard({ title = "Secretary General" }: { title?: string }) {
+  return (
+    <div className="inline-block bg-navy p-6 border border-dashed border-gold/50 rounded-sm w-[290px] sm:w-[320px] shadow-sm text-center">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full border-2 border-gold/40 bg-navy-mid mx-auto flex items-center justify-center">
+        <Briefcase className="w-9 h-9 text-gold/60" />
+      </div>
+      <h4 className="font-display text-base sm:text-lg font-bold text-white tracking-tight mt-3">&nbsp;</h4>
+      <p className="font-sans text-[9px] sm:text-[10px] text-gold uppercase tracking-[0.15em] font-semibold mt-1">
+        {title}
+      </p>
+      <p className="font-sans text-[9px] text-slate-400 uppercase tracking-[0.12em] mt-1">Appointed Executive</p>
+      <div className="mt-4 pt-3 border-t border-white/10 h-[30px]" />
+    </div>
+  );
+}
+
+// Official Secretariat contact details, read from the site's contact settings (the same source as the footer).
+export function SecretariatContactPanel() {
+  const { email, phone, address } = getFooterSettingsSync().contact;
+  const emails = email.split(/[,;]/).map((e) => e.trim()).filter(Boolean);
+  const addressLines = address.split("\n").map((l) => l.trim()).filter((l) => l && !/^www\./i.test(l));
+  const label = "font-sans text-[9px] text-text-light uppercase tracking-[0.18em] font-semibold";
+  const value = "font-sans text-xs text-text-dark leading-relaxed";
+  return (
+    <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm w-full max-w-2xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 gap-5 text-left">
+      <div className="flex gap-3">
+        <Mail className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+        <div className="space-y-1 min-w-0">
+          <p className={label}>Official Email</p>
+          {emails.map((e) => (
+            <a key={e} href={`mailto:${e}`} className={`${value} block hover:text-gold transition-colors break-all`}>{e}</a>
+          ))}
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <Phone className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <p className={label}>Phone</p>
+          <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className={`${value} block hover:text-gold transition-colors`}>{phone}</a>
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <Clock className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <p className={label}>Office Hours</p>
+          <p className={value}>{SECRETARIAT_OFFICE_HOURS}</p>
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <p className={label}>Club House</p>
+          {addressLines.map((l) => (
+            <p key={l} className={value}>{l}</p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

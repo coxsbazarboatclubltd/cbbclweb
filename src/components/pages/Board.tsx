@@ -4,7 +4,7 @@ import { RoutePath, Director } from "../../types";
 import { getBoardMembers, getDirectorPortrait } from "../../utils/storage";
 import { User, ShieldAlert, Award, Anchor, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
-import BoardProfileCard, { VacantBoardCard } from "../BoardProfileCard";
+import BoardProfileCard, { SecretariatContactPanel, SecretariatVacantCard, VacantBoardCard } from "../BoardProfileCard";
 import BackgroundVideo from "../BackgroundVideo";
 
 interface BoardProps {
@@ -130,6 +130,22 @@ export default function Board({ navigate }: BoardProps) {
               <BoardProfileCard key={dir.id} director={dir} navigate={navigate} variant="compact" />
             ))}
           </div>
+        </div>
+
+        {/* CLUB SECRETARIAT: appointed executive serving the Board (not a board seat, so not a numbered row) */}
+        <div className="space-y-6 pt-12 border-t border-slate-200 max-w-5xl mx-auto w-full">
+          <div className="text-center space-y-1.5">
+            <h5 className="font-sans text-[10px] text-[#1a2744] uppercase tracking-[0.2em] font-bold block">
+              Club Secretariat
+            </h5>
+            <p className="font-sans text-[11px] text-text-light font-light">
+              Appointed by and serving the Board of Directors
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <SecretariatVacantCard />
+          </div>
+          <SecretariatContactPanel />
         </div>
 
       </section>

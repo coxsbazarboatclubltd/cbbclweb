@@ -56,7 +56,20 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionDetail: "Donor Members are exempt from monthly subscriptions."
     },
     eligibility: ["Admission is governed by the membership provisions of the Articles of Association."],
-    privileges: ["General Membership with voting and election rights.", "Exempt from monthly subscriptions."],
+    // Same facilities as Life Membership (club's instruction, 2026-10-18).
+    privileges: [
+      "No regular monthly subscription",
+      "Full General Membership rights",
+      "Voting rights",
+      "Eligibility to contest elections subject to Articles",
+      "Club facility access",
+      "Family privileges",
+      "Guest privileges",
+      "Boating access",
+      "Dining and recreation",
+      "Member events",
+      "Nominee/succession provisions"
+    ],
     restrictions: []
   },
   {
