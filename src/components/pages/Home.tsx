@@ -289,16 +289,16 @@ export default function Home({ navigate }: HomeProps) {
 
             return (
               <section key="president" id="president-session" className="py-24 px-6 bg-bg-primary">
-                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center xl:items-stretch">
-                  {/* Left Side: Photo Framed. Side by side (xl), the frame grows with the message and the
-                      portrait fills it. */}
-                  <div className="lg:col-span-12 xl:col-span-5 relative group">
+                {/* Magazine layout (xl): the framed portrait floats left, the message starts beside it and
+                    continues full width underneath. Below xl the portrait sits above the message. */}
+                <div className="max-w-6xl mx-auto flow-root">
+                  <div className="relative group mb-12 xl:float-left xl:w-[46%] xl:mr-14 xl:mb-10">
                     <div className="absolute -inset-2 border border-gold/40 transform translate-x-3 translate-y-3 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"></div>
-                    <div className="relative overflow-hidden bg-[#12304c] border border-gold xl:h-full">
+                    <div className="relative overflow-hidden bg-[#12304c] border border-gold">
                       <img
                         src={presPhoto}
                         alt="President photo representation"
-                        className="w-full h-[460px] object-cover object-top xl:h-full xl:min-h-[460px] xl:object-[50%_35%] transition-all duration-700"
+                        className="w-full h-[460px] object-cover object-top xl:h-[640px] xl:object-[50%_30%] transition-all duration-700"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.currentTarget;
@@ -321,12 +321,12 @@ export default function Home({ navigate }: HomeProps) {
                     </div>
                   </div>
 
-                  {/* Right Side: Message text */}
-                  <div className="lg:col-span-12 xl:col-span-7 space-y-6">
+                  {/* Message text: wraps around the portrait, then runs full width */}
+                  <div className="space-y-6">
                     <span className="font-sans text-[9px] font-semibold tracking-[0.25em] uppercase text-text-gold block">
                       Founding Leadership
                     </span>
-                    <h2 className="font-display text-3xl md:text-4xl font-light text-text-dark tracking-tight">
+                    <h2 className="font-display text-3xl md:text-4xl xl:text-[33px] font-light text-text-dark tracking-tight">
                       A Message from the <span className="font-serif italic font-normal text-gold">{presDesignation}</span>
                     </h2>
                     <p className="font-sans text-[10px] text-text-light uppercase tracking-[0.2em] font-semibold -mt-3">
@@ -337,13 +337,13 @@ export default function Home({ navigate }: HomeProps) {
                       <Quote className="w-12 h-12" />
                     </div>
 
-                    <div className="space-y-4 font-sans text-[13px] text-text-body font-light tracking-wide leading-relaxed">
+                    <div className="space-y-4 font-sans text-[13px] text-text-body font-light tracking-wide leading-relaxed text-justify hyphens-auto">
                       {bioLines.map((para, idx) => (
                         <p key={idx}>{withBold(para)}</p>
                       ))}
                     </div>
 
-                    <div className="pt-4 border-t border-slate-200 space-y-1">
+                    <div className="flow-root pt-4 border-t border-slate-200 space-y-1">
                       <p className="font-sans text-[13px] text-text-body font-light">With sincere regards,</p>
                       {/* Signature artwork (outlines from the OFL font Mr De Haviland with pen strokes; no font is loaded). */}
                       <img
