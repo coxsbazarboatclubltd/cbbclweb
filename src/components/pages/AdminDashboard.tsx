@@ -228,7 +228,7 @@ export default function AdminDashboard({ navigate, onLogout, initialActiveTab }:
     const DEFAULT_F_SETTINGS: FooterSettings = {
       key: "footer",
       socialLinks: {
-        facebook: "https://www.facebook.com/CoxsBazarBoatClubLtd",
+        facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
         instagram: "https://instagram.com",
         youtube: "https://youtube.com",
         linkedin: "https://www.linkedin.com/company/cbbcl/",

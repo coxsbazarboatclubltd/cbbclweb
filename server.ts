@@ -60,7 +60,7 @@ function getSiteSettings() {
         alt: "Site Logo"
       },
       socialLinks: {
-        facebook: "https://www.facebook.com/CoxsBazarBoatClubLtd",
+        facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
         instagram: "https://instagram.com",
         youtube: "https://youtube.com",
         linkedin: "https://www.linkedin.com/company/cbbcl/",

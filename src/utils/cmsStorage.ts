@@ -388,7 +388,7 @@ const DEFAULT_FOOTER: FooterCMSData = {
   phone: "+880 1711-223344 (Registry Desk)",
   copyright: "© 2026 Cox's Bazar Boat Club Limited. All Rights Reserved. Incorporated under The Companies Act, 1994, Bangladesh.",
   socials: {
-    facebook: "https://www.facebook.com/CoxsBazarBoatClubLtd",
+    facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
     twitter: "https://twitter.com",
     linkedin: "https://www.linkedin.com/company/cbbcl/",
     instagram: "https://instagram.com"
@@ -481,7 +481,7 @@ export const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
     alt: "Site Logo"
   },
   socialLinks: {
-    facebook: "https://www.facebook.com/CoxsBazarBoatClubLtd",
+    facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
     instagram: "https://instagram.com",
     youtube: "https://youtube.com",
     linkedin: "https://www.linkedin.com/company/cbbcl/",
@@ -534,8 +534,8 @@ export function getFooterSettingsSync(): FooterSettings {
         if (parsed.socialLinks.linkedin === "https://linkedin.com" || parsed.socialLinks.linkedin === "https://linkedin.com/") {
           parsed.socialLinks.linkedin = "https://www.linkedin.com/company/cbbcl/";
         }
-        if (parsed.socialLinks.facebook === "https://facebook.com" || parsed.socialLinks.facebook === "https://facebook.com/") {
-          parsed.socialLinks.facebook = "https://www.facebook.com/CoxsBazarBoatClubLtd";
+        if (["https://facebook.com", "https://facebook.com/", "https://www.facebook.com/CoxsBazarBoatClubLtd"].includes(parsed.socialLinks.facebook)) {
+          parsed.socialLinks.facebook = "https://www.facebook.com/coxsbazarboatclubltd/";
         }
       }
       // Replace the retired Kolatoli office address cached in older browsers.
@@ -570,8 +570,8 @@ export async function fetchFooterSettings(): Promise<FooterSettings> {
         if (data.socialLinks.linkedin === "https://linkedin.com" || data.socialLinks.linkedin === "https://linkedin.com/") {
           data.socialLinks.linkedin = "https://www.linkedin.com/company/cbbcl/";
         }
-        if (data.socialLinks.facebook === "https://facebook.com" || data.socialLinks.facebook === "https://facebook.com/") {
-          data.socialLinks.facebook = "https://www.facebook.com/CoxsBazarBoatClubLtd";
+        if (["https://facebook.com", "https://facebook.com/", "https://www.facebook.com/CoxsBazarBoatClubLtd"].includes(data.socialLinks.facebook)) {
+          data.socialLinks.facebook = "https://www.facebook.com/coxsbazarboatclubltd/";
         }
         localStorage.setItem(FOOTER_DB_SETTINGS_KEY, JSON.stringify(data));
         return data;
