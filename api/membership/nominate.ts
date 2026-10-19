@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { buildRegistryEmailHtml } from "../_lib/emailTemplate.js";
+import { recordApplication } from "../_lib/stats.js";
 
 const NOMINATION_RECIPIENT = "membership@cbbcl.org";
 const NOMINATION_SENDER = "notifications@cbbcl.org";
@@ -110,6 +111,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error("Error sending nomination email: ", error);
       return res.status(500).json({ error: "Failed to send nomination request: " + error.message });
     }
+
+    // The application reached the Secretariat: count it for the homepage figures.
+    await recordApplication();
 
     // Send the candidate a copy of their own submission for their records
     try {

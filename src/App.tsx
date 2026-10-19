@@ -6,6 +6,7 @@
 import { useState, useEffect } from "react";
 import { RoutePath, User } from "./types";
 import { getLoggedInUser, setLoggedInUser } from "./utils/storage";
+import { recordVisitOnce } from "./utils/siteStats";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/pages/Home";
@@ -120,6 +121,11 @@ export default function App() {
 
     document.title = pageTitle;
   }, [currentPath]);
+
+  // Count this website visit (one per page load) for the homepage figures.
+  useEffect(() => {
+    recordVisitOnce();
+  }, []);
 
   // Handle address bar routing from the window location if accessed directly
   useEffect(() => {

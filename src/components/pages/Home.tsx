@@ -4,6 +4,7 @@ import { getBoardMembers, getNewsPosts, getDirectorPortrait } from "../../utils/
 import { getPageContent, getCMSFacilities, getCMSEvents, getCMSAffiliations, fetchFooterSettings, getFooterSettingsSync } from "../../utils/cmsStorage";
 import { FooterSettings } from "../../types";
 import BoardProfileCard, { SecretariatContactPanel, SecretariatVacantCard, VacantBoardCard } from "../BoardProfileCard";
+import SiteStatsStrip from "../SiteStatsStrip";
 import CardMedia from "../CardMedia";
 import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
@@ -246,28 +247,8 @@ export default function Home({ navigate }: HomeProps) {
           case "stats": {
             const s = homeCms.sections.stats;
             if (!s.enabled) return null;
-            return (
-              <section key="stats" className="bg-navy-mid border-y border-navy-light py-10 px-6 text-slate-200">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                  <div className="space-y-1.5">
-                    <span className="font-sans text-[9px] uppercase tracking-widest text-gold block">{s.labelEvents || "Incorporated"}</span>
-                    <span className="font-display text-2xl md:text-3xl text-white font-medium">{s.metricEvents || "Estd. 2026"}</span>
-                  </div>
-                  <div className="space-y-1.5 border-l border-slate-700/50">
-                    <span className="font-sans text-[9px] uppercase tracking-widest text-gold block">{s.labelMembers || "Founding Circle"}</span>
-                    <span className="font-display text-2xl md:text-3xl text-white font-medium">{s.metricMembers || "35+"}</span>
-                  </div>
-                  <div className="space-y-1.5 border-l border-slate-700/50">
-                    <span className="font-sans text-[9px] uppercase tracking-widest text-gold block">{s.labelVessels || "Curated Luxury"}</span>
-                    <span className="font-display text-2xl md:text-3xl text-white font-medium">{s.metricVessels || "15+"}</span>
-                  </div>
-                  <div className="space-y-1.5 border-l border-slate-700/50">
-                    <span className="font-sans text-[9px] uppercase tracking-widest text-gold block">{s.labelTonnage || "Scenic Anchorage"}</span>
-                    <span className="font-display text-2xl md:text-3xl text-white font-medium">{s.metricTonnage || "Cox's Bazar"}</span>
-                  </div>
-                </div>
-              </section>
-            );
+            // Live figures: website visits, applications and categories (the old static metrics are retired).
+            return <SiteStatsStrip key="stats" />;
           }
 
           case "president": {

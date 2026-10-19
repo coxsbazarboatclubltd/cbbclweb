@@ -7,6 +7,7 @@ import multer from "multer";
 import { Resend } from "resend";
 import { generateFavicons } from "./src/utils/generateFavicons";
 import { buildRegistryEmailHtml } from "./src/utils/emailTemplate";
+import { readStats, recordApplication, recordVisit } from "./api/_lib/stats";
 
 const app = express();
 const PORT = 3000;
@@ -287,6 +288,15 @@ app.put("/api/cms/footer", authMiddleware, isAdmin, (req, res) => {
   }
 });
 
+// Site counters (same as api/stats.ts on Vercel). Without Upstash env vars they report configured: false.
+app.get("/api/stats", async (_req, res) => {
+  try { res.set("Cache-Control", "no-store").json(await readStats()); } catch (e) { res.status(500).json({ error: "Stats unavailable." }); }
+});
+app.post("/api/stats", async (req, res) => {
+  if ((req.body && req.body.event) !== "visit") return res.status(400).json({ error: "Unknown event." });
+  try { res.set("Cache-Control", "no-store").json(await recordVisit()); } catch (e) { res.status(500).json({ error: "Stats unavailable." }); }
+});
+
 // POST membership nomination request - emails the Registration Office
 app.post("/api/membership/nominate", async (req, res) => {
   try {
@@ -376,6 +386,9 @@ app.post("/api/membership/nominate", async (req, res) => {
       console.error("Error sending nomination email: ", error);
       return res.status(500).json({ error: "Failed to send nomination request: " + error.message });
     }
+
+    // The application reached the Secretariat: count it for the homepage figures.
+    await recordApplication();
 
     // Send the candidate a copy of their own submission for their records
     try {
