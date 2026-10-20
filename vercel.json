@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/:path((?!sw\\.js$).*)",
+      "has": [{ "type": "host", "value": "cbbcl.org" }],
+      "destination": "https://www.cbbcl.org/:path",
+      "permanent": true
+    },
+    {
       "source": "/:path*.html",
       "destination": "/:path*",
       "permanent": true
