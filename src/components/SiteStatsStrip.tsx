@@ -21,7 +21,7 @@ export default function SiteStatsStrip() {
   const month = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Dhaka", month: "long" }).format(new Date());
 
   const items = [
-    { label: "Website Visits Today", value: fmt(stats?.visitsToday), note: ready ? `${fmt(stats?.visitsTotal)} visits in total` : "" },
+    { label: "Website Visits Today", value: fmt(stats?.visitsToday), note: ready ? `${fmt(stats?.visitsTotal)} ${stats?.visitsTotal === 1 ? "visit" : "visits"} in total` : "" },
     { label: `New Applications · ${month}`, value: fmt(stats?.applicationsThisMonth), note: ready ? "Submitted this month" : "" },
     { label: "Applications Under Review", value: fmt(stats?.applicationsTotal), note: ready ? "Awaiting the Board's decision" : "" },
     { label: "Membership Categories", value: String(MEMBERSHIP_CATEGORIES.length), note: "Under the Articles of Association" },
