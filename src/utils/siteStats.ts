@@ -7,6 +7,7 @@ export interface SiteStats {
   visitsTotal: number;
   applicationsThisMonth: number;
   applicationsTotal: number;
+  applicationsUnderReview: number;
 }
 
 let pending: Promise<SiteStats | null> | null = null;

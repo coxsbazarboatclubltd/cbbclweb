@@ -2,6 +2,8 @@
 // Without the store configured every call is a no-op and readStats() reports configured: false.
 //   - website visits: every page load counts (repeat visits too), per day and all-time
 //   - applications: counted when a membership application is successfully submitted
+//   - under review: +1 per new application; the club lowers it as applications are decided
+//     (Upstash console: DECRBY cbbcl:applications:review <n>)
 const URL_ = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "";
 const TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
 
@@ -10,6 +12,7 @@ const K = {
   visitsDay: (d: string) => `cbbcl:visits:day:${d}`,
   appsTotal: "cbbcl:applications:total",
   appsMonth: (m: string) => `cbbcl:applications:month:${m}`,
+  appsReview: "cbbcl:applications:review",
 };
 
 export function statsConfigured(): boolean {
@@ -39,35 +42,37 @@ export interface SiteStats {
   visitsTotal: number;
   applicationsThisMonth: number;
   applicationsTotal: number;
+  applicationsUnderReview: number;
 }
 
-const EMPTY: SiteStats = { configured: false, visitsToday: 0, visitsTotal: 0, applicationsThisMonth: 0, applicationsTotal: 0 };
+const EMPTY: SiteStats = { configured: false, visitsToday: 0, visitsTotal: 0, applicationsThisMonth: 0, applicationsTotal: 0, applicationsUnderReview: 0 };
 
 export async function readStats(): Promise<SiteStats> {
   if (!statsConfigured()) return EMPTY;
   const { day, month } = dhakaDate();
-  const [vd, vt, am, at] = await pipeline([["GET", K.visitsDay(day)], ["GET", K.visitsTotal], ["GET", K.appsMonth(month)], ["GET", K.appsTotal]]);
-  return { configured: true, visitsToday: Number(vd) || 0, visitsTotal: Number(vt) || 0, applicationsThisMonth: Number(am) || 0, applicationsTotal: Number(at) || 0 };
+  const [vd, vt, am, at, ar] = await pipeline([["GET", K.visitsDay(day)], ["GET", K.visitsTotal], ["GET", K.appsMonth(month)], ["GET", K.appsTotal], ["GET", K.appsReview]]);
+  return { configured: true, visitsToday: Number(vd) || 0, visitsTotal: Number(vt) || 0, applicationsThisMonth: Number(am) || 0, applicationsTotal: Number(at) || 0, applicationsUnderReview: Number(ar) || 0 };
 }
 
 export async function recordVisit(): Promise<SiteStats> {
   if (!statsConfigured()) return EMPTY;
   const { day, month } = dhakaDate();
-  const [vd, , vt, am, at] = await pipeline([
+  const [vd, , vt, am, at, ar] = await pipeline([
     ["INCR", K.visitsDay(day)],
     ["EXPIRE", K.visitsDay(day), 60 * 60 * 24 * 120],
     ["INCR", K.visitsTotal],
     ["GET", K.appsMonth(month)],
     ["GET", K.appsTotal],
+    ["GET", K.appsReview],
   ]);
-  return { configured: true, visitsToday: Number(vd) || 0, visitsTotal: Number(vt) || 0, applicationsThisMonth: Number(am) || 0, applicationsTotal: Number(at) || 0 };
+  return { configured: true, visitsToday: Number(vd) || 0, visitsTotal: Number(vt) || 0, applicationsThisMonth: Number(am) || 0, applicationsTotal: Number(at) || 0, applicationsUnderReview: Number(ar) || 0 };
 }
 
 export async function recordApplication(): Promise<void> {
   if (!statsConfigured()) return;
   const { month } = dhakaDate();
   try {
-    await pipeline([["INCR", K.appsMonth(month)], ["INCR", K.appsTotal]]);
+    await pipeline([["INCR", K.appsMonth(month)], ["INCR", K.appsTotal], ["INCR", K.appsReview]]);
   } catch (e) {
     // Counting must never fail an application that was already emailed successfully.
     console.error("Application counter not updated:", e);

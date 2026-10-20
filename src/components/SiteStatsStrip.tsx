@@ -3,8 +3,8 @@ import { MEMBERSHIP_CATEGORIES } from "../membershipCategories";
 import { getSiteStats, SiteStats } from "../utils/siteStats";
 
 // Homepage figures. Visits and applications are real counts kept by the site (api/_lib/stats.ts);
-// they show a dash until the counter store is connected. "Under review" is every application
-// received so far, as each one stays under review until the club decides on it.
+// they show a dash until the counter store is connected. "Under review" rises with each new
+// application and is lowered by the club as applications are decided.
 export default function SiteStatsStrip() {
   const [stats, setStats] = useState<SiteStats | null>(null);
 
@@ -23,7 +23,7 @@ export default function SiteStatsStrip() {
   const items = [
     { label: "Website Visits Today", value: fmt(stats?.visitsToday), note: ready ? `${fmt(stats?.visitsTotal)} ${stats?.visitsTotal === 1 ? "visit" : "visits"} in total` : "" },
     { label: `New Applications · ${month}`, value: fmt(stats?.applicationsThisMonth), note: ready ? "Submitted this month" : "" },
-    { label: "Applications Under Review", value: fmt(stats?.applicationsTotal), note: ready ? "Awaiting the Board's decision" : "" },
+    { label: "Applications Under Review", value: fmt(stats?.applicationsUnderReview), note: ready ? "Awaiting the Board's decision" : "" },
     { label: "Membership Categories", value: String(MEMBERSHIP_CATEGORIES.length), note: "Under the Articles of Association" },
   ];
 
