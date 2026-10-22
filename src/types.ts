@@ -53,8 +53,8 @@ export interface Director {
   quoteAuthor?: string;
   /** Professional strengths shown as tags under "Areas of Expertise". */
   expertise?: string[];
-  /** `fbcci`: the director's profile page on fbcci.org. */
-  socials?: { linkedin?: string; facebook?: string; twitter?: string; instagram?: string; email?: string; wechat?: string; fbcci?: string };
+  /** `fbcci`: the director's profile page on fbcci.org. `website`: personal site (business card uses businessProfile.website). A value without http shows as a non-clickable icon + label. */
+  socials?: { linkedin?: string; facebook?: string; twitter?: string; instagram?: string; email?: string; wechat?: string; fbcci?: string; website?: string };
   // Set once the director has submitted their profile form: only their real data is shown,
   // and sections they left empty are hidden instead of being filled with placeholder text.
   profileSubmitted?: boolean;
