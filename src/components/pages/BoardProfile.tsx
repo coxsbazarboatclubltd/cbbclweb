@@ -192,7 +192,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         ["twitter", director.socials?.twitter, Twitter, "X / Twitter"],
         ["instagram", director.socials?.instagram, Instagram, "Instagram"],
         ["fbcci", director.socials?.fbcci, Landmark, "FBCCI"],
-        ["website", website || director.socials?.website, Globe, (website || director.socials?.website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
+        ["website", website, Globe, (website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
       ] as const).filter(([, url]) => !!url)
     : ([
         ["linkedin", "https://linkedin.com", Linkedin, "LinkedIn"],
@@ -308,12 +308,10 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
 
               {/* Specifications list */}
               <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left [&>div:last-child]:border-b-0">
-                {director.membershipCode && (
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="text-slate-400 font-light">Founder Code:</span>
-                    <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
-                  </div>
-                )}
+                <div className="flex justify-between border-b border-slate-50 pb-2">
+                  <span className="text-slate-400 font-light">Founder Code:</span>
+                  <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
+                </div>
                 {director.memberNumber && (
                   <div className="flex justify-between border-b border-slate-50 pb-2">
                     <span className="text-slate-400 font-light">Member No.:</span>
