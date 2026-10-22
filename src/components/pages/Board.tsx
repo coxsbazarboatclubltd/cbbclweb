@@ -6,6 +6,7 @@ import { User, ShieldAlert, Award, Anchor, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import BoardProfileCard, { SecretariatContactPanel, SecretariatVacantCard, VacantBoardCard } from "../BoardProfileCard";
 import BackgroundVideo from "../BackgroundVideo";
+import { byFounderCode } from "../../utils/founderOrder";
 
 interface BoardProps {
   navigate: (path: RoutePath) => void;
@@ -29,7 +30,8 @@ export default function Board({ navigate }: BoardProps) {
   // The Director Administration seat is currently vacant; show a blank card in its place.
   const adminSeatVacant = !secretariatDirectors.some((d) => /administration/i.test(d.designation));
   const rawFounding = level4Arr.length > 0 ? level4Arr : boardList.filter((d) => d.level === 4 || (d.id !== "humayun-kabir-robel" && d.id !== "arifur-rahman"));
-  const foundingDirectors = [...rawFounding].sort((a, b) => a.name.localeCompare(b.name));
+  // Founding directors appear in founder-code order (FM-01, FM-02, ...).
+  const foundingDirectors = [...rawFounding].sort(byFounderCode);
 
   const getPortrait = (dir: Director) => {
     return getDirectorPortrait(dir);

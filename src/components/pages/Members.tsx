@@ -1,11 +1,12 @@
 import { SHOW_FOUNDER_CODES } from "../../utils/displaySettings";
+import { byFounderCode } from "../../utils/founderOrder";
 import React, { useState, useEffect } from "react";
 import { ClubMember, RoutePath } from "../../types";
 import { getClubMembers } from "../../utils/memberStorage";
 import { hasTextSelection } from "../../utils/selection";
 import { motion } from "motion/react";
 import { Search, Anchor, Calendar, Award, User, ArrowLeft, ShieldCheck, Mail, BookOpen } from "lucide-react";
-import { MASTER_HERO_VIDEO } from "../../data";
+import { DIRECTORS_DATA, MASTER_HERO_VIDEO } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 
 interface MembersProps {
@@ -16,7 +17,7 @@ interface MembersProps {
 export default function Members({ navigate, selectedMemberId = null }: MembersProps) {
   const [members, setMembers] = useState<ClubMember[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTypeFilter, setActiveTypeFilter] = useState<string>("Founding Members");
+  const [activeTypeFilter, setActiveTypeFilter] = useState<string>("All");
 
   useEffect(() => {
     setMembers(getClubMembers().filter((m) => m.status === "Active"));
@@ -39,13 +40,12 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
 
     const category = m.category || "General Member";
 
-    if (activeTypeFilter === "Founding Members") {
-      return category === "Founding Member";
-    } else if (activeTypeFilter === "Executive Officers") {
+    if (activeTypeFilter === "Executive Officers") {
       return category === "Executive Officer";
     } else {
       // Executive Officers are a role-based category and stay out of membership tabs.
-      // Founding Members also hold a membership (e.g. Life Member), so they appear in that tab too.
+      // Founding Members also hold a membership (e.g. Life Member), so they appear in that tab too,
+      // in the Founding Members Council section with their badge.
       if (category === "Executive Officer") {
         return false;
       }
@@ -58,13 +58,16 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
     }
   });
 
-  const foundingMembers = filteredMembers.filter((m) => m.category === "Founding Member");
+  // Member numbers (CBBCL-LM-xxxx) come from the director records, so cached member lists show them too.
+  const memberNumberOf = (id: string) => DIRECTORS_DATA.find((d) => d.id === id)?.memberNumber;
+
+  // Founding members in founder-code order (FM-01, FM-02, ...).
+  const foundingMembers = filteredMembers.filter((m) => m.category === "Founding Member").sort(byFounderCode);
   const executiveOfficers = filteredMembers.filter((m) => m.category === "Executive Officer");
   const generalMembers = filteredMembers.filter((m) => !m.category || m.category === "General Member");
 
   // Extract unique membership types for a clean pill filter
   const membershipTypes = [
-    "Founding Members",
     "All",
     "Life Member",
     "Permanent Member",
@@ -325,28 +328,12 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
         {/* Membership tier filters */}
         <div id="membership-filters" className="flex flex-wrap justify-center gap-2">
           {membershipTypes.map((type) => {
-            const isFounding = type === "Founding Members";
             const isActive = activeTypeFilter === type;
-            
+
             let btnClass = "text-[10px] font-sans font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-sm border transition-all duration-300 flex items-center space-x-1.5 ";
-            
-            if (isFounding) {
-              if (isActive) {
-                // Gold active styling with beautiful prestige glow
-                btnClass += "bg-gradient-to-r from-amber-500/15 to-amber-600/20 border-2 border-amber-500 text-amber-700 shadow-[0_0_12px_rgba(217,119,6,0.35)] scale-105 font-bold";
-              } else {
-                // Premium non-active styling
-                btnClass += "bg-amber-500/5 hover:bg-amber-500/10 border-amber-500/30 text-amber-600 hover:border-amber-500 hover:text-amber-700";
-              }
-            } else {
-              if (isActive) {
-                // Standard active
-                btnClass += "bg-[#1a2744] border-gold text-white shadow-sm";
-              } else {
-                // Standard inactive
-                btnClass += "bg-white border-slate-200 text-slate-600 hover:border-gold hover:text-navy";
-              }
-            }
+            btnClass += isActive
+              ? "bg-[#1a2744] border-gold text-white shadow-sm"
+              : "bg-white border-slate-200 text-slate-600 hover:border-gold hover:text-navy";
 
             return (
               <button
@@ -355,7 +342,6 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                 onClick={() => setActiveTypeFilter(type)}
                 className={btnClass}
               >
-                {isFounding && <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />}
                 <span>{type}</span>
               </button>
             );
@@ -429,6 +415,11 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                               {member.membershipType}
                             </span>
                           </div>
+                          {memberNumberOf(member.id) && (
+                            <span className="font-mono text-[11px] text-gold-dark font-semibold block tracking-wider">
+                              {memberNumberOf(member.id)}
+                            </span>
+                          )}
                           {SHOW_FOUNDER_CODES && (
                             <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
                               {member.membershipCode}

@@ -244,12 +244,15 @@ export function getCMSEvents(): EventItem[] {
     }
     const parsed = JSON.parse(data);
     if (Array.isArray(parsed)) {
-      // Drop the prototype events shipped with earlier builds; admin-added events are kept.
-      const real = parsed.filter((e: EventItem) => e && !PROTOTYPE_EVENT_IDS.includes(e.id));
-      if (real.length !== parsed.length) {
-        localStorage.setItem(EVENTS_KEY, JSON.stringify(real));
+      // Events are code-managed (EVENTS_DATA / PAST_EVENTS_DATA); those always win. Any other event
+      // saved in this browser is kept after them. Prototype events from earlier builds are dropped.
+      const codeIds = new Set(combined.map((e) => e.id));
+      const extra = parsed.filter((e: EventItem) => e && !PROTOTYPE_EVENT_IDS.includes(e.id) && !codeIds.has(e.id));
+      const merged = [...combined, ...extra];
+      if (JSON.stringify(merged) !== data) {
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(merged));
       }
-      return real;
+      return merged;
     }
     localStorage.setItem(EVENTS_KEY, JSON.stringify(combined));
     return combined;

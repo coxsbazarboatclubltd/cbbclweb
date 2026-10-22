@@ -44,57 +44,15 @@ export function safeLocalSet(key: string, value: string): void {
 }
 
 // Default admin and mock data for initial load
-const DEFAULT_USERS: User[] = [
-  {
-    id: "admin-id",
-    name: "Registry Administrator",
-    email: "admin@cbbcl.org",
-    passwordHash: "admin123",
-    role: "admin",
-    status: "approved",
-    membershipNumber: "CBBCL-ADMIN-001"
-  },
-  {
-    id: "unverified-member-id",
-    name: "Sajid Chowdhury",
-    email: "member@cbbcl.org",
-    passwordHash: "member123",
-    role: "member",
-    status: "pending",
-    membershipNumber: "CBBCL-PENDING-99"
-  },
-  {
-    id: "verified-member-id",
-    name: "Zafar Ahmed",
-    email: "verified@cbbcl.org",
-    passwordHash: "verified123",
-    role: "verified",
-    status: "approved",
-    membershipNumber: "CBBCL-MEMBER-005"
-  }
-];
+// No built-in accounts. Earlier builds shipped an admin and two demo member logins with their
+// passwords in the public site code; those are removed and any cached copies are ignored below.
+// Sign-in here is browser-only (not secure) until a server-side login exists.
+const DEFAULT_USERS: User[] = [];
+const RETIRED_USER_IDS = ["admin-id", "unverified-member-id", "verified-member-id"];
+const usable = (u: User | null | undefined) => !!u && u.role !== "admin" && !RETIRED_USER_IDS.includes(u.id);
 
-const DEFAULT_PROFILES: Profile[] = [
-  {
-    userId: "verified-member-id",
-    name: "Zafar Ahmed",
-    bio: [
-      "Zafar Ahmed is an entrepreneur in real estate and international commerce.",
-      "As a verified member, he supports the club's development initiatives in the Cox's Bazar waterfront and marina construction projects.",
-      "His profile is verified by the central registry and assigned an active membership status."
-    ],
-    education: "Master of Business Administration, IBA",
-    career: "CEO, Zafar Estates & Developments Ltd.",
-    achievements: ["Elite Business Leader Award (2025)", "Pioneered premium commercial properties in Chittagong"],
-    socialLinks: {
-      linkedin: "https://linkedin.com",
-      facebook: "https://facebook.com",
-      twitter: "https://twitter.com"
-    },
-    profileStatus: "approved",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400"
-  }
-];
+// The demo profile shipped with earlier builds (invented person and awards) is removed.
+const DEFAULT_PROFILES: Profile[] = [];
 
 export function getUsers(): User[] {
   try {
@@ -105,7 +63,9 @@ export function getUsers(): User[] {
     }
     const parsed = JSON.parse(data);
     if (Array.isArray(parsed)) {
-      return parsed;
+      const kept = parsed.filter(usable);
+      if (kept.length !== parsed.length) safeLocalSet(USERS_KEY, JSON.stringify(kept));
+      return kept;
     }
     safeLocalSet(USERS_KEY, JSON.stringify(DEFAULT_USERS));
     return DEFAULT_USERS;
@@ -127,7 +87,9 @@ export function getProfiles(): Profile[] {
     }
     const parsed = JSON.parse(data);
     if (Array.isArray(parsed)) {
-      return parsed;
+      const kept = parsed.filter((p: Profile) => p && !RETIRED_USER_IDS.includes(p.userId));
+      if (kept.length !== parsed.length) safeLocalSet(PROFILES_KEY, JSON.stringify(kept));
+      return kept;
     }
     safeLocalSet(PROFILES_KEY, JSON.stringify(DEFAULT_PROFILES));
     return DEFAULT_PROFILES;
@@ -336,7 +298,7 @@ export function getLoggedInUser(): User | null {
     const data = localStorage.getItem(CURRENT_USER_KEY);
     if (!data) return null;
     const parsed = JSON.parse(data);
-    if (parsed && typeof parsed === "object") {
+    if (parsed && typeof parsed === "object" && usable(parsed)) {
       return parsed;
     }
     localStorage.removeItem(CURRENT_USER_KEY);

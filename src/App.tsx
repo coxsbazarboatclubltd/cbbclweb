@@ -24,7 +24,8 @@ import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
-import AdminDashboard from "./components/pages/AdminDashboard";
+// The admin dashboard (browser-only, not secure) is disabled; see AdminDisabled.
+import AdminDisabled from "./components/pages/AdminDisabled";
 import Members from "./components/pages/Members";
 import MembershipDetail from "./components/pages/MembershipDetail";
 import AffiliationDetail from "./components/pages/AffiliationDetail";
@@ -144,8 +145,6 @@ export default function App() {
 
       // Protected route guards
       if ((normalized === "/dashboard" || normalized === "/dashboard.html") && !user) {
-        navigate("/login");
-      } else if ((normalized === "/admin-dashboard" || normalized === "/admin-dashboard.html") && (!user || user.role !== "admin")) {
         navigate("/login");
       } else {
         setCurrentPath(pathname);
@@ -363,10 +362,9 @@ export default function App() {
         return <Dashboard navigate={navigate} onLogout={handleLogout} />;
       case "/admin-dashboard":
       case "/admin-dashboard.html":
-        return <AdminDashboard navigate={navigate} onLogout={handleLogout} />;
       case "/admin-dashboard/home-cms":
       case "/admin-dashboard/home-cms.html":
-        return <AdminDashboard navigate={navigate} onLogout={handleLogout} initialActiveTab="home_cms" />;
+        return <AdminDisabled navigate={navigate} />;
       default:
         return <Home navigate={navigate} />;
     }

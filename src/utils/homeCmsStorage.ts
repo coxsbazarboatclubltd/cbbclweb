@@ -1,5 +1,8 @@
 // Home Page CMS Storage & Model
 import { getMediaLibrary, saveMediaLibrary, MediaItem } from "./cmsStorage";
+import { PRESIDENT_MESSAGE, FACILITIES_DATA } from "../data";
+
+const facilityImage = (id: string) => FACILITIES_DATA.find((f) => f.id === id)?.image || "";
 
 export interface HomeCMSHero {
   enabled: boolean;
@@ -146,16 +149,7 @@ const DEFAULT_HOME_LAYOUT: HomeCMSLayoutData = {
       name: "Humayun Kabir Robel",
       designation: "Founding President",
       image: "",
-      // **text** is shown in bold.
-      bio: [
-        "The establishment of Cox's Bazar Boat Club Limited represents a vision built upon shared aspirations, distinguished values, and a long-term commitment to institutional excellence. Our ambition extends beyond establishing a conventional boat club. We aspire to cultivate a distinguished destination for maritime recreation, coastal leisure, meaningful social connections, and an elevated lifestyle in Bangladesh.",
-        "Renowned for its extraordinary natural coastline, Cox's Bazar holds immense potential to emerge as a leading destination for maritime leisure, premium hospitality, and international tourism. Recognizing this opportunity, Cox's Bazar Boat Club Limited is committed to developing a unique, member-oriented environment where the beauty of the sea meets refined recreation, meaningful engagement, and a strong sense of community.",
-        "At the heart of our vision lies a commitment to **trust, fellowship, mutual respect, and enduring relationships among our members**. We believe that the true strength of a distinguished club lies not merely in its infrastructure or facilities, but in the collective values of its members, the quality of its leadership, and their shared commitment to building an institution of lasting significance.",
-        "Our long-term vision is to foster a vibrant club culture encompassing boating and maritime recreation, social and professional networking, quality hospitality, and distinctive member experiences. We also recognize that responsible governance, transparency, discipline, and sustainable development are essential foundations for building an institution that commands lasting respect and confidence.",
-        "I firmly believe that, through collective dedication, mutual cooperation, and visionary leadership, Cox's Bazar Boat Club Limited has the potential to establish a significant position within Bangladesh's maritime leisure and private club landscape. Beyond serving the interests of our members, we aspire to contribute meaningfully to the positive development of Cox's Bazar and the advancement of Bangladesh's tourism potential.",
-        "As Founding President, I extend my sincere gratitude to every founding member, well-wisher, and stakeholder who has contributed to this journey. Your trust, participation, and continued support remain invaluable to our shared aspirations. Together, let us build an institution defined by integrity, strengthened by unity, and guided by a vision that will inspire generations to come.",
-        "**Our commitment is to build more than a club: an enduring institution, a united community, and a distinguished legacy shaped by our connection to the sea.**"
-      ]
+      bio: PRESIDENT_MESSAGE
     },
     overview: {
       enabled: true,
@@ -164,10 +158,8 @@ const DEFAULT_HOME_LAYOUT: HomeCMSLayoutData = {
       text: "Incorporated strictly as a private non-profit Company Limited by Guarantee, CBBCL is constructed to protect the pristine shorelines of Cox's Bazar while nurturing close ties of nautical camrade among families. We foster high athletic safety and provide elite reciprocal hospitality with prime clubs worldwide.",
       welcomeText: "Proudly registered under the Joint Stock Companies & Firms (RJSC) of Bangladesh, Cox’s Bazar Boat Club Limited (CBBCL) stands as an elite private socio-recreational institution. Designed for shipping pioneers, corporate chiefs, and environment advocates, we offer a safe, luxurious marina haven that celebrates South Asia's maritime legacy on the longest sandy beach in the world.",
       layout: "standard",
-      gallery: [
-        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=400"
-      ]
+      // Yacht (large) and Private Hotel (small), the same photos as on the Facilities cards.
+      gallery: [facilityImage("boating-yacht"), facilityImage("private-hotel")]
     },
     facilities: {
       enabled: true,
@@ -240,13 +232,11 @@ export function getHomeLayoutCMS(): HomeCMSLayoutData {
         hero: { ...DEFAULT_HOME_LAYOUT.sections.hero, ...(s.hero || {}) },
         stats: { ...DEFAULT_HOME_LAYOUT.sections.stats, ...(s.stats || {}) },
         president: (() => {
-          const merged = { ...DEFAULT_HOME_LAYOUT.sections.president, ...(s.president || {}) };
-          if (Array.isArray(merged.bio) && typeof merged.bio[0] === "string" && merged.bio[0].startsWith("In constructing the permanent pillars")) {
-            merged.bio = DEFAULT_HOME_LAYOUT.sections.president.bio;
-          }
-          return merged;
+          // The message is code-managed (src/data.ts PRESIDENT_MESSAGE); cached copies never override it.
+          return { ...DEFAULT_HOME_LAYOUT.sections.president, ...(s.president || {}), bio: DEFAULT_HOME_LAYOUT.sections.president.bio };
         })(),
-        overview: { ...DEFAULT_HOME_LAYOUT.sections.overview, ...(s.overview || {}) },
+        // Gallery photos are code-managed (the admin editor is disabled).
+        overview: { ...DEFAULT_HOME_LAYOUT.sections.overview, ...(s.overview || {}), gallery: DEFAULT_HOME_LAYOUT.sections.overview.gallery },
         // The old default showed 6 facilities; raise cached layouts to 9 once so the new facilities appear.
         facilities: (() => {
           const merged = { ...DEFAULT_HOME_LAYOUT.sections.facilities, ...(s.facilities || {}) };

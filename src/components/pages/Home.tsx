@@ -5,6 +5,7 @@ import { getPageContent, getCMSFacilities, getCMSEvents, getCMSAffiliations, fet
 import { FooterSettings } from "../../types";
 import BoardProfileCard, { SecretariatContactPanel, SecretariatVacantCard, VacantBoardCard } from "../BoardProfileCard";
 import SiteStatsStrip from "../SiteStatsStrip";
+import { byFounderCode } from "../../utils/founderOrder";
 import CardMedia from "../CardMedia";
 import { getHomeLayoutCMS } from "../../utils/homeCmsStorage";
 import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users, Shield, Award, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
@@ -15,6 +16,9 @@ import presidentSignature from "../../assets/images/signature-humayun-kabir.svg"
 import BackgroundVideo from "../BackgroundVideo";
 import { MEMBERSHIP_CATEGORIES } from "../../membershipCategories";
 import { hasTextSelection } from "../../utils/selection";
+import { activeAnnouncements } from "../../content/clubLife";
+import NewlyJoinedCoverflow, { FeedCard } from "../gazette/NewlyJoinedCoverflow";
+import { upcomingEvents } from "../gazette/UpcomingEventsSection";
 
 interface HomeProps {
   navigate: (path: RoutePath) => void;
@@ -25,7 +29,6 @@ export default function Home({ navigate }: HomeProps) {
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formSubmitError, setFormSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", facebookLink: "", message: "" });
-  const newsCarouselRef = React.useRef<HTMLDivElement>(null);
   const membershipCarouselRef = React.useRef<HTMLDivElement>(null);
   const membershipAutoplayPaused = React.useRef(false);
 
@@ -363,13 +366,13 @@ export default function Home({ navigate }: HomeProps) {
                       {/* Primary Large Image */}
                       <img
                         src={img1}
-                        alt="Cox Bazar Coast Landscape"
+                        alt="Yacht on the Bay of Bengal"
                         className="absolute top-0 left-0 w-[70%] h-[340px] object-cover shadow-lg border border-slate-200"
                       />
                       {/* Overlapping Small Image */}
                       <img
                         src={img2}
-                        alt="Lounge yacht view interior"
+                        alt="CBBCL Private Hotel"
                         className="absolute bottom-0 right-0 w-[60%] h-[260px] object-cover shadow-2xl border-4 border-white"
                       />
                     </div>
@@ -603,16 +606,18 @@ export default function Home({ navigate }: HomeProps) {
             
             const selectedNews = filteredNews.slice(0, Math.max(newsLimit, 6));
 
-            const scrollLeft = () => {
-              if (newsCarouselRef.current) {
-                newsCarouselRef.current.scrollBy({ left: -380, behavior: "smooth" });
-              }
-            };
-            const scrollRight = () => {
-              if (newsCarouselRef.current) {
-                newsCarouselRef.current.scrollBy({ left: 380, behavior: "smooth" });
-              }
-            };
+            // Club Life items from the Gazette page (live notices, upcoming events) lead the 3D carousel,
+            // followed by the newly joined members and the news posts, when no category filter is set.
+            const clubLifeCards: FeedCard[] = catFilter !== "All" ? [] : [
+              ...activeAnnouncements().map((a) => ({
+                key: `notice-${a.id}`, path: (a.link && a.link.startsWith("/") ? a.link : "/news-feed"), category: "Club Notice", date: "Latest",
+                title: a.title || "Club Notice", excerpt: a.text, cta: a.linkLabel || "Read More", image: a.image,
+              })),
+              ...upcomingEvents().slice(0, 2).map((e) => ({
+                key: `event-${e.id}`, path: "/events", category: "Upcoming Event", date: e.date, title: e.title,
+                excerpt: [e.description, e.venue].filter(Boolean).join(" · "), cta: "Event Details", image: e.image, empty: "event" as const,
+              })),
+            ];
 
             return (
               <section key="news" className="py-24 px-6 bg-bg-secondary border-b border-slate-100 overflow-hidden">
@@ -638,95 +643,14 @@ export default function Home({ navigate }: HomeProps) {
                     </div>
                   </div>
 
-                  {/* Carousel Container */}
-                  <div className="relative group/carousel px-1">
-                    
-                    {/* Navigation Buttons */}
-                    <button
-                      onClick={scrollLeft}
-                      aria-label="Scroll left"
-                      className="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white border border-slate-100 shadow-md text-navy hover:text-gold hover:border-gold/40 transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 pointer-events-auto shrink-0 md:flex hidden items-center justify-center"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-
-                    <button
-                      onClick={scrollRight}
-                      aria-label="Scroll right"
-                      className="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white border border-slate-100 shadow-md text-navy hover:text-gold hover:border-gold/40 transition-all cursor-pointer opacity-0 group-hover/carousel:opacity-100 pointer-events-auto shrink-0 md:flex hidden items-center justify-center"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-
-                    {/* Sliding Track */}
-                    <div
-                      ref={newsCarouselRef}
-                      className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 whitespace-nowrap"
-                      style={{
-                        scrollbarWidth: "none",
-                        msOverflowStyle: "none"
-                      }}
-                    >
-                      {selectedNews.map((post) => (
-                        <div
-                          key={post.id}
-                          onClick={() => navigate(`/news-feed/${post.id}`)}
-                          className="w-[85vw] sm:w-[48vw] md:w-[38vw] lg:w-[24rem] shrink-0 snap-start bg-white border border-slate-200/80 hover:border-gold/40 shadow-sm hover:shadow-md p-6 flex flex-col justify-between transition-all duration-300 rounded-sm h-[26rem] cursor-pointer group whitespace-normal"
-                        >
-                          <div className="space-y-4">
-                            <div className="flex justify-between items-center text-[10px] font-sans tracking-wider">
-                              <span className="text-gold uppercase font-semibold flex items-center space-x-1">
-                                <Anchor className="w-3 h-3 text-gold-dark shrink-0" />
-                                <span>{post.category}</span>
-                              </span>
-                              <span className="text-slate-400 font-light flex items-center space-x-1">
-                                <Calendar className="w-3.5 h-3.5 text-slate-300" />
-                                <span>{post.date}</span>
-                              </span>
-                            </div>
-
-                            <h3 className="font-display text-base font-semibold text-text-dark leading-snug line-clamp-2 group-hover:text-gold transition-colors duration-200 whitespace-pre-line">
-                              {post.title}
-                            </h3>
-
-                            {post.image ? (
-                              <div className="h-40 overflow-hidden rounded-xs bg-slate-50 border border-slate-100">
-                                <CardMedia
-                                  media={post.image}
-                          objectPosition={post.imagePosition}
-                                  alt={post.title}
-                                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 saturate-75"
-                                />
-                              </div>
-                            ) : (
-                              <div className="h-40 bg-slate-50 rounded-xs flex items-center justify-center border border-dashed border-slate-200">
-                                <Anchor className="w-8 h-8 text-slate-300" />
-                              </div>
-                            )}
-
-                            <p className="font-sans text-[11px] text-text-body font-light line-clamp-3 leading-relaxed">
-                              {post.excerpt}
-                            </p>
-                          </div>
-
-                          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <span className="flex items-center space-x-1 font-sans text-[9px] font-semibold tracking-widest text-navy group-hover:text-gold uppercase transition-colors">
-                              <span>Read Full Gazette</span>
-                              <ArrowRight className="w-3 h-3" />
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Touch Swipe Assist Cue (Mobile only layout indicator dots/swipe hint) */}
-                    <div className="md:hidden flex justify-center space-x-1.5 mt-2">
-                      <div className="w-8 h-1 rounded-full bg-gold/60"></div>
-                      <div className="w-2 h-1 rounded-full bg-slate-200"></div>
-                      <div className="w-2 h-1 rounded-full bg-slate-200"></div>
-                    </div>
-
-                  </div>
+                  <NewlyJoinedCoverflow
+                    navigate={navigate}
+                    lead={clubLifeCards}
+                    news={selectedNews.map((post) => ({
+                      key: post.id, path: `/news-feed/${post.id}`, category: post.category, date: post.date, title: post.title,
+                      excerpt: post.excerpt, cta: "Read Full Gazette", image: post.image, imagePosition: post.imagePosition,
+                    }))}
+                  />
 
                   {/* See All Main Button */}
                   <div className="text-center pt-2">
@@ -750,7 +674,7 @@ export default function Home({ navigate }: HomeProps) {
             const president = directors.find(d => d.level === 1) || directors.find(d => d.id === "humayun-kabir-robel") || directors[0];
             const vicePresidents = directors.filter(d => d.level === 2);
             const coreSecretariat = directors.filter(d => d.level === 3).sort((a,b) => (a.orderIndex ?? 0) - (b.orderIndex ?? 0));
-            const foundingDirectorsList = directors.filter(d => d.level === 4 || (d.level === undefined && d.id !== president.id && !vicePresidents.some(v => v.id === d.id) && !coreSecretariat.some(c => c.id === d.id))).sort((a,b) => a.name.localeCompare(b.name));
+            const foundingDirectorsList = directors.filter(d => d.level === 4 || (d.level === undefined && d.id !== president.id && !vicePresidents.some(v => v.id === d.id) && !coreSecretariat.some(c => c.id === d.id))).sort(byFounderCode);
 
             return (
               <section key="board" className="py-24 px-6 bg-white border-y border-slate-100">

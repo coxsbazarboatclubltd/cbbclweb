@@ -50,6 +50,18 @@ export default function Header({ currentPath, navigate, currentUser, onLogout }:
     return () => window.removeEventListener("scroll", handleScroll);
   }, [currentPath]);
 
+  // Publishes the sticky header's height as --header-h so other sticky bars can sit right below it.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const publish = () => document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    publish();
+    // border-box: the header shrinks by padding when scrolled, which a content-box observer misses.
+    const ro = new ResizeObserver(publish);
+    ro.observe(el, { box: "border-box" });
+    return () => ro.disconnect();
+  }, []);
+
   useEffect(() => {
     if (!isOpen) return;
 

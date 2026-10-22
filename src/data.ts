@@ -796,6 +796,18 @@ export const FACILITIES_DATA: Facility[] = [
   }
 ];
 
+// Founding President's message: shown on the homepage and as the Gazette welcome release.
+// **text** is shown in bold on the homepage.
+export const PRESIDENT_MESSAGE: string[] = [
+  "The establishment of Cox's Bazar Boat Club Limited represents a vision built upon shared aspirations, distinguished values, and a long-term commitment to institutional excellence. Our ambition extends beyond establishing a conventional boat club. We aspire to cultivate a distinguished destination for maritime recreation, coastal leisure, meaningful social connections, and an elevated lifestyle in Bangladesh.",
+  "Renowned for its extraordinary natural coastline, Cox's Bazar holds immense potential to emerge as a leading destination for maritime leisure, premium hospitality, and international tourism. Recognizing this opportunity, Cox's Bazar Boat Club Limited is committed to developing a unique, member-oriented environment where the beauty of the sea meets refined recreation, meaningful engagement, and a strong sense of community.",
+  "At the heart of our vision lies a commitment to **trust, fellowship, mutual respect, and enduring relationships among our members**. We believe that the true strength of a distinguished club lies not merely in its infrastructure or facilities, but in the collective values of its members, the quality of its leadership, and their shared commitment to building an institution of lasting significance.",
+  "Our long-term vision is to foster a vibrant club culture encompassing boating and maritime recreation, social and professional networking, quality hospitality, and distinctive member experiences. We also recognize that responsible governance, transparency, discipline, and sustainable development are essential foundations for building an institution that commands lasting respect and confidence.",
+  "I firmly believe that, through collective dedication, mutual cooperation, and visionary leadership, Cox's Bazar Boat Club Limited has the potential to establish a significant position within Bangladesh's maritime leisure and private club landscape. Beyond serving the interests of our members, we aspire to contribute meaningfully to the positive development of Cox's Bazar and the advancement of Bangladesh's tourism potential.",
+  "As Founding President, I extend my sincere gratitude to every founding member, well-wisher, and stakeholder who has contributed to this journey. Your trust, participation, and continued support remain invaluable to our shared aspirations. Together, let us build an institution defined by integrity, strengthened by unity, and guided by a vision that will inspire generations to come.",
+  "**Our commitment is to build more than a club: an enduring institution, a united community, and a distinguished legacy shaped by our connection to the sea.**"
+];
+
 export const NEWS_DATA: NewsPost[] = [
   {
     id: "2",
@@ -804,8 +816,8 @@ export const NEWS_DATA: NewsPost[] = [
     category: "Announcements",
     year: "2026",
     month: "June",
-    excerpt: "On our founding month, President Humayun Kabir Robel shares his bold vision for the future of nautical leisure and membership prestige at CBBCL.",
-    content: "Dear Founding Members and Guests, as we embark on this exciting journey, I welcome you to Cox’s Bazar Boat Club Limited. Our club represents more than just a leisure resort. It is a long-awaited vision to anchor the elite social, maritime, and philanthropic networks of Bangladesh on the longest natural sea beach in the world. CBBCL will act as a luxurious maritime haven that promotes yachting, water sports, and environmental preservation while fostering tight-knit camaraderie. Our board is committed to developing state-of-the-art facilities and securing reciprocal arrangements with elite global clubs.",
+    excerpt: "Founding President Humayun Kabir Robel shares his vision for Cox's Bazar Boat Club Limited: trust, fellowship, responsible governance, and an enduring institution shaped by our connection to the sea.",
+    content: [...PRESIDENT_MESSAGE.map((p) => p.replace(/\*\*/g, "")), "With sincere regards,\nHumayun Kabir Robel\nFounding President, Cox's Bazar Boat Club Limited"].join("\n\n"),
     tags: ["president", "welcome", "vision", "cbbcl"],
     image: PRESIDENT_IMAGE,
     // Wide news cards crop the centre; frame from the top so his face stays in view.
@@ -815,8 +827,23 @@ export const NEWS_DATA: NewsPost[] = [
   }
 ];
 
-// Prototype events were removed (2026-10-17); real events are added from the admin dashboard.
-export const EVENTS_DATA: EventItem[] = [];
+// Code-managed club events (the admin dashboard is disabled). Add verified events only.
+export const EVENTS_DATA: EventItem[] = [
+  {
+    id: "club-house-soft-opening-2026",
+    title: "Soft Opening of the Club House",
+    date: "October 31, 2026",
+    day: "31",
+    month: "Oct",
+    startsAt: "2026-10-31",
+    venue: "CBBCL Club House, Anderson Road, Cox's Bazar",
+    category: "Club Milestone",
+    isUpcoming: true,
+    // Same photo as the Fine Dining facility card (no Club House photo on file yet).
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
+    description: "Cox's Bazar Boat Club Ltd. marks the soft opening of its Club House."
+  }
+];
 
 // Prototype events were removed (2026-10-17); real events are added from the admin dashboard.
 export const PAST_EVENTS_DATA: EventItem[] = [];

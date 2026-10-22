@@ -95,6 +95,18 @@ export interface EventItem {
   image?: string;
   description: string;
   registrationInfo?: string;
+  // Optional details used by the Gazette / Club Life page (all code-managed).
+  /** Start, e.g. "2026-12-05T18:30" (Bangladesh time). Used for sorting and "has it ended". */
+  startsAt?: string;
+  endsAt?: string;
+  /** Last day to register (YYYY-MM-DD). */
+  registrationDeadline?: string;
+  registrationStatus?: "open" | "soon" | "full" | "closed";
+  /** Only linked while registration is open. */
+  registrationUrl?: string;
+  /** Pin as the featured event; otherwise the nearest upcoming event is featured. */
+  featured?: boolean;
+  cancelled?: boolean;
 }
 
 export interface Facility {
