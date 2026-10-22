@@ -3,6 +3,7 @@ import { DIRECTORS_DATA, MASTER_HERO_VIDEO } from "../../data";
 import { getBoardMembers, getDirectorPortrait } from "../../utils/storage";
 import { getClubMembers } from "../../utils/memberStorage";
 import { User, Award, Briefcase, Calendar, Globe, Linkedin, Facebook, Twitter, Instagram, Mail, Anchor, Compass, CheckCircle, ArrowLeft, Landmark } from "lucide-react";
+import { SHOW_FOUNDER_CODES } from "../../utils/displaySettings";
 import { motion } from "motion/react";
 import { RoutePath, Director } from "../../types";
 import BackgroundVideo from "../BackgroundVideo";
@@ -192,7 +193,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         ["twitter", director.socials?.twitter, Twitter, "X / Twitter"],
         ["instagram", director.socials?.instagram, Instagram, "Instagram"],
         ["fbcci", director.socials?.fbcci, Landmark, "FBCCI"],
-        ["website", website, Globe, (website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
+        ["website", website || director.socials?.website, Globe, (website || director.socials?.website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
       ] as const).filter(([, url]) => !!url)
     : ([
         ["linkedin", "https://linkedin.com", Linkedin, "LinkedIn"],
@@ -308,10 +309,12 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
 
               {/* Specifications list */}
               <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left [&>div:last-child]:border-b-0">
-                <div className="flex justify-between border-b border-slate-50 pb-2">
-                  <span className="text-slate-400 font-light">Founder Code:</span>
-                  <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
-                </div>
+                {SHOW_FOUNDER_CODES && director.membershipCode && (
+                  <div className="flex justify-between border-b border-slate-50 pb-2">
+                    <span className="text-slate-400 font-light">Founder Code:</span>
+                    <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
+                  </div>
+                )}
                 {director.memberNumber && (
                   <div className="flex justify-between border-b border-slate-50 pb-2">
                     <span className="text-slate-400 font-light">Member No.:</span>

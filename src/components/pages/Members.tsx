@@ -1,3 +1,4 @@
+import { SHOW_FOUNDER_CODES } from "../../utils/displaySettings";
 import React, { useState, useEffect } from "react";
 import { ClubMember, RoutePath } from "../../types";
 import { getClubMembers } from "../../utils/memberStorage";
@@ -176,9 +177,11 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                     {member.name}
                   </h1>
 
-                  <p className="font-mono text-xs text-gold-dark font-semibold tracking-wider select-all uppercase">
-                    Code Registry: {member.membershipCode}
-                  </p>
+                  {SHOW_FOUNDER_CODES && (
+                    <p className="font-mono text-xs text-gold-dark font-semibold tracking-wider select-all uppercase">
+                      Code Registry: {member.membershipCode}
+                    </p>
+                  )}
 
                   <div className="flex items-center text-xs text-slate-500 font-light space-x-4 pt-1">
                     {member.joinDate ? (
@@ -426,9 +429,11 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                               {member.membershipType}
                             </span>
                           </div>
-                          <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
-                            {member.membershipCode}
-                          </span>
+                          {SHOW_FOUNDER_CODES && (
+                            <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
+                              {member.membershipCode}
+                            </span>
+                          )}
                         </div>
                       </div>
 
@@ -498,9 +503,11 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                               {member.membershipType}
                             </span>
                           </div>
-                          <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
-                            {member.membershipCode}
-                          </span>
+                          {SHOW_FOUNDER_CODES && (
+                            <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
+                              {member.membershipCode}
+                            </span>
+                          )}
                         </div>
                       </div>
 
@@ -564,9 +571,11 @@ export default function Members({ navigate, selectedMemberId = null }: MembersPr
                               {member.membershipType}
                             </span>
                           </div>
-                          <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
-                            {member.membershipCode}
-                          </span>
+                          {SHOW_FOUNDER_CODES && (
+                            <span className="font-mono text-[9px] text-slate-500 block tracking-wider uppercase">
+                              {member.membershipCode}
+                            </span>
+                          )}
                         </div>
                       </div>
 

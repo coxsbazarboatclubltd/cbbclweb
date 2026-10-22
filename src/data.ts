@@ -32,11 +32,14 @@ import ziaulHoquePortrait from "./assets/images/board/ziaul-haque.webp";
 // @ts-ignore
 import abuMurshedChowdhuryPortrait from "./assets/images/board/abu-murshed-chowdhury.webp";
 // @ts-ignore
+import anwarulIslamPortrait from "./assets/images/board/mohammed-anwarul-islam.webp";
+// @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
 // @ts-ignore
 import heroPoster from "./assets/images/hero-poster.webp";
 
 export const PRESIDENT_IMAGE = presidentPortrait;
+export const ANWARUL_ISLAM_IMAGE = anwarulIslamPortrait;
 /** Face-focused crop of the President's portrait for round frames (cards, profile, members). */
 export const PRESIDENT_FACE_IMAGE = presidentFacePortrait;
 export const ABU_MURSHED_CHOWDHURY_IMAGE = abuMurshedChowdhuryPortrait;
@@ -660,7 +663,62 @@ export const DIRECTORS_DATA: Director[] = [
       role: "Proprietor",
       industry: ""
     }
-  }
+  },
+  {
+    id: "mohammed-anwarul-islam",
+    name: "Mohammed Anwarul Islam",
+    designation: "Founding Director",
+    membershipCode: "CBBCL-FM-17",
+    memberNumber: "CBBCL-LM-0017",
+    level: 4,
+    profileSubmitted: true,
+    profileRevision: 11,
+    photoAlt: "Mohammed Anwarul Islam, Founding Director of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Mohammed Anwarul Islam is a Cox's Bazar-based entrepreneur and business leader associated with NF Enterprise and NF Group, with business interests spanning petroleum distribution, filling stations, LPG supply, automotive services, logistics and commercial distribution. NF Enterprise traces its origins to a service workshop established in 1997, from which it expanded into a diversified operation serving commercial, institutional and humanitarian-sector customers.",
+      "As Proprietor of NF Enterprise and Chairman of NF Group, he is associated with a portfolio that includes Ideal Petroleum Ltd., NF Properties, NF Enterprise, Autocox, Hadi Organic Agro Complex and related ventures. He is also a successful importer, notably of reconditioned vehicles. The group's activities include fuel and LPG distribution, vehicle imports, automotive servicing, agent banking and digital financial services.",
+      "The group works with multinational and local businesses, construction contractors and humanitarian organizations, including fuel supply and LPG cylinder distribution. He is a CIP (Commercially Important Person) and serves as Senior Vice President of the Cox's Bazar Chamber of Commerce for the 2025–2027 term. His professional affiliations also include leadership roles in petroleum and auto-LPG industry associations, as well as memberships in business chambers and the Bangladesh Red Crescent Society.",
+      "As a Founding Director of Cox's Bazar Boat Club Ltd., he brings experience in enterprise development, operational logistics, business partnerships and professional networking. His background aligns with the Club's ambition to establish a distinguished socio-cultural institution in Cox's Bazar."
+    ],
+    businessProfile: {
+      role: "Chairman, NF Group; Proprietor, NF Enterprise; Importer",
+      company: "NF Group; NF Enterprise; Ideal Petroleum Ltd.; NF Properties; Autocox; Hadi Organic Agro Complex; Ideal Filling Station",
+      industry: "Petroleum & Fuel Distribution; LPG Filling & Cylinder Supply; Import & Trade; Automotive Sales & Servicing; Logistics & Transport; Property; Agro-business; Financial-service Distribution",
+      interests: "Fuel Retail & Distribution; LPG Logistics; Corporate & Institutional Supply; Vehicle Imports; Business Development; Operations; Strategic Partnerships"
+    },
+    achievements: [
+      "CIP (Commercially Important Person), Government of Bangladesh",
+      "2025–2027 — Senior Vice President, Cox's Bazar Chamber of Commerce"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Founding Director",
+      "Chittagong Petrol Pump Owners Association — Vice President",
+      "Cox's Bazar Auto LPG Owners Association — President",
+      "Cox's Bazar Chamber of Commerce — Senior Vice President (2025–2027)",
+      "Commonwealth of Independent States of Bangladesh Chamber of Commerce & Industry — Member",
+      "BARVIDA (Bangladesh Reconditioned Vehicles Importers and Dealers Association) — Member",
+      "FBCCI (Federation of Bangladesh Chambers of Commerce & Industry) — General Body Member",
+      "Bangladesh Red Crescent Society — Member"
+    ],
+    socials: {
+      // Icon placeholders until his links are supplied (shown as icons with labels, not clickable).
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      website: "Website",
+      fbcci: "https://fbcci.org/web/profile/mr-mohammed-anwarul-islam",
+      email: "anwar_nfe@yahoo.com"
+    },
+    timeline: [
+      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." },
+      { year: "Current", event: "Chairman, NF Group" },
+      { year: "Current", event: "Proprietor, NF Enterprise" },
+      { year: "Current", event: "Importer, including reconditioned vehicles" },
+      { year: "2025–2027", event: "Senior Vice President, Cox's Bazar Chamber of Commerce" },
+      { year: "Current", event: "President, Cox's Bazar Auto LPG Owners Association" },
+      { year: "Current", event: "Vice President, Chittagong Petrol Pump Owners Association" },
+      { year: "1997", event: "NF Enterprise begins as a service workshop, later expanding into fuel and LPG filling, logistics, automotive and distribution ventures" }
+    ]
+  },
 ];
 
 export const FACILITIES_DATA: Facility[] = [

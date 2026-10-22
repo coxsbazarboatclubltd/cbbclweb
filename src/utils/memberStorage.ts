@@ -1,5 +1,5 @@
 import { ClubMember, MembershipApplication, AffiliationRequest, EZBookingReservation } from "../types";
-import { DIRECTORS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MD_IMRAN_ALAM_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE } from "../data";
+import { DIRECTORS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MD_IMRAN_ALAM_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE, ANWARUL_ISLAM_IMAGE } from "../data";
 
 const MEMBERS_KEY = "cbbcl_club_members";
 const APPLICATIONS_KEY = "cbbcl_membership_applications";
@@ -7,6 +7,7 @@ const APPLICATIONS_KEY = "cbbcl_membership_applications";
 const GLOBAL_AVATARS: Record<string, string> = {
   "humayun-kabir-robel": PRESIDENT_FACE_IMAGE,
   "abu-murshed-chowdhury": ABU_MURSHED_CHOWDHURY_IMAGE,
+  "mohammed-anwarul-islam": ANWARUL_ISLAM_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "ak-rubel": AK_RUBEL_IMAGE,
   "maimunal-karim-jisan": MAIMUNAL_KARIM_JISAN_IMAGE,
@@ -48,7 +49,7 @@ const DEMO_MEMBER_IDS = [
   "syfuddin-khaled"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v18";
+const MEMBERS_SEED_VERSION = "founding-directors-v19";
 
 
 export function getClubMembers(): ClubMember[] {
