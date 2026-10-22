@@ -1,5 +1,6 @@
 import { Facility, EventItem, Affiliation, RoutePath, FooterSettings } from "../types";
 import { FACILITIES_DATA, EVENTS_DATA, PAST_EVENTS_DATA, AFFILIATIONS_DATA, MASTER_HERO_POSTER } from "../data";
+import { clubToday } from "../content/clubLife";
 
 // Interfaces
 export interface MediaItem {
@@ -234,7 +235,30 @@ export function saveCMSFacilities(facilities: Facility[]): void {
 // EVENTS GET / SET
 const PROTOTYPE_EVENT_IDS = ["e1", "e2", "e3", "pe1", "pe2", "pe3"];
 
+/** Last day of an event (YYYY-MM-DD), from endsAt, startsAt or the display date; "" if unknown. */
+function eventLastDay(e: EventItem): string {
+  const iso = (e.endsAt || e.startsAt || "").slice(0, 10);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso;
+  const t = Date.parse(e.date);
+  if (Number.isNaN(t)) return "";
+  const d = new Date(t);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+// An event stops being upcoming the day after it ends (Bangladesh time), wherever it is shown.
+function withLiveStatus(list: EventItem[]): EventItem[] {
+  const today = clubToday();
+  return list.map((e) => {
+    const last = eventLastDay(e);
+    return e.isUpcoming && last && last < today ? { ...e, isUpcoming: false } : e;
+  });
+}
+
 export function getCMSEvents(): EventItem[] {
+  return withLiveStatus(readCMSEvents());
+}
+
+function readCMSEvents(): EventItem[] {
   try {
     const data = localStorage.getItem(EVENTS_KEY);
     const combined = [...EVENTS_DATA, ...PAST_EVENTS_DATA];

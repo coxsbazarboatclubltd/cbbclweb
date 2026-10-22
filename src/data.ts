@@ -36,6 +36,10 @@ import anwarulIslamPortrait from "./assets/images/board/mohammed-anwarul-islam.w
 // @ts-ignore
 import atiqulIslamPortrait from "./assets/images/board/md-atiqul-islam.webp";
 // @ts-ignore
+import softOpeningPhoto from "./assets/images/events/club-house-soft-opening.webp";
+// @ts-ignore
+import softOpeningBanner from "./assets/images/events/club-house-soft-opening-banner.webp";
+// @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
 // @ts-ignore
 import heroPoster from "./assets/images/hero-poster.webp";
@@ -890,8 +894,9 @@ export const EVENTS_DATA: EventItem[] = [
     venue: "CBBCL Club House, Anderson Road, Cox's Bazar",
     category: "Club Milestone",
     isUpcoming: true,
-    // Same photo as the Fine Dining facility card (no Club House photo on file yet).
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
+    // Photo-only crop of the event banner for small cards; the full banner shows on the Gazette page.
+    image: softOpeningPhoto,
+    banner: softOpeningBanner,
     description: "Cox's Bazar Boat Club Ltd. marks the soft opening of its Club House."
   }
 ];

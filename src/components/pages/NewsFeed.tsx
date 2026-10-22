@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getNewsPosts } from "../../utils/storage";
+import { getCMSEvents } from "../../utils/cmsStorage";
 import { NewsPost, RoutePath } from "../../types";
 import CardMedia from "../CardMedia";
 import { Search, Heart, Tag, Calendar, Anchor, ShieldAlert, ArrowRight } from "lucide-react";
@@ -25,7 +26,29 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
   const [liked, setLiked] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const list = getNewsPosts();
+    // Past events join the Gazette as regular cards (category "Events"), newest first with the posts.
+    const eventPosts: NewsPost[] = getCMSEvents()
+      .filter((e) => !e.isUpcoming && !e.cancelled)
+      .map((e) => {
+        const d = new Date(Date.parse(e.startsAt || e.date));
+        return {
+          id: `event-${e.id}`,
+          title: e.title,
+          date: e.date,
+          category: "Events",
+          year: Number.isNaN(d.getTime()) ? "" : String(d.getFullYear()),
+          month: Number.isNaN(d.getTime()) ? "" : d.toLocaleString("en-US", { month: "long" }),
+          excerpt: [e.description, e.venue].filter(Boolean).join(" · "),
+          content: e.description,
+          tags: ["event", e.category].filter(Boolean).map((t) => t.toLowerCase()),
+          image: e.image,
+          likes: 0,
+          commentsCount: 0,
+          link: "/events",
+        };
+      });
+    const when = (p: NewsPost) => Date.parse(p.date) || 0;
+    const list = [...getNewsPosts(), ...eventPosts].sort((a, b) => when(b) - when(a));
     setNewsList(list);
     const initial: Record<string, boolean> = {};
     for (const p of list) {
@@ -183,7 +206,7 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
                   return (
                     <article
                       key={post.id}
-                      onClick={() => navigate(`/news-feed/${post.id}` as RoutePath)}
+                      onClick={() => navigate((post.link || `/news-feed/${post.id}`) as RoutePath)}
                       className="bg-white border border-slate-200 hover:border-gold/60 flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm cursor-pointer group overflow-hidden"
                     >
                       <div className="aspect-[16/9] bg-slate-100 overflow-hidden">
@@ -214,10 +237,10 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
                         <div className="mt-auto pt-3 border-t border-slate-100 flex justify-between items-center text-[10px] font-sans">
                           <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); navigate(`/news-feed/${post.id}` as RoutePath); }}
+                            onClick={(e) => { e.stopPropagation(); navigate((post.link || `/news-feed/${post.id}`) as RoutePath); }}
                             className="font-bold text-navy group-hover:text-gold-dark transition-colors inline-flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold rounded-sm"
                           >
-                            Read Gazette Release <ArrowRight className="w-3 h-3" />
+                            {post.link ? "View Event" : "Read Gazette Release"} <ArrowRight className="w-3 h-3" />
                           </button>
                           <div className="flex items-center gap-3">
                             {post.tags[0] && (
@@ -272,7 +295,7 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
                 <button
                   key={p.id}
                   type="button"
-                  onClick={() => navigate(`/news-feed/${p.id}` as RoutePath)}
+                  onClick={() => navigate((p.link || `/news-feed/${p.id}`) as RoutePath)}
                   className="group relative aspect-[4/3] overflow-hidden rounded-sm text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
                 >
                   <CardMedia media={p.image} objectPosition={p.imagePosition} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

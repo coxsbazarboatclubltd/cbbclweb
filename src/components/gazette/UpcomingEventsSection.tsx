@@ -97,7 +97,31 @@ export default function UpcomingEventsSection({ navigate }: { navigate: (path: R
 
         {featured ? (
           <div className="space-y-5">
-            <EventCard e={featured} featured navigate={navigate} />
+            {featured.banner ? (
+              <>
+                {/* Designed banner (title, date and venue are in the artwork); phones get the regular card. */}
+                <article className="hidden md:block max-w-4xl mx-auto bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+                  <button type="button" onClick={() => navigate("/events")} className="block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">
+                    <img
+                      src={featured.banner}
+                      alt={`${featured.title}, ${featured.date}${featured.venue ? `, ${featured.venue}` : ""}`}
+                      width={1600}
+                      height={600}
+                      className="w-full h-auto block"
+                    />
+                  </button>
+                  <div className="px-5 py-3 flex flex-wrap items-center gap-3 border-t border-slate-100">
+                    <span className="font-sans text-[9px] uppercase tracking-widest text-gold-dark font-semibold">{featured.category}</span>
+                    <button type="button" onClick={() => navigate("/events")} className="ml-auto font-sans text-[10px] uppercase tracking-widest font-bold text-navy hover:text-gold-dark inline-flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold rounded-sm">
+                      Event Details <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                </article>
+                <div className="md:hidden"><EventCard e={featured} featured navigate={navigate} /></div>
+              </>
+            ) : (
+              <EventCard e={featured} featured navigate={navigate} />
+            )}
             {others.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {others.map((e) => <EventCard key={e.id} e={e} navigate={navigate} />)}

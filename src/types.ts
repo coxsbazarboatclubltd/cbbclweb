@@ -81,6 +81,8 @@ export interface NewsPost {
   commentsCount: number;
   status?: "Published" | "Draft" | "Scheduled";
   scheduledDate?: string;
+  /** Internal path the card opens instead of /news-feed/:id (e.g. past events link to /events). */
+  link?: string;
 }
 
 export interface EventItem {
@@ -107,6 +109,8 @@ export interface EventItem {
   /** Pin as the featured event; otherwise the nearest upcoming event is featured. */
   featured?: boolean;
   cancelled?: boolean;
+  /** Full designed banner (text included in the artwork), shown wide on the Gazette page. */
+  banner?: string;
 }
 
 export interface Facility {
