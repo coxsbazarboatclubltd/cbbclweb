@@ -36,6 +36,8 @@ import anwarulIslamPortrait from "./assets/images/board/mohammed-anwarul-islam.w
 // @ts-ignore
 import atiqulIslamPortrait from "./assets/images/board/md-atiqul-islam.webp";
 // @ts-ignore
+import nadiaSiddikaPortrait from "./assets/images/board/nadia-siddika.webp";
+// @ts-ignore
 import softOpeningPhoto from "./assets/images/events/club-house-soft-opening.webp";
 // @ts-ignore
 import softOpeningBanner from "./assets/images/events/club-house-soft-opening-banner.webp";
@@ -47,6 +49,7 @@ import heroPoster from "./assets/images/hero-poster.webp";
 export const PRESIDENT_IMAGE = presidentPortrait;
 export const ANWARUL_ISLAM_IMAGE = anwarulIslamPortrait;
 export const ATIQUL_ISLAM_IMAGE = atiqulIslamPortrait;
+export const NADIA_SIDDIKA_IMAGE = nadiaSiddikaPortrait;
 /** Face-focused crop of the President's portrait for round frames (cards, profile, members). */
 export const PRESIDENT_FACE_IMAGE = presidentFacePortrait;
 export const ABU_MURSHED_CHOWDHURY_IMAGE = abuMurshedChowdhuryPortrait;
@@ -772,6 +775,57 @@ export const DIRECTORS_DATA: Director[] = [
       { year: "2016", event: "Highest-taxpayer recognition, Cox's Bazar" },
       { year: "2008–2010", event: "Recognised among Cox's Bazar's highest taxpayers" },
       { year: "1984", event: "Unnayan International begins operations in Cox's Bazar, later undertaking jetty, road, rubber-dam and bridge works" }
+    ]
+  },
+  {
+    id: "nadia-siddika",
+    name: "Nadia Siddika",
+    designation: "Founding Director",
+    membershipCode: "CBBCL-FM-19",
+    memberNumber: "CBBCL-LM-0019",
+    level: 4,
+    profileSubmitted: true,
+    profileRevision: 1,
+    photoAlt: "Nadia Siddika, Founding Director of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Nadia Siddika is a distinguished civil engineer, entrepreneur and compassionate humanitarian whose journey reflects a harmonious blend of academic excellence, professional leadership and devotion to family.",
+      "Born in Dhaka, Bangladesh, she pursued her passion for engineering at the Military Institute of Science and Technology (MIST), where she earned both her Bachelor of Science (BSc) and Master of Science (MSc) degrees in Civil Engineering. Continuing her pursuit of knowledge and academic distinction, she is currently pursuing her PhD in Civil Engineering at MIST.",
+      "Beyond academia, Nadia has established herself as a visionary entrepreneur, serving as the Chairman of Kuthi Group, with interests in real estate, construction and hospitality. Her leadership embodies ambition, integrity and a commitment to meaningful progress.",
+      "A firm believer in social responsibility, Nadia actively participates in humanitarian and Corporate Social Responsibility (CSR) initiatives. Her philanthropic efforts include supporting communities affected by natural disasters, organizing charitable activities during Eid festivals, and distributing warm clothing among underprivileged people during winter. She believes that true success is measured not merely by personal achievements but by the positive difference one makes in the lives of others.",
+      "Residing in Dhaka, Nadia shares a fulfilling family life with her husband, Lieutenant Colonel Mirazul Islam, Engineers, and their six-year-old daughter. Beyond her professional commitments, she finds joy in photography, listening to music and travelling, embracing opportunities to discover new cultures, landscapes and perspectives.",
+      "Guided by perseverance, compassion and an enduring thirst for knowledge, Nadia aspires to leave a meaningful legacy through engineering, entrepreneurship and service to humanity."
+    ],
+    businessProfile: {
+      role: "Chairman",
+      company: "Kuthi Group",
+      industry: "Real Estate; Construction; Hospitality",
+      interests: "Construction"
+    },
+    achievements: [
+      "MSc in Civil Engineering — Military Institute of Science and Technology (MIST)",
+      "BSc in Civil Engineering — Military Institute of Science and Technology (MIST)",
+      "PhD in Civil Engineering (in progress) — MIST"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Founding Director"
+    ],
+    community: [
+      "Disaster relief — supporting communities affected by natural disasters",
+      "Eid charitable activities — organizing charitable programmes during Eid festivals",
+      "Winter clothing distribution — warm clothing for underprivileged people during winter"
+    ],
+    socials: {
+      // Icon placeholders until her links are supplied (shown as icons with labels, not clickable).
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      website: "Website"
+    },
+    timeline: [
+      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." },
+      { year: "Current", event: "Chairman, Kuthi Group (real estate, construction & hospitality)" },
+      { year: "Current", event: "PhD candidate in Civil Engineering, Military Institute of Science and Technology (MIST)" },
+      { year: "MSc", event: "Master of Science in Civil Engineering, MIST" },
+      { year: "BSc", event: "Bachelor of Science in Civil Engineering, MIST" }
     ]
   },
 ];
