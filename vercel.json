@@ -2,8 +2,18 @@
   "redirects": [
     {
       "source": "/:path((?!sw\\.js$).*)",
-      "has": [{ "type": "host", "value": "cbbcl.org" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "cbbcl.org"
+        }
+      ],
       "destination": "https://www.cbbcl.org/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:section(board|profile)/md-atiqul-islam",
+      "destination": "/:section/atiqul-islam",
       "permanent": true
     },
     {

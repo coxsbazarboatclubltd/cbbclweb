@@ -108,7 +108,8 @@ const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = 
   "mohammed-elias": { name: "Mohammad Eliyas", oldNames: ["Mohammed Elias"] },
   "maimunal-karim-jisan": { name: "Maimunul Karim Jisan", oldNames: ["Maimunal Karim Jisan"] },
   "md-rezaul-kabir-reza": { name: "Mohammad Rezaul Kabir Reza", oldNames: ["Md Rezaul Kabir Reza"] },
-  "nurul-absar": { name: "Nurul Abser", oldNames: ["Nurul Absar"] }
+  "nurul-absar": { name: "Nurul Abser", oldNames: ["Nurul Absar"] },
+  "atiqul-islam": { name: "Atiqul Islam", oldNames: ["Md. Atiqul Islam"] }
 };
 
 // Directors whose board seat changed; cached lists still holding the old seat are moved.
@@ -117,7 +118,13 @@ const ROLE_CHANGES: Record<string, { fromLevel: number; level: number; designati
 };
 
 // Directors removed from the board; filtered out of any cached board list.
-const RETIRED_DIRECTOR_IDS = ["syfuddin-khaled"];
+// "md-atiqul-islam" was renamed to "atiqul-islam"; the old cached entry is dropped and the new one added.
+const RETIRED_DIRECTOR_IDS = ["syfuddin-khaled", "md-atiqul-islam"];
+
+/** Old profile addresses that now live under a new id (/board/<old> opens /board/<new>). */
+export const DIRECTOR_ID_ALIASES: Record<string, string> = {
+  "md-atiqul-islam": "atiqul-islam"
+};
 
 export function getBoardMembers(): Director[] {
   let list: Director[] = DIRECTORS_DATA;
@@ -327,7 +334,7 @@ const DEFAULT_PORTRAITS: Record<string, string> = {
   "humayun-kabir-robel": PRESIDENT_FACE_IMAGE,
   "abu-murshed-chowdhury": ABU_MURSHED_CHOWDHURY_IMAGE,
   "mohammed-anwarul-islam": ANWARUL_ISLAM_IMAGE,
-  "md-atiqul-islam": ATIQUL_ISLAM_IMAGE,
+  "atiqul-islam": ATIQUL_ISLAM_IMAGE,
   "nadia-siddika": NADIA_SIDDIKA_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "arifur-rahman": ARIFUR_RAHMAN_IMAGE,

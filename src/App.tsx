@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from "react";
 import { RoutePath, User } from "./types";
-import { getLoggedInUser, setLoggedInUser } from "./utils/storage";
+import { getLoggedInUser, setLoggedInUser, DIRECTOR_ID_ALIASES } from "./utils/storage";
 import { recordVisitOnce } from "./utils/siteStats";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -281,7 +281,12 @@ export default function App() {
         (normalized.startsWith("/profile/") && normalized !== "/profile" && normalized !== "/profile.html")) {
       const parts = normalized.split("/");
       const filePart = parts[parts.length - 1];
-      const directorId = filePart.replace(/\.html$/, "");
+      const requestedId = filePart.replace(/\.html$/, "");
+      // Renamed profiles: show the new address in the browser bar and open the current profile.
+      const directorId = DIRECTOR_ID_ALIASES[requestedId] || requestedId;
+      if (directorId !== requestedId) {
+        window.history.replaceState(null, "", `/${parts[1]}/${directorId}`);
+      }
       return <BoardProfile directorId={directorId} navigate={navigate} />;
     }
     if (normalized.startsWith("/membership/") && normalized !== "/membership" && normalized !== "/membership.html") {

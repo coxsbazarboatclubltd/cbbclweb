@@ -8,7 +8,7 @@ const GLOBAL_AVATARS: Record<string, string> = {
   "humayun-kabir-robel": PRESIDENT_FACE_IMAGE,
   "abu-murshed-chowdhury": ABU_MURSHED_CHOWDHURY_IMAGE,
   "mohammed-anwarul-islam": ANWARUL_ISLAM_IMAGE,
-  "md-atiqul-islam": ATIQUL_ISLAM_IMAGE,
+  "atiqul-islam": ATIQUL_ISLAM_IMAGE,
   "nadia-siddika": NADIA_SIDDIKA_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "ak-rubel": AK_RUBEL_IMAGE,
@@ -48,10 +48,12 @@ const DEMO_MEMBER_IDS = [
   "md-rezaul-karim", "admin-officer-example", "dr-sofia-kamal", "tasnim-jahan", "raymond-vance",
   "kaiser-chowdhury",
   // Removed from the board
-  "syfuddin-khaled"
+  "syfuddin-khaled",
+  // Renamed to atiqul-islam
+  "md-atiqul-islam"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v21";
+const MEMBERS_SEED_VERSION = "founding-directors-v23";
 
 
 export function getClubMembers(): ClubMember[] {

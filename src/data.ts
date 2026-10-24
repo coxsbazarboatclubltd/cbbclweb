@@ -34,7 +34,7 @@ import abuMurshedChowdhuryPortrait from "./assets/images/board/abu-murshed-chowd
 // @ts-ignore
 import anwarulIslamPortrait from "./assets/images/board/mohammed-anwarul-islam.webp";
 // @ts-ignore
-import atiqulIslamPortrait from "./assets/images/board/md-atiqul-islam.webp";
+import atiqulIslamPortrait from "./assets/images/board/atiqul-islam.webp";
 // @ts-ignore
 import nadiaSiddikaPortrait from "./assets/images/board/nadia-siddika.webp";
 // @ts-ignore
@@ -730,18 +730,18 @@ export const DIRECTORS_DATA: Director[] = [
     ]
   },
   {
-    id: "md-atiqul-islam",
-    name: "Md. Atiqul Islam",
+    id: "atiqul-islam",
+    name: "Atiqul Islam",
     designation: "Founding Director",
     membershipCode: "CBBCL-FM-18",
     memberNumber: "CBBCL-LM-0018",
     level: 4,
     profileSubmitted: true,
-    profileRevision: 3,
-    photoAlt: "Md. Atiqul Islam, Founding Director of Cox's Bazar Boat Club Ltd.",
+    profileRevision: 4,
+    photoAlt: "Atiqul Islam, Founding Director of Cox's Bazar Boat Club Ltd.",
     bio: [
-      "Md. Atiqul Islam, a CIP (Commercially Important Person), is a Cox's Bazar-based entrepreneur and contractor with a longstanding presence in construction and infrastructure development. He is associated with Unnayan International, an enterprise established in Cox's Bazar in 1984, and is recognised as its proprietor and a key figure in its development.",
-      "His professional interests extend to construction contracting, ready-mix concrete and related business activities. Alongside his commercial responsibilities, he has held leadership and membership roles within the contractor and business communities, including serving as former President of the District Contractor Association and as a member of FBCCI and the Cox's Bazar Chamber of Commerce & Industry.",
+      "Atiqul Islam is a Cox's Bazar-based entrepreneur and contractor with a longstanding presence in construction and infrastructure development. He is associated with Unnayan International, an enterprise established in Cox's Bazar in 1984, and is recognised as its proprietor and a key figure in its development.",
+      "His professional interests extend to construction contracting, ready-mix concrete and related business activities. Alongside his commercial responsibilities, he has held leadership and membership roles within the contractor and business communities, including serving as former President of the District Contractor Association and as a member of FBCCI and the Cox's Bazar Chamber of Commerce & Industry. He was a CIP (Commercially Important Person) from 2012 to 2019.",
       "As a Founding Director of Cox's Bazar Boat Club Ltd., he joins the Club's institutional leadership with experience in entrepreneurship, contracting and business development."
     ],
     businessProfile: {
@@ -751,7 +751,7 @@ export const DIRECTORS_DATA: Director[] = [
       interests: "Construction Contracting & Infrastructure; Project Implementation; Ready-mix Concrete; Business Leadership & Organizational Development; Industry & Business Association Engagement"
     },
     achievements: [
-      "CIP (Commercially Important Person), Government of Bangladesh",
+      "2012–2019 — CIP (Commercially Important Person), Government of Bangladesh",
       "2008, 2009 & 2010 — Recognised among Cox's Bazar's highest taxpayers",
       "2016 — Highest-taxpayer recognition, Cox's Bazar"
     ],
@@ -771,7 +771,7 @@ export const DIRECTORS_DATA: Director[] = [
     timeline: [
       { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." },
       { year: "Current", event: "Chairman, Unnayan International & Unnayan Ready Mix Group of Companies" },
-      { year: "Current", event: "CIP (Commercially Important Person)" },
+      { year: "2012–2019", event: "CIP (Commercially Important Person), Government of Bangladesh" },
       { year: "2016", event: "Highest-taxpayer recognition, Cox's Bazar" },
       { year: "2008–2010", event: "Recognised among Cox's Bazar's highest taxpayers" },
       { year: "1984", event: "Unnayan International begins operations in Cox's Bazar, later undertaking jetty, road, rubber-dam and bridge works" }

@@ -38,7 +38,7 @@ export const CLUB_ANNOUNCEMENTS: ClubAnnouncement[] = [
 
 /** Most recently joined members, shown in the "Meet Our Newly Joined Members" spotlight (newest first).
  *  No joining dates are shown (none are on record). */
-export const NEWLY_JOINED_DIRECTOR_IDS = ["nadia-siddika", "md-atiqul-islam", "mohammed-anwarul-islam", "abu-murshed-chowdhury"];
+export const NEWLY_JOINED_DIRECTOR_IDS = ["nadia-siddika", "atiqul-islam", "mohammed-anwarul-islam", "abu-murshed-chowdhury"];
 
 /** Today's date (YYYY-MM-DD) in the club's timezone. */
 export function clubToday(): string {
