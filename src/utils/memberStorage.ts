@@ -53,7 +53,7 @@ const DEMO_MEMBER_IDS = [
   "md-atiqul-islam"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v23";
+const MEMBERS_SEED_VERSION = "founding-directors-v24";
 
 
 export function getClubMembers(): ClubMember[] {

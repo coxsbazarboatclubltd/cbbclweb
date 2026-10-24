@@ -536,7 +536,10 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "amzad-mahmud",
     name: "Amzad Mahmud",
-    designation: "Founding Director",
+    // Core Secretariat seat, shown before Director – Finance.
+    designation: "Director – Administration",
+    level: 3,
+    orderIndex: 0,
     membershipCode: "CBBCL-FM-09",
     memberNumber: "CBBCL-LM-0009"
   },

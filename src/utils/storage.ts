@@ -113,8 +113,9 @@ const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = 
 };
 
 // Directors whose board seat changed; cached lists still holding the old seat are moved.
-const ROLE_CHANGES: Record<string, { fromLevel: number; level: number; designation: string }> = {
-  "farhan-bin-rafiq": { fromLevel: 2, level: 4, designation: "Founding Director" }
+const ROLE_CHANGES: Record<string, { fromLevel: number; level: number; designation: string; orderIndex?: number }> = {
+  "farhan-bin-rafiq": { fromLevel: 2, level: 4, designation: "Founding Director" },
+  "amzad-mahmud": { fromLevel: 4, level: 3, designation: "Director – Administration", orderIndex: 0 }
 };
 
 // Directors removed from the board; filtered out of any cached board list.
@@ -186,6 +187,7 @@ export function getBoardMembers(): Director[] {
     if (roleChange && updated.level === roleChange.fromLevel) {
       updated.level = roleChange.level;
       updated.designation = roleChange.designation;
+      if (roleChange.orderIndex !== undefined) updated.orderIndex = roleChange.orderIndex;
       changed = true;
     }
     const correctedName = RENAMED_DIRECTORS[globalId];

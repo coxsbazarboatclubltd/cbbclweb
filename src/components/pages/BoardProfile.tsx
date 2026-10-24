@@ -121,7 +121,8 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
       ];
     }
 
-    if (!d.businessProfile) {
+    // Board directors only show business details they actually gave (no invented companies).
+    if (!d.businessProfile && !isOnBoard) {
       const companies = [
         "Bay & Ocean Maritime Logistics",
         "Apex Coastal Ventures",
@@ -195,11 +196,8 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         ["fbcci", director.socials?.fbcci, Landmark, "FBCCI"],
         ["website", website || director.socials?.website, Globe, (website || director.socials?.website || "").replace(/^https?:\/\//, "").replace(/\/$/, "")]
       ] as const).filter(([, url]) => !!url)
-    : ([
-        ["linkedin", "https://linkedin.com", Linkedin, "LinkedIn"],
-        ["facebook", "https://facebook.com", Facebook, "Facebook"],
-        ["twitter", "https://twitter.com", Twitter, "X / Twitter"]
-      ] as const);
+    // No profile sent yet: no social icons (never link to a site's home page as if it were theirs).
+    : [];
   // One or more addresses, comma-separated.
   const wechatId = director.socials?.wechat;
   const contactEmails = splitList((director.socials?.email || "").replace(/,/g, ";"));
@@ -241,6 +239,165 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
     "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400"
   ];
 
+  // Photo, member number, designation and social links; also shown on profiles still awaiting details.
+  const profileCard = (
+    <div className="bg-white border border-gold shadow-lg rounded-sm overflow-hidden text-center p-6 space-y-6">
+      
+      <div className="relative w-44 h-44 mx-auto rounded-full border border-gold overflow-hidden">
+        <img
+          src={getPortraitUrl(director)}
+          alt={director.photoAlt || director.name}
+          className="w-full h-full object-cover transition-all duration-500"
+          referrerPolicy="no-referrer"
+          onError={handleImageError}
+        />
+      </div>
+
+      {/* Specifications list */}
+      <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left [&>div:last-child]:border-b-0">
+        {SHOW_FOUNDER_CODES && director.membershipCode && (
+          <div className="flex justify-between border-b border-slate-50 pb-2">
+            <span className="text-slate-400 font-light">Founder Code:</span>
+            <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
+          </div>
+        )}
+        {director.memberNumber && (
+          <div className="flex justify-between border-b border-slate-50 pb-2">
+            <span className="text-slate-400 font-light">Member No.:</span>
+            <span className="text-gold-dark font-mono font-semibold">{director.memberNumber}</span>
+          </div>
+        )}
+        <div className="flex justify-between border-b border-slate-50 pb-2">
+          <span className="text-slate-400 font-light">Designation:</span>
+          <span className="text-navy font-semibold">{director.designation}</span>
+        </div>
+        {director.appointed && director.profileSubmitted && (
+          <div className="flex justify-between border-b border-slate-50 pb-2">
+            <span className="text-slate-400 font-light">Appointed:</span>
+            <span className="text-navy font-semibold">{director.appointed}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Social Channels Links */}
+      {(socialLinks.length > 0 || contactEmails.length > 0 || !!wechatId) && (
+        <div className="border-t border-slate-100 pt-6">
+          <span className="block text-[9px] font-sans text-slate-400 font-bold uppercase tracking-widest mb-3 text-center">
+            Social Registries
+          </span>
+          {(socialLinks.length > 0 || wechatId) && (
+            <div className="flex flex-wrap justify-center gap-x-5 gap-y-3">
+              {socialLinks.map(([key, url, Icon, label]) =>
+                /^https?:\/\//i.test(url) ? (
+                  <a key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors">
+                    <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
+                      <Icon className="w-4 h-4" />
+                    </span>
+                    <span className="font-sans text-[10px] leading-none">{label}</span>
+                  </a>
+                ) : (
+                  // Profile name only (the director chose not to share a link): icon + name, not clickable.
+                  <span key={key} aria-label={`${label}: ${url}`} title={`${label}: ${url}`} className="flex flex-col items-center space-y-1.5 text-slate-600">
+                    <span className="p-2 border border-slate-200 rounded-full">
+                      <Icon className="w-4 h-4" />
+                    </span>
+                    <span className="font-sans text-[10px] leading-none">{url}</span>
+                  </span>
+                )
+              )}
+              {/* WeChat has no web profile link: show the ID; clicking copies it */}
+              {wechatId && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard?.writeText(wechatId).then(() => {
+                      setWechatCopied(true);
+                      setTimeout(() => setWechatCopied(false), 2000);
+                    }).catch(() => {});
+                  }}
+                  aria-label={`WeChat ID ${wechatId} (click to copy)`}
+                  title="Click to copy WeChat ID"
+                  className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors"
+                >
+                  <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
+                    <WeChatIcon className="w-4 h-4" />
+                  </span>
+                  <span className="font-sans text-[10px] leading-none">{wechatCopied ? "Copied!" : `WeChat: ${wechatId}`}</span>
+                </button>
+              )}
+            </div>
+          )}
+          {contactEmails.length > 0 && (
+            <div className={`space-y-1.5 ${socialLinks.length > 0 ? "mt-4 pt-4 border-t border-slate-100" : ""}`}>
+              {contactEmails.map((email) => (
+                <a
+                  key={email}
+                  href={`mailto:${email}`}
+                  className="flex items-center justify-center space-x-1.5 font-sans text-xs text-slate-600 hover:text-navy transition-colors break-all"
+                >
+                  <Mail className="w-3.5 h-3.5 text-gold shrink-0" />
+                  <span>{email}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+
+  // Business Standing card; shown whenever business details are on record.
+  const businessCard = (roles.length > 0 || companies.length > 0 || industries.length > 0 || interests.length > 0 || !!website) ? (
+    <>
+      {/* Business Card specifications */}
+      <div className="bg-navy text-slate-300 p-6 rounded-xs border border-gold/20 space-y-4">
+        <div className="flex items-center space-x-2 text-gold">
+          <Briefcase className="w-5 h-5 animate-pulse" />
+          <span className="font-sans text-[10px] font-bold uppercase tracking-widest">
+            Business Standing
+          </span>
+        </div>
+        <h4 className="font-display text-lg text-white font-medium border-b border-navy-light pb-2">
+          Merchant Profile
+        </h4>
+        <div className="font-sans text-xs space-y-2 font-light">
+          {roles.length > 0 && (
+            <div>
+              <span className="text-gold block font-semibold text-[10px]">{roles.length > 1 ? "OFFICIAL ROLES:" : "OFFICIAL ROLE:"}</span>
+              {roles.length > 1 ? <BulletList items={roles} /> : <span>{roles[0]}</span>}
+            </div>
+          )}
+          {companies.length > 0 && (
+            <div>
+              <span className="text-gold block font-semibold text-[10px]">{companies.length > 1 ? "BUSINESSES:" : "CORPORATION:"}</span>
+              {companies.length > 1 ? <BulletList items={companies} /> : <span>{companies[0]}</span>}
+            </div>
+          )}
+          {industries.length > 0 && (
+            <div>
+              <span className="text-gold block font-semibold text-[10px]">INDUSTRY SPHERE:</span>
+              {industries.length > 1 ? <BulletList items={industries} /> : <span>{industries[0]}</span>}
+            </div>
+          )}
+          {interests.length > 0 && (
+            <div>
+              <span className="text-gold block font-semibold text-[10px]">KEY BUSINESS INTERESTS:</span>
+              <BulletList items={interests} />
+            </div>
+          )}
+          {website && (
+            <div>
+              <span className="text-gold block font-semibold text-[10px]">COMPANY WEBSITE:</span>
+              <a href={website} target="_blank" rel="noopener noreferrer" className="text-white underline decoration-gold/60 hover:text-gold break-all">
+                {website.replace(/^https?:\/\//, "")}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  ) : null;
+
   return (
     <div className="bg-bg-primary min-h-screen">
       {/* 1. HERO BLOCK */}
@@ -277,7 +434,31 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
         </div>
       </section>
 
-      {/* Main Column Grid */}
+      {/* Directors who have not sent their profile yet: no profile details, only a thank-you note. */}
+      {isOnBoard && !director.profileSubmitted ? (
+      <section className="py-20 px-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <aside className="lg:col-span-4 space-y-6">
+            {profileCard}
+            {businessCard}
+          </aside>
+          <div className="lg:col-span-8 text-center space-y-10">
+            <p className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-text-dark leading-tight tracking-tight">
+              Thank You For Visiting My Profile,{" "}
+              <span className="font-serif italic text-gold">Keep Me In Your Prayers</span>
+            </p>
+            <button
+              onClick={() => navigate?.(backPath)}
+              className="inline-flex items-center space-x-2 text-xs text-slate-500 hover:text-gold transition-colors font-sans uppercase tracking-widest font-semibold"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>{backLabel}</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      ) : (
+      /* Main Column Grid */
       <section className="py-20 px-6 max-w-6xl mx-auto">
         
         {/* Back Link Button */}
@@ -295,160 +476,9 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
           
           {/* Left Side: Sidebar Card & Brief Profile */}
           <aside className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
-            <div className="bg-white border border-gold shadow-lg rounded-sm overflow-hidden text-center p-6 space-y-6">
-              
-              <div className="relative w-44 h-44 mx-auto rounded-full border border-gold overflow-hidden">
-                <img
-                  src={getPortraitUrl(director)}
-                  alt={director.photoAlt || director.name}
-                  className="w-full h-full object-cover transition-all duration-500"
-                  referrerPolicy="no-referrer"
-                  onError={handleImageError}
-                />
-              </div>
+            {profileCard}
 
-              {/* Specifications list */}
-              <div className="border-t border-slate-100 pt-6 space-y-3 font-sans text-xs text-left [&>div:last-child]:border-b-0">
-                {SHOW_FOUNDER_CODES && director.membershipCode && (
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="text-slate-400 font-light">Founder Code:</span>
-                    <span className="text-gold-dark font-mono font-semibold">{director.membershipCode}</span>
-                  </div>
-                )}
-                {director.memberNumber && (
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="text-slate-400 font-light">Member No.:</span>
-                    <span className="text-gold-dark font-mono font-semibold">{director.memberNumber}</span>
-                  </div>
-                )}
-                <div className="flex justify-between border-b border-slate-50 pb-2">
-                  <span className="text-slate-400 font-light">Designation:</span>
-                  <span className="text-navy font-semibold">{director.designation}</span>
-                </div>
-                {director.appointed && (
-                  <div className="flex justify-between border-b border-slate-50 pb-2">
-                    <span className="text-slate-400 font-light">Appointed:</span>
-                    <span className="text-navy font-semibold">{director.appointed}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Social Channels Links */}
-              {(socialLinks.length > 0 || contactEmails.length > 0 || !!wechatId) && (
-                <div className="border-t border-slate-100 pt-6">
-                  <span className="block text-[9px] font-sans text-slate-400 font-bold uppercase tracking-widest mb-3 text-center">
-                    Social Registries
-                  </span>
-                  {(socialLinks.length > 0 || wechatId) && (
-                    <div className="flex flex-wrap justify-center gap-x-5 gap-y-3">
-                      {socialLinks.map(([key, url, Icon, label]) =>
-                        /^https?:\/\//i.test(url) ? (
-                          <a key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label} className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors">
-                            <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
-                              <Icon className="w-4 h-4" />
-                            </span>
-                            <span className="font-sans text-[10px] leading-none">{label}</span>
-                          </a>
-                        ) : (
-                          // Profile name only (the director chose not to share a link): icon + name, not clickable.
-                          <span key={key} aria-label={`${label}: ${url}`} title={`${label}: ${url}`} className="flex flex-col items-center space-y-1.5 text-slate-600">
-                            <span className="p-2 border border-slate-200 rounded-full">
-                              <Icon className="w-4 h-4" />
-                            </span>
-                            <span className="font-sans text-[10px] leading-none">{url}</span>
-                          </span>
-                        )
-                      )}
-                      {/* WeChat has no web profile link: show the ID; clicking copies it */}
-                      {wechatId && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            navigator.clipboard?.writeText(wechatId).then(() => {
-                              setWechatCopied(true);
-                              setTimeout(() => setWechatCopied(false), 2000);
-                            }).catch(() => {});
-                          }}
-                          aria-label={`WeChat ID ${wechatId} (click to copy)`}
-                          title="Click to copy WeChat ID"
-                          className="group flex flex-col items-center space-y-1.5 text-slate-600 hover:text-navy transition-colors"
-                        >
-                          <span className="p-2 border border-slate-200 group-hover:border-navy transition-colors rounded-full">
-                            <WeChatIcon className="w-4 h-4" />
-                          </span>
-                          <span className="font-sans text-[10px] leading-none">{wechatCopied ? "Copied!" : `WeChat: ${wechatId}`}</span>
-                        </button>
-                      )}
-                    </div>
-                  )}
-                  {contactEmails.length > 0 && (
-                    <div className={`space-y-1.5 ${socialLinks.length > 0 ? "mt-4 pt-4 border-t border-slate-100" : ""}`}>
-                      {contactEmails.map((email) => (
-                        <a
-                          key={email}
-                          href={`mailto:${email}`}
-                          className="flex items-center justify-center space-x-1.5 font-sans text-xs text-slate-600 hover:text-navy transition-colors break-all"
-                        >
-                          <Mail className="w-3.5 h-3.5 text-gold shrink-0" />
-                          <span>{email}</span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {(roles.length > 0 || companies.length > 0 || industries.length > 0 || interests.length > 0 || !!website) && (
-              <>
-                {/* Business Card specifications */}
-                <div className="bg-navy text-slate-300 p-6 rounded-xs border border-gold/20 space-y-4">
-                  <div className="flex items-center space-x-2 text-gold">
-                    <Briefcase className="w-5 h-5 animate-pulse" />
-                    <span className="font-sans text-[10px] font-bold uppercase tracking-widest">
-                      Business Standing
-                    </span>
-                  </div>
-                  <h4 className="font-display text-lg text-white font-medium border-b border-navy-light pb-2">
-                    Merchant Profile
-                  </h4>
-                  <div className="font-sans text-xs space-y-2 font-light">
-                    {roles.length > 0 && (
-                      <div>
-                        <span className="text-gold block font-semibold text-[10px]">{roles.length > 1 ? "OFFICIAL ROLES:" : "OFFICIAL ROLE:"}</span>
-                        {roles.length > 1 ? <BulletList items={roles} /> : <span>{roles[0]}</span>}
-                      </div>
-                    )}
-                    {companies.length > 0 && (
-                      <div>
-                        <span className="text-gold block font-semibold text-[10px]">{companies.length > 1 ? "BUSINESSES:" : "CORPORATION:"}</span>
-                        {companies.length > 1 ? <BulletList items={companies} /> : <span>{companies[0]}</span>}
-                      </div>
-                    )}
-                    {industries.length > 0 && (
-                      <div>
-                        <span className="text-gold block font-semibold text-[10px]">INDUSTRY SPHERE:</span>
-                        {industries.length > 1 ? <BulletList items={industries} /> : <span>{industries[0]}</span>}
-                      </div>
-                    )}
-                    {interests.length > 0 && (
-                      <div>
-                        <span className="text-gold block font-semibold text-[10px]">KEY BUSINESS INTERESTS:</span>
-                        <BulletList items={interests} />
-                      </div>
-                    )}
-                    {website && (
-                      <div>
-                        <span className="text-gold block font-semibold text-[10px]">COMPANY WEBSITE:</span>
-                        <a href={website} target="_blank" rel="noopener noreferrer" className="text-white underline decoration-gold/60 hover:text-gold break-all">
-                          {website.replace(/^https?:\/\//, "")}
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </>
-            )}
+            {businessCard}
           </aside>
 
           {/* Right Side: Narrative Details Area */}
@@ -631,6 +661,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 }
