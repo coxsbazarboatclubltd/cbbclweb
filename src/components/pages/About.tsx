@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Compass, BookOpen, Target, Award, Anchor, ArrowRight, ShieldAlert } from "lucide-react";
 import { motion } from "motion/react";
 import { getPageContent } from "../../utils/cmsStorage";
+import { CLUB_VISION, CLUB_MISSION, CLUB_CORE_VALUES } from "../../content/visionMission";
 import { MASTER_HERO_VIDEO } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 
@@ -27,7 +28,7 @@ export default function About({ initialSection = "overview" }: AboutProps) {
   const tabs = [
     { id: "overview", label: "Club Introduction", icon: Compass },
     { id: "history", label: "History & Story", icon: BookOpen },
-    { id: "vision", label: "Vision & Mission", icon: Target },
+    { id: "vision", label: "Vision, Mission & Values", icon: Target },
     { id: "objectives", label: "Key Objectives", icon: Award }
   ];
 
@@ -195,38 +196,37 @@ export default function About({ initialSection = "overview" }: AboutProps) {
                   Section 03
                 </span>
                 <h2 className="font-display text-2xl md:text-3xl text-text-dark font-light tracking-tight pb-3 border-b border-slate-150">
-                  Vision statement & <span className="font-serif italic font-normal text-gold">Our Organizational Mission</span>
+                  Vision, Mission & <span className="font-serif italic font-normal text-gold">Core Values</span>
                 </h2>
               </div>
 
               <div className="space-y-6">
                 {/* Vision card */}
                 <div className="p-6 bg-slate-50 border border-slate-200 rounded-sm space-y-2">
-                  <h4 className="font-display text-base text-text-dark font-bold uppercase tracking-wider">Our Core Vision</h4>
+                  <h4 className="font-display text-base text-text-dark font-bold uppercase tracking-wider">Vision</h4>
                   <p className="font-sans text-xs sm:text-[13px] text-text-body font-light leading-relaxed">
-                    "{cms.about.visionVision || cms.about.visionText}"
+                    {CLUB_VISION}
                   </p>
                 </div>
 
                 {/* Mission card */}
                 <div className="p-6 bg-navy text-slate-200 border border-gold/25 rounded-sm space-y-2">
-                  <h4 className="font-display text-base text-gold uppercase tracking-wider">Our Dynamic Mission</h4>
-                  <p className="font-sans text-xs font-light tracking-wide leading-relaxed max-w-prose">
-                    {cms.about.visionMission || cms.about.missionText}
+                  <h4 className="font-display text-base text-gold uppercase tracking-wider">Mission</h4>
+                  <p className="font-sans text-xs sm:text-[13px] font-light tracking-wide leading-relaxed">
+                    {CLUB_MISSION}
                   </p>
-                  <ul className="space-y-3.5 font-sans text-xs font-light tracking-wide leading-relaxed pt-2">
-                    <li className="flex items-start space-x-2.5">
-                      <span className="text-gold font-bold">1.</span>
-                      <span><strong>Nautical Leisure Innovation:</strong> Build and operate international-standard marine facilities, slipways, and sailing equipment for yachts and sports boats.</span>
-                    </li>
-                    <li className="flex items-start space-x-2.5">
-                      <span className="text-gold font-bold">2.</span>
-                      <span><strong>Exclusive Camaraderie:</strong> Curate deep and secure corporate, diplomatic, and executive social spaces and premium dining services.</span>
-                    </li>
-                    <li className="flex items-start space-x-2.5">
-                      <span className="text-gold font-bold">3.</span>
-                      <span><strong>Ecological Integrity:</strong> Execute continuous beach preservation cleanup campaigns and lead environment-friendly coastal landscaping of our sites.</span>
-                    </li>
+                </div>
+
+                {/* Core values */}
+                <div className="p-6 bg-white border border-gold/30 rounded-sm space-y-4">
+                  <h4 className="font-display text-base text-text-dark font-bold uppercase tracking-wider">Core Values</h4>
+                  <ul className="space-y-3.5 font-sans text-xs sm:text-[13px] text-text-body font-light leading-relaxed">
+                    {CLUB_CORE_VALUES.map((v, idx) => (
+                      <li key={v.title} className="flex items-start space-x-2.5">
+                        <span className="text-gold font-bold">{idx + 1}.</span>
+                        <span><strong className="font-semibold text-text-dark">{v.title}</strong> — {v.text}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import { Facility, EventItem, Affiliation, RoutePath, FooterSettings } from "../types";
 import { FACILITIES_DATA, EVENTS_DATA, PAST_EVENTS_DATA, AFFILIATIONS_DATA, MASTER_HERO_POSTER } from "../data";
 import { clubToday } from "../content/clubLife";
+import { CLUB_VISION, CLUB_MISSION } from "../content/visionMission";
 
 // Interfaces
 export interface MediaItem {
@@ -105,8 +106,8 @@ const DEFAULT_PAGE_CONTENT: PageCMSContent = {
       "The club was pioneered by Founding President Humayun Kabir Robel alongside an eminent board of shipping leaders, legal advocates, and retired military command staff. They shared a vision: to construct an elite marine complex comparable to South Asia's historic clubs that supports yachting, water sports, and environmental preservation in the world's longest sand beach zone.",
       "CBBCL acts as a social, professional, and philanthropic nexus, maintaining a warm harbor for members, elite dining suites, modern snooker rooms, and dedicated standing councils to defend our coastal dunes against pollution."
     ],
-    visionText: "To stand as Bangladesh's premier private nautical institution, recognized globally for its elite membership, luxurious sea recreation, and deep-seated coastal protection legacy.",
-    missionText: "To build a world-class clubhouse complex and private marina, uphold strict safety codes, curate dynamic athletic and cultural calendars, and foster a tight-knit community of maritime pioneers and leaders."
+    visionText: CLUB_VISION,
+    missionText: CLUB_MISSION
   },
   membership: {
     title: "Exclusive Executive Membership",
