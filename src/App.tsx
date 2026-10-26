@@ -318,7 +318,7 @@ export default function App() {
         return <Home navigate={navigate} />;
       case "/about":
       case "/about.html":
-        return <About initialSection={initialSection || "overview"} />;
+        return <About initialSection={initialSection || "overview"} navigate={navigate} />;
       case "/facilities":
       case "/facilities.html":
       case "/gallery":

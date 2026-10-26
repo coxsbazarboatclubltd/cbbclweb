@@ -412,7 +412,6 @@ export default function Home({ navigate }: HomeProps) {
                 <section className="relative py-32 bg-navy flex items-center justify-center overflow-hidden">
                   <div className="absolute inset-0 w-full h-full">
                     <BackgroundVideo
-                      animated
                       src={MASTER_HERO_VIDEO}
                     />
                     <div className="absolute inset-0 bg-navy/85 mix-blend-multiply"></div>
