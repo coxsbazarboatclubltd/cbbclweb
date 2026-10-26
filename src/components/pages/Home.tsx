@@ -12,7 +12,7 @@ import { ArrowRight, Quote, Calendar, MapPin, Mail, Phone, Clock, Anchor, Users,
 import { motion } from "motion/react";
 import { PRESIDENT_IMAGE, MASTER_HERO_VIDEO, MASTER_HERO_POSTER } from "../../data";
 // @ts-ignore
-import presidentSignature from "../../assets/images/signature-humayun-kabir.svg";
+import presidentSignature from "../../assets/images/signature-humayun-kabir.webp";
 import BackgroundVideo from "../BackgroundVideo";
 import { MEMBERSHIP_CATEGORIES } from "../../membershipCategories";
 import { hasTextSelection } from "../../utils/selection";
@@ -329,11 +329,11 @@ export default function Home({ navigate }: HomeProps) {
 
                     <div className="flow-root pt-4 border-t border-slate-200 space-y-1">
                       <p className="font-sans text-[13px] text-text-body font-light">With sincere regards,</p>
-                      {/* Signature artwork (outlines from the OFL font Mr De Haviland with pen strokes; no font is loaded). */}
+                      {/* President's signature (supplied artwork, ink cut out onto a transparent background). */}
                       <img
                         src={presidentSignature}
                         alt="Signature of Humayun Kabir"
-                        className="block h-[64px] sm:h-[84px] w-auto max-w-full -ml-2 select-none"
+                        className="block h-[60px] sm:h-[78px] w-auto max-w-full -ml-1 my-1 select-none"
                         draggable={false}
                       />
                       <p className="font-display text-base text-text-dark font-medium pt-1">The {presDesignation}</p>
