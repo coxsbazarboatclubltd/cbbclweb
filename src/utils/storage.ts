@@ -1,5 +1,6 @@
 import { User, Profile, Director, NewsPost } from "../types";
-import { DIRECTORS_DATA, NEWS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_IMRAN_ALAM_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE, ANWARUL_ISLAM_IMAGE, ATIQUL_ISLAM_IMAGE, NADIA_SIDDIKA_IMAGE } from "../data";
+import { initialsPortrait } from "./initialsPortrait";
+import { DIRECTORS_DATA, NEWS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_IMRAN_ALAM_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE, ANWARUL_ISLAM_IMAGE, ATIQUL_ISLAM_IMAGE, NADIA_SIDDIKA_IMAGE, TASHIN_LUTFUR_IMAGE } from "../data";
 
 const USERS_KEY = "cbbcl_users";
 const PROFILES_KEY = "cbbcl_profiles";
@@ -338,6 +339,7 @@ const DEFAULT_PORTRAITS: Record<string, string> = {
   "mohammed-anwarul-islam": ANWARUL_ISLAM_IMAGE,
   "atiqul-islam": ATIQUL_ISLAM_IMAGE,
   "nadia-siddika": NADIA_SIDDIKA_IMAGE,
+  "tashin-lutfur": TASHIN_LUTFUR_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "arifur-rahman": ARIFUR_RAHMAN_IMAGE,
   "mehedi-hasan": MEHEDI_HASAN_IMAGE,
@@ -358,5 +360,5 @@ export function getDirectorPortrait(dir: Director): string {
   const mappedPhoto = DEFAULT_PORTRAITS[globalId];
   if (mappedPhoto) return mappedPhoto;
   if (dir.photoUrl) return dir.photoUrl;
-  return "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600";
+  return initialsPortrait(dir.name);
 }

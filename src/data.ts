@@ -38,6 +38,8 @@ import atiqulIslamPortrait from "./assets/images/board/atiqul-islam.webp";
 // @ts-ignore
 import nadiaSiddikaPortrait from "./assets/images/board/nadia-siddika.webp";
 // @ts-ignore
+import tashinLutfurPortrait from "./assets/images/board/tashin-lutfur.webp";
+// @ts-ignore
 import softOpeningPhoto from "./assets/images/events/club-house-soft-opening.webp";
 // @ts-ignore
 import softOpeningBanner from "./assets/images/events/club-house-soft-opening-banner.webp";
@@ -50,6 +52,7 @@ export const PRESIDENT_IMAGE = presidentPortrait;
 export const ANWARUL_ISLAM_IMAGE = anwarulIslamPortrait;
 export const ATIQUL_ISLAM_IMAGE = atiqulIslamPortrait;
 export const NADIA_SIDDIKA_IMAGE = nadiaSiddikaPortrait;
+export const TASHIN_LUTFUR_IMAGE = tashinLutfurPortrait;
 /** Face-focused crop of the President's portrait for round frames (cards, profile, members). */
 export const PRESIDENT_FACE_IMAGE = presidentFacePortrait;
 export const ABU_MURSHED_CHOWDHURY_IMAGE = abuMurshedChowdhuryPortrait;
@@ -831,6 +834,57 @@ export const DIRECTORS_DATA: Director[] = [
       { year: "BSc", event: "Bachelor of Science in Civil Engineering, MIST" }
     ]
   },
+  {
+    id: "tashin-lutfur",
+    name: "Tashin Lutfur",
+    designation: "Founding Director",
+    membershipCode: "CBBCL-FM-20",
+    memberNumber: "CBBCL-LM-0020",
+    level: 4,
+    profileSubmitted: true,
+    profileRevision: 2,
+    photoAlt: "Tashin Lutfur, Founding Director of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Tashin Lutfur is a Cox's Bazar-based business executive and entrepreneur whose professional work spans fisheries, aquaculture, hospitality, food service and international trade. He serves as Director of Niribili Group Ltd. and is a Director of Niribili Fisheries Ltd., where his responsibilities have included international trade and relations. His business background connects the seafood sector with the tourism and hospitality economy of Cox's Bazar.",
+      "He completed a BA (Hons) in International Business at Coventry University in the United Kingdom in 2012, followed by an MBA in International Marketing at the same university in 2015. Alongside his business career, he served as an Adjunct Lecturer / Faculty Member at Cox's Bazar International University from 2015 to 2017. His academic background combines international business and marketing, complementing his involvement in commercial operations and trade.",
+      "In hospitality and food service, Tashin is the proprietor of Salt Bistro & Cafe, founded in 2016, and Sugar Boulangerie & Patisserie. He is also the proprietor of Aquila Import. These ventures form part of a professional portfolio that includes dining, bakery and patisserie operations, imports and fisheries. His fisheries interests include shrimp hatchery operations, aquaculture development and export-oriented seafood, with attention to areas such as biosecurity and production quality.",
+      "Beyond his individual businesses, he serves as Secretary General of the Cox's Bazar Hotel Owners' Association, connecting his professional activities with the wider local hospitality sector. He also served as Vice President of JCI Cox's Bazar in 2023. Across these business, academic and association roles, his experience brings together entrepreneurship, industry engagement and a sustained professional connection with Cox's Bazar."
+    ],
+    businessProfile: {
+      role: "Director, Niribili Group Ltd.; Director, Niribili Fisheries Ltd.; Proprietor, Salt Bistro & Cafe; Proprietor, Sugar Boulangerie & Patisserie; Proprietor, Aquila Import",
+      company: "Niribili Group Ltd.; Niribili Fisheries Ltd.; Salt Bistro & Cafe; Sugar Boulangerie & Patisserie; Aquila Import",
+      industry: "Fisheries & Aquaculture; Seafood Trade; Hospitality & Food Service; Imports",
+      interests: "Shrimp Hatchery & Aquaculture Development; Seafood Exports; Restaurant, Cafe, Bakery & Patisserie Operations; International Trade"
+    },
+    achievements: [
+      "2016 — Founded Salt Bistro & Cafe",
+      "2015 — MBA in International Marketing, Coventry University, United Kingdom",
+      "2012 — BA (Hons) in International Business, Coventry University, United Kingdom"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Founding Director",
+      "Cox's Bazar Hotel Owners' Association — Secretary General",
+      "JCI Cox's Bazar — Vice President (2023)"
+    ],
+    socials: {
+      // Icon placeholders until his links are supplied (shown as icons with labels, not clickable).
+      facebook: "Facebook",
+      linkedin: "LinkedIn",
+      website: "https://www.niribiligroup.com",
+      email: "tashin@niribiligroup.com"
+    },
+    timeline: [
+      { year: "Current", event: "Founding Director, Cox's Bazar Boat Club Ltd." },
+      { year: "Current", event: "Director, Niribili Group Ltd. and Niribili Fisheries Ltd." },
+      { year: "Current", event: "Secretary General, Cox's Bazar Hotel Owners' Association" },
+      { year: "Current", event: "Proprietor, Sugar Boulangerie & Patisserie and Aquila Import" },
+      { year: "2023", event: "Vice President, JCI Cox's Bazar" },
+      { year: "2016", event: "Founded Salt Bistro & Cafe" },
+      { year: "2015–2017", event: "Adjunct Lecturer / Faculty Member, Cox's Bazar International University" },
+      { year: "2015", event: "Completed MBA in International Marketing, Coventry University" },
+      { year: "2012", event: "Completed BA (Hons) in International Business, Coventry University" }
+    ]
+  },
 ];
 
 export const FACILITIES_DATA: Facility[] = [
@@ -951,7 +1005,7 @@ export const EVENTS_DATA: EventItem[] = [
     venue: "CBBCL Club House, Anderson Road, Cox's Bazar",
     category: "Club Milestone",
     isUpcoming: true,
-    // Photo-only crop of the event banner for small cards; the full banner shows on the Gazette page.
+    // Official Soft Opening Ceremony card: small copy for cards, larger copy as the Gazette page banner.
     image: softOpeningPhoto,
     banner: softOpeningBanner,
     description: "Cox's Bazar Boat Club Ltd. marks the soft opening of its Club House."

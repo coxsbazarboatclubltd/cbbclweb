@@ -1,5 +1,6 @@
+import { initialsPortrait } from "./initialsPortrait";
 import { ClubMember, MembershipApplication, AffiliationRequest, EZBookingReservation } from "../types";
-import { DIRECTORS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MD_IMRAN_ALAM_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE, ANWARUL_ISLAM_IMAGE, ATIQUL_ISLAM_IMAGE, NADIA_SIDDIKA_IMAGE } from "../data";
+import { DIRECTORS_DATA, PRESIDENT_IMAGE, PRESIDENT_FACE_IMAGE, AK_RUBEL_IMAGE, MAIMUNAL_KARIM_JISAN_IMAGE, MD_REZAUL_KABIR_REZA_IMAGE, MD_IMRAN_ALAM_IMAGE, MEHEDI_HASAN_IMAGE, MD_ZIAUL_HOQUE, RESHEDUL_EVU_IMAGE, FARHAN_BIN_RAFIQ_IMAGE, ARIFUR_RAHMAN_IMAGE, AMZAD_MAHMUD_IMAGE, MOHAMMED_ELIAS_IMAGE, MD_YOUSUF_IMAGE, NURUL_ABSAR_IMAGE, ABU_MURSHED_CHOWDHURY_IMAGE, ANWARUL_ISLAM_IMAGE, ATIQUL_ISLAM_IMAGE, NADIA_SIDDIKA_IMAGE, TASHIN_LUTFUR_IMAGE } from "../data";
 
 const MEMBERS_KEY = "cbbcl_club_members";
 const APPLICATIONS_KEY = "cbbcl_membership_applications";
@@ -10,6 +11,7 @@ const GLOBAL_AVATARS: Record<string, string> = {
   "mohammed-anwarul-islam": ANWARUL_ISLAM_IMAGE,
   "atiqul-islam": ATIQUL_ISLAM_IMAGE,
   "nadia-siddika": NADIA_SIDDIKA_IMAGE,
+  "tashin-lutfur": TASHIN_LUTFUR_IMAGE,
   "farhan-bin-rafiq": FARHAN_BIN_RAFIQ_IMAGE,
   "ak-rubel": AK_RUBEL_IMAGE,
   "maimunal-karim-jisan": MAIMUNAL_KARIM_JISAN_IMAGE,
@@ -36,7 +38,7 @@ const DEFAULT_MEMBERS: ClubMember[] = DIRECTORS_DATA.map((d, idx) => ({
   order: idx,
   bio: d.bio && d.bio.length > 0 ? d.bio.join("\n\n") : undefined,
   clubInvolvement: d.designation,
-  avatarUrl: GLOBAL_AVATARS[d.id] || d.photoUrl,
+  avatarUrl: GLOBAL_AVATARS[d.id] || d.photoUrl || initialsPortrait(d.name),
   category: "Founding Member",
   roleType: "FoundingMember"
 }));
@@ -53,7 +55,7 @@ const DEMO_MEMBER_IDS = [
   "md-atiqul-islam"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v24";
+const MEMBERS_SEED_VERSION = "founding-directors-v25";
 
 
 export function getClubMembers(): ClubMember[] {

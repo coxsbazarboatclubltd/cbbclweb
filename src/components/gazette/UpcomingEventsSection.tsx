@@ -100,13 +100,13 @@ export default function UpcomingEventsSection({ navigate }: { navigate: (path: R
             {featured.banner ? (
               <>
                 {/* Designed banner (title, date and venue are in the artwork); phones get the regular card. */}
-                <article className="hidden md:block max-w-4xl mx-auto bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+                <article className="hidden md:block max-w-3xl mx-auto bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
                   <button type="button" onClick={() => navigate("/events")} className="block w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold">
                     <img
                       src={featured.banner}
                       alt={`${featured.title}, ${featured.date}${featured.venue ? `, ${featured.venue}` : ""}`}
-                      width={1600}
-                      height={600}
+                      width={1800}
+                      height={1029}
                       className="w-full h-auto block"
                     />
                   </button>
