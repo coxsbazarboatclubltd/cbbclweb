@@ -191,6 +191,11 @@ export function getBoardMembers(): Director[] {
       if (roleChange.orderIndex !== undefined) updated.orderIndex = roleChange.orderIndex;
       changed = true;
     }
+    // Designations are shown without "Founding" for now (cached copies may still have it).
+    if (/^Founding /.test(updated.designation || "")) {
+      updated.designation = updated.designation.replace(/^Founding /, "");
+      changed = true;
+    }
     const correctedName = RENAMED_DIRECTORS[globalId];
     if (correctedName && correctedName.oldNames.includes(updated.name)) {
       updated.name = correctedName.name;

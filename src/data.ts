@@ -80,7 +80,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "humayun-kabir-robel",
     name: "Humayun Kabir Robel",
-    designation: "Founding President",
+    designation: "President",
     membershipCode: "CBBCL-FM-01",
     memberNumber: "CBBCL-LM-0001",
     appointed: "January 2026",
@@ -142,7 +142,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "abu-murshed-chowdhury",
     name: "Abu Murshed Chowdhury",
-    designation: "Founding Vice President",
+    designation: "Vice President",
     membershipCode: "CBBCL-FM-16",
     memberNumber: "CBBCL-LM-0016",
     level: 2,
@@ -229,7 +229,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "farhan-bin-rafiq",
     name: "Farhan Bin Rafiq",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-02",
     memberNumber: "CBBCL-LM-0002",
     profileSubmitted: true,
@@ -348,7 +348,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "mehedi-hasan",
     name: "Mehedi Hasan",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-03",
     memberNumber: "CBBCL-LM-0003",
     profileSubmitted: true,
@@ -388,7 +388,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "md-imran-alam",
     name: "Md Imran Alam",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-04",
     memberNumber: "CBBCL-LM-0004",
     profileSubmitted: true,
@@ -441,7 +441,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "maimunal-karim-jisan",
     name: "Maimunul Karim Jisan",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-06",
     memberNumber: "CBBCL-LM-0006",
     profileSubmitted: true,
@@ -495,7 +495,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "md-rezaul-kabir-reza",
     name: "Mohammad Rezaul Kabir Reza",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-07",
     memberNumber: "CBBCL-LM-0007",
     profileSubmitted: true,
@@ -549,7 +549,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "ak-rubel",
     name: "Ahmedul Karim Rubel",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-10",
     memberNumber: "CBBCL-LM-0010",
     profileSubmitted: true,
@@ -585,14 +585,14 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "mohammed-elias",
     name: "Mohammad Eliyas",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-11",
     memberNumber: "CBBCL-LM-0011"
   },
   {
     id: "md-yousuf",
     name: "Md Yousuf",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-12",
     memberNumber: "CBBCL-LM-0012",
     profileSubmitted: true,
@@ -637,7 +637,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "nurul-absar",
     name: "Nurul Abser",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-13",
     memberNumber: "CBBCL-LM-0013",
     profileSubmitted: true,
@@ -662,14 +662,14 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "ziaul-haque",
     name: MD_ZIAUL_HOQUE.name,
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-14",
     memberNumber: "CBBCL-LM-0014"
   },
   {
     id: "reshedul-evu",
     name: "Rasadul Maimun Evo",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-15",
     memberNumber: "CBBCL-LM-0015",
     photoUrl: RESHEDUL_EVU_IMAGE,
@@ -683,7 +683,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "mohammed-anwarul-islam",
     name: "Mohammed Anwarul Islam",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-17",
     memberNumber: "CBBCL-LM-0017",
     level: 4,
@@ -738,7 +738,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "atiqul-islam",
     name: "Atiqul Islam",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-18",
     memberNumber: "CBBCL-LM-0018",
     level: 4,
@@ -786,7 +786,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "nadia-siddika",
     name: "Nadia Siddika",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-19",
     memberNumber: "CBBCL-LM-0019",
     level: 4,
@@ -837,7 +837,7 @@ export const DIRECTORS_DATA: Director[] = [
   {
     id: "tashin-lutfur",
     name: "Tashin Lutfur",
-    designation: "Founding Director",
+    designation: "Director",
     membershipCode: "CBBCL-FM-20",
     memberNumber: "CBBCL-LM-0020",
     level: 4,

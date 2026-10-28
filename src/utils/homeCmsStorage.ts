@@ -147,7 +147,7 @@ const DEFAULT_HOME_LAYOUT: HomeCMSLayoutData = {
     president: {
       enabled: true,
       name: "Humayun Kabir Robel",
-      designation: "Founding President",
+      designation: "President",
       image: "",
       bio: PRESIDENT_MESSAGE
     },
@@ -233,7 +233,7 @@ export function getHomeLayoutCMS(): HomeCMSLayoutData {
         stats: { ...DEFAULT_HOME_LAYOUT.sections.stats, ...(s.stats || {}) },
         president: (() => {
           // The message is code-managed (src/data.ts PRESIDENT_MESSAGE); cached copies never override it.
-          return { ...DEFAULT_HOME_LAYOUT.sections.president, ...(s.president || {}), bio: DEFAULT_HOME_LAYOUT.sections.president.bio };
+          return { ...DEFAULT_HOME_LAYOUT.sections.president, ...(s.president || {}), bio: DEFAULT_HOME_LAYOUT.sections.president.bio, designation: DEFAULT_HOME_LAYOUT.sections.president.designation };
         })(),
         // Gallery photos are code-managed (the admin editor is disabled).
         overview: { ...DEFAULT_HOME_LAYOUT.sections.overview, ...(s.overview || {}), gallery: DEFAULT_HOME_LAYOUT.sections.overview.gallery },
