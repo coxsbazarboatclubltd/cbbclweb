@@ -604,7 +604,9 @@ export default function Home({ navigate }: HomeProps) {
               return isPublic && matchesCategory;
             });
             
-            const selectedNews = filteredNews.slice(0, Math.max(newsLimit, 6));
+            // A post about an event that is still upcoming would repeat the event card: show the event only.
+            const upcomingEventIds = new Set(upcomingEvents().map((e) => e.id));
+            const selectedNews = filteredNews.filter((p) => !(p.eventId && upcomingEventIds.has(p.eventId))).slice(0, Math.max(newsLimit, 6));
 
             // Club Life items from the Gazette page (live notices, upcoming events) lead the 3D carousel,
             // followed by the newly joined members and the news posts, when no category filter is set.
@@ -615,7 +617,7 @@ export default function Home({ navigate }: HomeProps) {
               })),
               ...upcomingEvents().slice(0, 2).map((e) => ({
                 key: `event-${e.id}`, path: "/events", category: "Upcoming Event", date: e.date, title: e.title,
-                excerpt: [e.description, e.venue].filter(Boolean).join(" · "), cta: "Event Details", image: e.image, empty: "event" as const,
+                excerpt: [e.description, e.venue].filter(Boolean).join(" · "), cta: "Event Details", image: e.image, empty: "event" as const, fit: e.imageFit,
               })),
             ];
 

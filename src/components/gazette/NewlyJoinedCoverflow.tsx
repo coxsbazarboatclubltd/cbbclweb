@@ -11,7 +11,7 @@ const ROTATE_MS = 6000;
 /** A notice, event or news post shown as a card beside the member cards. */
 export type FeedCard = {
   key: string; path: string; category: string; date: string; title: string; excerpt: string; cta: string;
-  image?: string; imagePosition?: string; empty?: "event";
+  image?: string; imagePosition?: string; empty?: "event"; fit?: "contain";
 };
 
 type Slide = { kind: "member"; key: string; d: Director } | { kind: "feed"; key: string; f: FeedCard };
@@ -162,7 +162,7 @@ export default function NewlyJoinedCoverflow({ navigate, lead = [], news = [] }:
       <h3 className="font-display text-lg text-text-dark leading-snug text-left line-clamp-2">{f.title}</h3>
       <div className="h-40 overflow-hidden rounded-xs bg-navy flex items-center justify-center">
         {f.image
-          ? <CardMedia media={f.image} objectPosition={f.imagePosition} alt={f.title} className="w-full h-full object-cover" />
+          ? <CardMedia media={f.image} objectPosition={f.imagePosition} alt={f.title} className={`w-full h-full ${f.fit === "contain" ? "object-contain" : "object-cover"}`} />
           : f.empty === "event" ? <Calendar className="w-9 h-9 text-gold/60" /> : <Anchor className="w-9 h-9 text-gold/60" />}
       </div>
       <p className="font-sans text-[11px] text-text-body font-light leading-relaxed text-left line-clamp-4">{f.excerpt}</p>

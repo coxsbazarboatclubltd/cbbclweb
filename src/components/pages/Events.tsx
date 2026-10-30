@@ -6,6 +6,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { MASTER_HERO_VIDEO } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 
+// Archived: the RSVP form only showed a success message and sent nothing to the club.
+// Set to true once RSVPs reach the Secretariat (e.g. via an email endpoint like the contact form).
+const SHOW_EVENT_RSVP = false;
+
 export default function Events() {
   const [allEvents] = useState(getCMSEvents());
   const upcomingEvents = allEvents.filter(e => e.isUpcoming);
@@ -103,7 +107,7 @@ export default function Events() {
                 <CardMedia
                   media={event.image}
                   alt={event.title}
-                  className="w-full h-full object-cover filter brightness-95"
+                  className={`w-full h-full ${event.imageFit === "contain" ? "object-contain" : "object-cover"} filter brightness-95`}
                 />
                 
                 {/* Date tag badge */}
@@ -135,16 +139,20 @@ export default function Events() {
                     <span className="truncate">{event.venue}</span>
                   </div>
 
-                  <p className="text-[10px] font-sans italic text-slate-400 bg-slate-50/70 p-3 rounded-xs leading-relaxed border-l border-gold-dark/40">
-                    {event.registrationInfo}
-                  </p>
+                  {event.registrationInfo && (
+                    <p className="text-[10px] font-sans italic text-slate-500 bg-slate-50/70 p-3 rounded-xs leading-relaxed border-l border-gold-dark/40">
+                      {event.registrationInfo}
+                    </p>
+                  )}
 
-                  <button
-                    onClick={() => handleOpenRegistration(event.title)}
-                    className="w-full py-2.5 bg-[#1a2744] hover:bg-gold hover:text-navy text-white text-[10px] font-sans font-semibold uppercase tracking-widest transition-colors text-center"
-                  >
-                    Send Reservation RSVP
-                  </button>
+                  {SHOW_EVENT_RSVP && (
+                    <button
+                      onClick={() => handleOpenRegistration(event.title)}
+                      className="w-full py-2.5 bg-[#1a2744] hover:bg-gold hover:text-navy text-white text-[10px] font-sans font-semibold uppercase tracking-widest transition-colors text-center"
+                    >
+                      Send Reservation RSVP
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -185,7 +193,7 @@ export default function Events() {
                     <CardMedia
                       media={event.image}
                       alt={event.title}
-                      className="w-full h-full object-cover filter saturate-50 group-hover:saturate-100 transition-all duration-300"
+                      className={`w-full h-full ${event.imageFit === "contain" ? "object-contain bg-navy" : "object-cover"} filter saturate-50 group-hover:saturate-100 transition-all duration-300`}
                     />
                   </div>
                 )}

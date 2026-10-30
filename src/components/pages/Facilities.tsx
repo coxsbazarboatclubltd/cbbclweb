@@ -6,6 +6,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { MASTER_HERO_VIDEO } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 
+// Archived: the reservation form only showed a success message and sent nothing to the club.
+// Set to true once reservation requests reach the Secretariat (e.g. via an email endpoint).
+const SHOW_FACILITY_RESERVATIONS = false;
+
 export default function Facilities() {
   const [facilities] = useState(getCMSFacilities());
   const [selectedFacility, setSelectedFacility] = useState<string | null>(null);
@@ -134,7 +138,7 @@ export default function Facilities() {
                       <span>Capacity guideline: <strong>{fac.capacity}</strong></span>
                     </div>
 
-                    {fac.id !== "developments" && (
+                    {SHOW_FACILITY_RESERVATIONS && fac.id !== "developments" && (
                       <button
                         onClick={() => handleOpenBooking(fac.name)}
                         className="bg-[#1a2744] text-white px-5 py-2 hover:bg-gold hover:text-navy text-[10px] font-sans font-semibold uppercase tracking-widest rounded-xs transition-colors self-start"

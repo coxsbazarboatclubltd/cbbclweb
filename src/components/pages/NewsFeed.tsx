@@ -50,7 +50,9 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
         };
       });
     const when = (p: NewsPost) => Date.parse(p.date) || 0;
-    const list = [...posts, ...eventPosts].sort((a, b) => when(b) - when(a));
+    // While its event is upcoming, a post about it would repeat the Upcoming Events card; it appears afterwards.
+    const upcomingIds = new Set(getCMSEvents().filter((e) => e.isUpcoming && !e.cancelled).map((e) => e.id));
+    const list = [...posts.filter((p) => !(p.eventId && upcomingIds.has(p.eventId))), ...eventPosts].sort((a, b) => when(b) - when(a));
     setNewsList(list);
     const initial: Record<string, boolean> = {};
     for (const p of list) {

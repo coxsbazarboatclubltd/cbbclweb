@@ -113,6 +113,8 @@ export interface EventItem {
   cancelled?: boolean;
   /** Full designed banner (text included in the artwork), shown wide on the Gazette page. */
   banner?: string;
+  /** "contain": show the whole image (e.g. a designed invitation) instead of cropping it to fill. */
+  imageFit?: "contain";
 }
 
 export interface Facility {

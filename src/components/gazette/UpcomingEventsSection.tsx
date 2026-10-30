@@ -42,7 +42,7 @@ function EventCard({ e, featured, navigate }: { key?: React.Key; e: EventItem; f
   return (
     <article className={`bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden flex flex-col ${featured ? "md:flex-row" : ""}`}>
       <div className={`relative bg-navy shrink-0 ${featured ? "aspect-[16/9] md:aspect-auto md:w-2/5 md:min-h-[230px]" : "aspect-[16/7]"}`}>
-        {e.image ? <CardMedia media={e.image} alt={e.title} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center"><CalendarDays className="w-10 h-10 text-gold/50" /></div>}
+        {e.image ? <CardMedia media={e.image} alt={e.title} className={`w-full h-full ${e.imageFit === "contain" ? "object-contain" : "object-cover"}`} /> : <div className="w-full h-full flex items-center justify-center"><CalendarDays className="w-10 h-10 text-gold/50" /></div>}
         <div className="absolute top-3 left-3 bg-navy/90 border border-gold text-center px-3 py-1.5">
           <span className="block font-display text-lg text-gold font-bold leading-none">{e.day}</span>
           <span className="block font-sans text-[8px] text-slate-200 uppercase tracking-widest mt-0.5">{e.month}</span>

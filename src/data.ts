@@ -40,10 +40,6 @@ import nadiaSiddikaPortrait from "./assets/images/board/nadia-siddika.webp";
 // @ts-ignore
 import tashinLutfurPortrait from "./assets/images/board/tashin-lutfur.webp";
 // @ts-ignore
-import softOpeningPhoto from "./assets/images/events/club-house-soft-opening.webp";
-// @ts-ignore
-import softOpeningBanner from "./assets/images/events/club-house-soft-opening-banner.webp";
-// @ts-ignore
 import softOpeningInvitation from "./assets/images/events/club-house-soft-opening-invitation.webp";
 // @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
@@ -1016,7 +1012,7 @@ export const NEWS_DATA: NewsPost[] = [
 export const EVENTS_DATA: EventItem[] = [
   {
     id: "club-house-soft-opening-2026",
-    title: "Soft Opening of the Club House",
+    title: "Soft Opening Ceremony of the Club House",
     date: "October 31, 2026",
     day: "31",
     month: "Oct",
@@ -1024,9 +1020,9 @@ export const EVENTS_DATA: EventItem[] = [
     venue: "CBBCL Club House, Anderson Road, Cox's Bazar",
     category: "Club Milestone",
     isUpcoming: true,
-    // Official Soft Opening Ceremony card: small copy for cards, larger copy as the Gazette page banner.
-    image: softOpeningPhoto,
-    banner: softOpeningBanner,
+    // Official invitation card, shown whole (not cropped) on event cards.
+    image: softOpeningInvitation,
+    imageFit: "contain",
     description: "Cox's Bazar Boat Club Ltd. marks the soft opening of its Club House."
   }
 ];
