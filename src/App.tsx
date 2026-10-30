@@ -370,7 +370,7 @@ export default function App() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-[#111625] border-2 border-gold/40 rounded-xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-white backdrop-blur-md"
+            className="fixed bottom-4 left-4 right-4 mx-auto sm:bottom-6 sm:left-auto sm:right-6 sm:mx-0 z-50 max-w-sm bg-[#111625] border-2 border-gold/40 rounded-xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-white backdrop-blur-md"
             id="pwa-update-banner"
           >
             <div className="flex items-start gap-3">
@@ -408,7 +408,7 @@ export default function App() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 left-6 z-50 max-w-sm w-full bg-[#002262] border-2 border-gold/40 rounded-xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-white backdrop-blur-md"
+            className="fixed bottom-4 left-4 right-4 mx-auto sm:bottom-6 sm:left-6 sm:right-auto sm:mx-0 z-50 max-w-sm bg-[#002262] border-2 border-gold/40 rounded-xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-white backdrop-blur-md"
             id="pwa-install-banner"
           >
             <div className="flex items-start gap-3">
