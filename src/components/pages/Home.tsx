@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FormSafeguards, { honeypotValue } from "../FormSafeguards";
 import { RoutePath } from "../../types";
 import { getBoardMembers, getNewsPosts, getDirectorPortrait } from "../../utils/storage";
 import { getPageContent, getCMSFacilities, getCMSEvents, getCMSAffiliations, fetchFooterSettings, getFooterSettingsSync } from "../../utils/cmsStorage";
@@ -133,7 +134,7 @@ export default function Home({ navigate }: HomeProps) {
       const res = await fetch("/api/contact/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, subject: "Homepage Registry Inquiry" })
+        body: JSON.stringify({ ...formData, subject: "Homepage Registry Inquiry", company_website: honeypotValue(e) })
       });
 
       if (!res.ok) {
@@ -854,7 +855,6 @@ export default function Home({ navigate }: HomeProps) {
                             data-membership-card
                             role="link"
                             tabIndex={0}
-                            aria-label={`View ${cat.title} details`}
                             onClick={() => { if (!hasTextSelection()) navigate(`/membership/${cat.slug}`); }}
                             onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); navigate(`/membership/${cat.slug}`); } }}
                             className={`cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-md w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-[17rem] shrink-0 snap-start whitespace-normal [transform-style:preserve-3d] [backface-visibility:hidden] will-change-transform ${
@@ -912,8 +912,9 @@ export default function Home({ navigate }: HomeProps) {
                                     </span>
                                   </div>
                                   <button
+                                    tabIndex={-1}
                                     onClick={(e) => { e.stopPropagation(); navigate(`/membership/${cat.slug}`); }}
-                                    className="text-left font-sans text-[8px] font-semibold tracking-widest uppercase text-navy hover:text-gold cursor-pointer"
+                                    className="text-left font-sans text-[8px] font-semibold tracking-widest uppercase text-navy hover:text-gold cursor-pointer min-h-6 py-1.5"
                                   >
                                     Learn More →
                                   </button>
@@ -1071,12 +1072,12 @@ export default function Home({ navigate }: HomeProps) {
                         <form onSubmit={handleFormSubmit} className="space-y-4">
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-1.5">
-                              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                              <label htmlFor="home-inquiry-name" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                                 Full Name *
                               </label>
                               <input
                                 type="text"
-                                name="name"
+                                id="home-inquiry-name" name="name"
                                 required
                                 value={formData.name}
                                 onChange={handleInputChange}
@@ -1085,12 +1086,12 @@ export default function Home({ navigate }: HomeProps) {
                               />
                             </div>
                             <div className="space-y-1.5">
-                              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                              <label htmlFor="home-inquiry-phone" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                                 Telephone/Phone
                               </label>
                               <input
                                 type="text"
-                                name="phone"
+                                id="home-inquiry-phone" name="phone"
                                 value={formData.phone}
                                 onChange={handleInputChange}
                                 className="w-full bg-slate-50 border border-slate-200/80 px-4 py-2.5 text-xs focus:bg-white focus:border-gold outline-none transition-colors rounded-xs"
@@ -1100,12 +1101,12 @@ export default function Home({ navigate }: HomeProps) {
                           </div>
 
                           <div className="space-y-1.5">
-                            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                            <label htmlFor="home-inquiry-email" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                               Email Address *
                             </label>
                             <input
                               type="email"
-                              name="email"
+                              id="home-inquiry-email" name="email"
                               required
                               value={formData.email}
                               onChange={handleInputChange}
@@ -1115,12 +1116,12 @@ export default function Home({ navigate }: HomeProps) {
                           </div>
 
                           <div className="space-y-1.5">
-                            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                            <label htmlFor="home-inquiry-facebookLink" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                               Facebook Profile Link *
                             </label>
                             <input
                               type="url"
-                              name="facebookLink"
+                              id="home-inquiry-facebookLink" name="facebookLink"
                               required
                               value={formData.facebookLink}
                               onChange={handleInputChange}
@@ -1129,11 +1130,11 @@ export default function Home({ navigate }: HomeProps) {
                             />
                           </div>
                           <div className="space-y-1.5">
-                            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                            <label htmlFor="home-inquiry-message" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                               Message Body *
                             </label>
                             <textarea
-                              name="message"
+                              id="home-inquiry-message" name="message"
                               required
                               rows={4}
                               value={formData.message}
@@ -1143,8 +1144,10 @@ export default function Home({ navigate }: HomeProps) {
                             ></textarea>
                           </div>
 
+                          <FormSafeguards purpose="to answer your inquiry" inbox="the Club Secretariat (info@cbbcl.org)" />
+
                           {formSubmitError && (
-                            <p className="text-[11px] font-sans text-red-600 font-medium">{formSubmitError}</p>
+                            <p role="alert" className="text-[11px] font-sans text-red-600 font-medium">{formSubmitError}</p>
                           )}
 
                           <button

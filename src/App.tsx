@@ -21,16 +21,17 @@ import NewsFeedDetail from "./components/pages/NewsFeedDetail";
 import Events from "./components/pages/Events";
 import Affiliations from "./components/pages/Affiliations";
 import Contact from "./components/pages/Contact";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import Dashboard from "./components/pages/Dashboard";
 // The admin dashboard (browser-only, not secure) is disabled; see AdminDisabled.
 import AdminDisabled from "./components/pages/AdminDisabled";
+import NotFound from "./components/pages/NotFound";
+import PolicyPage from "./components/pages/PolicyPage";
+import { POLICIES } from "./content/legal";
+import FeatureUnavailable from "./components/pages/FeatureUnavailable";
+import { purgeLocalAccounts } from "./utils/purgeLocalAccounts";
+import { applySeo, routeSeo } from "./seo/routeSeo";
 import Members from "./components/pages/Members";
 import MembershipDetail from "./components/pages/MembershipDetail";
 import AffiliationDetail from "./components/pages/AffiliationDetail";
-import AffiliationRequestForm from "./components/pages/AffiliationRequestForm";
-import EZBookingPortal from "./components/pages/EZBookingPortal";
 import { motion, AnimatePresence } from "motion/react";
 
 // The standalone membership application form has been retired in favor of the
@@ -73,58 +74,14 @@ export default function App() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showInstallBanner, setShowInstallBanner] = useState<boolean>(false);
 
-  // Dynamic document title and SEO metadata update
+  // Per-route title, description, canonical URL, robots and JSON-LD (see src/seo/routeSeo.ts).
   useEffect(() => {
-    const normalized = normalizePath(currentPath);
-    let pageTitle = "Cox's Bazar Boat Club Limited | CBBCL Official";
-
-    if (normalized === "/about" || normalized === "/about.html") {
-      pageTitle = "About Us | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/facilities" || normalized === "/facilities.html" || normalized === "/gallery" || normalized === "/gallery.html") {
-      pageTitle = "Facilities & Gallery Showcase | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/membership" || normalized === "/membership.html") {
-      pageTitle = "Membership Tiers | Cox's Bazar Boat Club Limited";
-    } else if (normalized.startsWith("/membership/")) {
-      const slug = normalized.replace("/membership/", "").replace(/\.html$/, "");
-      const formatted = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-      pageTitle = `${formatted} | Cox's Bazar Boat Club Limited`;
-    } else if (normalized === "/governance" || normalized === "/governance.html") {
-      pageTitle = "Governance & Leadership | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/board" || normalized === "/board.html") {
-      pageTitle = "Board of Directors | Cox's Bazar Boat Club Limited";
-    } else if (normalized.startsWith("/board/") || normalized.startsWith("/profile/")) {
-      pageTitle = "Director Profile | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/news-feed" || normalized === "/news-feed.html" || normalized === "/news" || normalized === "/news.html") {
-      pageTitle = "Club News Feed & Gazette | Cox's Bazar Boat Club Limited";
-    } else if (normalized.startsWith("/news-feed/") || normalized.startsWith("/news/")) {
-      pageTitle = "Official Gazette Release | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/events" || normalized === "/events.html") {
-      pageTitle = "Upcoming Events & Regattas | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/affiliations" || normalized === "/affiliations.html") {
-      pageTitle = "Reciprocal Affiliations | Cox's Bazar Boat Club Limited";
-    } else if (normalized.startsWith("/affiliations/")) {
-      pageTitle = "Affiliation Detail | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/contact" || normalized === "/contact.html") {
-      pageTitle = "Contact Us | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/login" || normalized === "/login.html") {
-      pageTitle = "Member Login | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/register" || normalized === "/register.html") {
-      pageTitle = "Member Registration | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/dashboard" || normalized === "/dashboard.html") {
-      pageTitle = "Member Portal Dashboard | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/admin-dashboard" || normalized === "/admin-dashboard.html") {
-      pageTitle = "Admin Central Ledger | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/members" || normalized === "/members.html" || normalized.startsWith("/members/")) {
-      pageTitle = "Member Directory | Cox's Bazar Boat Club Limited";
-    } else if (normalized === "/ezbooking-portal" || normalized === "/ezbooking-portal.html") {
-      pageTitle = "EZ Booking Portal | Cox's Bazar Boat Club Limited";
-    }
-
-    document.title = pageTitle;
+    applySeo(routeSeo(normalizePath(currentPath)));
   }, [currentPath]);
 
   // Count this website visit (one per page load) for the homepage figures.
   useEffect(() => {
+    purgeLocalAccounts();
     recordVisitOnce();
   }, []);
 
@@ -349,29 +306,32 @@ export default function App() {
         return <Affiliations navigate={navigate} />;
       case "/affiliation-request":
       case "/affiliation-request.html":
-        return <AffiliationRequestForm navigate={navigate} />;
+        return <FeatureUnavailable title="The affiliation request form" navigate={navigate} />;
       case "/ezbooking-portal":
       case "/ezbooking-portal.html":
-        return <EZBookingPortal navigate={navigate} />;
+        return <FeatureUnavailable title="EZ Booking" navigate={navigate} />;
       case "/contact":
       case "/contact.html":
         return <Contact />;
       case "/login":
       case "/login.html":
-        return <Login navigate={navigate} onLoginSuccess={refreshUser} />;
+        return <FeatureUnavailable title="Member sign-in" navigate={navigate} />;
       case "/register":
       case "/register.html":
-        return <Register navigate={navigate} />;
+        return <FeatureUnavailable title="Member registration" navigate={navigate} />;
       case "/dashboard":
       case "/dashboard.html":
-        return <Dashboard navigate={navigate} onLogout={handleLogout} />;
+        return <FeatureUnavailable title="The member dashboard" navigate={navigate} />;
       case "/admin-dashboard":
       case "/admin-dashboard.html":
       case "/admin-dashboard/home-cms":
       case "/admin-dashboard/home-cms.html":
         return <AdminDisabled navigate={navigate} />;
-      default:
-        return <Home navigate={navigate} />;
+      default: {
+        const policy = POLICIES.find((p) => normalized.replace(/\.html$/, "") === `/${p.slug}`);
+        if (policy) return <PolicyPage key={policy.slug} doc={policy} navigate={navigate} />;
+        return <NotFound navigate={navigate} />;
+      }
     }
   };
 

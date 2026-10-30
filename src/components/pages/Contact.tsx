@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FormSafeguards, { honeypotValue } from "../FormSafeguards";
 import { Mail, Phone, MapPin, Clock, Anchor, Send, CheckCircle2, ShieldAlert, Navigation } from "lucide-react";
 import { motion } from "motion/react";
 import { MASTER_HERO_VIDEO } from "../../data";
@@ -41,7 +42,7 @@ export default function Contact() {
       const res = await fetch("/api/contact/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, company_website: honeypotValue(e) })
       });
 
       if (!res.ok) {
@@ -186,13 +187,13 @@ export default function Contact() {
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                    <label htmlFor="contact-name" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                       Full Name *
                     </label>
                     <input
                       type="text"
                       required
-                      name="name"
+                      id="contact-name" name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       className="w-full bg-slate-50 border border-slate-200 px-4 py-2.5 text-xs focus:bg-white focus:border-gold outline-none transition-colors"
@@ -200,12 +201,12 @@ export default function Contact() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                    <label htmlFor="contact-phone" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                       Your Phone/Telephone
                     </label>
                     <input
                       type="text"
-                      name="phone"
+                      id="contact-phone" name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full bg-slate-50 border border-slate-200 px-4 py-2.5 text-xs focus:bg-white focus:border-gold outline-none transition-colors"
@@ -216,13 +217,13 @@ export default function Contact() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                    <label htmlFor="contact-email" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                       Email Address *
                     </label>
                     <input
                       type="email"
                       required
-                      name="email"
+                      id="contact-email" name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       className="w-full bg-slate-50 border border-slate-200 px-4 py-2.5 text-xs focus:bg-white focus:border-gold outline-none transition-colors"
@@ -230,11 +231,11 @@ export default function Contact() {
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                    <label htmlFor="contact-subject" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                       Inquiry Sphere *
                     </label>
                     <select
-                      name="subject"
+                      id="contact-subject" name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
                       className="w-full bg-slate-50 border border-slate-200 px-4 py-3 text-xs outline-none focus:border-gold focus:bg-white"
@@ -249,12 +250,12 @@ export default function Contact() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                  <label htmlFor="contact-facebookLink" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                     Facebook Profile Link *
                   </label>
                   <input
                     type="url"
-                    name="facebookLink"
+                    id="contact-facebookLink" name="facebookLink"
                     required
                     value={formData.facebookLink}
                     onChange={handleInputChange}
@@ -263,12 +264,12 @@ export default function Contact() {
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+                  <label htmlFor="contact-message" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                     Your Constructive Inquiry *
                   </label>
                   <textarea
                     required
-                    name="message"
+                    id="contact-message" name="message"
                     rows={5}
                     value={formData.message}
                     onChange={handleInputChange}
@@ -277,8 +278,10 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
+                <FormSafeguards purpose="to answer your inquiry" inbox="the Club Secretariat (info@cbbcl.org)" />
+
                 {submitError && (
-                  <p className="text-[11px] font-sans text-red-600 font-medium">{submitError}</p>
+                  <p role="alert" className="text-[11px] font-sans text-red-600 font-medium">{submitError}</p>
                 )}
 
                 <button

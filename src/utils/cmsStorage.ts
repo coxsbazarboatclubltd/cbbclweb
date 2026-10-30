@@ -419,7 +419,7 @@ const DEFAULT_FOOTER: FooterCMSData = {
     facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
     twitter: "https://twitter.com",
     linkedin: "https://www.linkedin.com/company/cbbcl/",
-    instagram: "https://instagram.com"
+    instagram: "https://www.instagram.com/coxsbazarboatclubltd"
   }
 };
 
@@ -510,7 +510,7 @@ export const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
   },
   socialLinks: {
     facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/coxsbazarboatclubltd",
     youtube: "https://youtube.com",
     linkedin: "https://www.linkedin.com/company/cbbcl/",
     twitter: "https://twitter.com"
@@ -547,11 +547,21 @@ export const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
     }
   ],
   legalLinks: [
-    { name: "Privacy Policy", url: "/about" },
-    { name: "Terms of Service", url: "/about" }
+    { name: "Privacy Policy", url: "/privacy-policy" },
+    { name: "Terms of Use", url: "/terms" },
+    { name: "Cookie Policy", url: "/cookie-policy" },
+    { name: "Data Deletion", url: "/data-deletion" }
   ],
   copyright: "© 2026 Cox's Bazar Boat Club Limited. All Rights Reserved. Incorporated under The Companies Act, 1994, Bangladesh."
 };
+
+/** Footer policy links point at the real policy pages (older cached settings sent them to /about). */
+function withPolicyLinks<T extends { legalLinks?: { name: string; url: string }[] }>(settings: T): T {
+  if (settings && Array.isArray(settings.legalLinks) && settings.legalLinks.some((l) => l && l.url === "/about")) {
+    settings.legalLinks = DEFAULT_FOOTER_SETTINGS.legalLinks;
+  }
+  return settings;
+}
 
 export function getFooterSettingsSync(): FooterSettings {
   try {
@@ -564,6 +574,10 @@ export function getFooterSettingsSync(): FooterSettings {
         }
         if (["https://facebook.com", "https://facebook.com/", "https://www.facebook.com/CoxsBazarBoatClubLtd"].includes(parsed.socialLinks.facebook)) {
           parsed.socialLinks.facebook = "https://www.facebook.com/coxsbazarboatclubltd/";
+        }
+        // The club's Instagram replaces the old placeholder link.
+        if (!parsed.socialLinks.instagram || /^https?:\/\/(www\.)?instagram\.com\/?$/.test(parsed.socialLinks.instagram)) {
+          parsed.socialLinks.instagram = "https://www.instagram.com/coxsbazarboatclubltd";
         }
       }
       // Replace the retired Kolatoli office address cached in older browsers.
@@ -583,7 +597,7 @@ export function getFooterSettingsSync(): FooterSettings {
       if (parsed && parsed.contact && parsed.contact.email === "info@cbbcl.org, registration@cbbcl.org") {
         parsed.contact.email = DEFAULT_FOOTER_SETTINGS.contact.email;
       }
-      return parsed;
+      return withPolicyLinks(parsed);
     }
   } catch (e) {}
   return DEFAULT_FOOTER_SETTINGS;
@@ -601,6 +615,11 @@ export async function fetchFooterSettings(): Promise<FooterSettings> {
         if (["https://facebook.com", "https://facebook.com/", "https://www.facebook.com/CoxsBazarBoatClubLtd"].includes(data.socialLinks.facebook)) {
           data.socialLinks.facebook = "https://www.facebook.com/coxsbazarboatclubltd/";
         }
+        // The club's Instagram replaces the old placeholder link.
+        if (!data.socialLinks.instagram || /^https?:\/\/(www\.)?instagram\.com\/?$/.test(data.socialLinks.instagram)) {
+          data.socialLinks.instagram = "https://www.instagram.com/coxsbazarboatclubltd";
+        }
+        withPolicyLinks(data);
         localStorage.setItem(FOOTER_DB_SETTINGS_KEY, JSON.stringify(data));
         return data;
       }

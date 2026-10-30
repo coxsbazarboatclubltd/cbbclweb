@@ -27,8 +27,10 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
 
   useEffect(() => {
     // Past events join the Gazette as regular cards (category "Events"), newest first with the posts.
+    const posts = getNewsPosts();
+    const coveredEvents = new Set(posts.map((p) => p.eventId).filter(Boolean));
     const eventPosts: NewsPost[] = getCMSEvents()
-      .filter((e) => !e.isUpcoming && !e.cancelled)
+      .filter((e) => !e.isUpcoming && !e.cancelled && !coveredEvents.has(e.id))
       .map((e) => {
         const d = new Date(Date.parse(e.startsAt || e.date));
         return {
@@ -48,7 +50,7 @@ export default function NewsFeed({ navigate }: NewsFeedProps) {
         };
       });
     const when = (p: NewsPost) => Date.parse(p.date) || 0;
-    const list = [...getNewsPosts(), ...eventPosts].sort((a, b) => when(b) - when(a));
+    const list = [...posts, ...eventPosts].sort((a, b) => when(b) - when(a));
     setNewsList(list);
     const initial: Record<string, boolean> = {};
     for (const p of list) {

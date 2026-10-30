@@ -44,6 +44,8 @@ import softOpeningPhoto from "./assets/images/events/club-house-soft-opening.web
 // @ts-ignore
 import softOpeningBanner from "./assets/images/events/club-house-soft-opening-banner.webp";
 // @ts-ignore
+import softOpeningInvitation from "./assets/images/events/club-house-soft-opening-invitation.webp";
+// @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
 // @ts-ignore
 import heroPoster from "./assets/images/hero-poster.webp";
@@ -289,9 +291,9 @@ export const DIRECTORS_DATA: Director[] = [
     membershipCode: "CBBCL-FM-08",
     memberNumber: "CBBCL-LM-0008",
     profileSubmitted: true,
-    profileRevision: 17,
-    quote: "The best time to plant a tree was 20 years ago. The second best time is now.",
-    quoteAuthor: "Chinese Proverb",
+    profileRevision: 18,
+    quote: "The perfect moment may never come. The right moment is when I decide to begin.",
+    quoteAuthor: "Arifur Rahman",
     bio: [
       "Arifur Rahman is a Bangladeshi entrepreneur, business professional, and experienced leader with diverse interests across hospitality, tourism, information technology, e-commerce, and digital business solutions. His professional journey reflects a strong commitment to business operations, financial management, organizational leadership, and sustainable business development.",
       "He serves as Director – Finance at Cox's Bazar Boat Club Ltd. (CBBCL), contributing to financial oversight, institutional development, strategic partnerships, and the club's long-term progress. He emphasizes financial transparency, responsible management, accountability, and the development of a well-structured and sustainable institutional framework.",
@@ -975,6 +977,23 @@ export const PRESIDENT_MESSAGE: string[] = [
 ];
 
 export const NEWS_DATA: NewsPost[] = [
+  {
+    id: "soft-opening-ceremony-2026",
+    title: "Soft Opening Ceremony of the Club House",
+    date: "October 30, 2026",
+    category: "Events",
+    year: "2026",
+    month: "October",
+    excerpt: "Cox's Bazar Boat Club Ltd. holds the Soft Opening Ceremony of its Club House on Saturday, 31st October 2026, at Anderson Road, Cox's Bazar.",
+    content: "Cox's Bazar Boat Club Ltd. will hold the Soft Opening Ceremony of its Club House on Saturday, 31st October 2026.\n\nVenue: Club House, Anderson Road, 4700, Cox's Bazar, Bangladesh.\n\nThe soft opening marks the Club House opening its doors as the home of Cox's Bazar Boat Club Ltd.",
+    tags: ["soft opening", "club house", "event", "cbbcl"],
+    image: softOpeningInvitation,
+    // Square invitation in wide cards: frame from the top so the title stays in view.
+    imagePosition: "center 30%",
+    eventId: "club-house-soft-opening-2026",
+    likes: 0,
+    commentsCount: 0
+  },
   {
     id: "2",
     title: "Welcome Message from Founding President Humayun Kabir Robel",

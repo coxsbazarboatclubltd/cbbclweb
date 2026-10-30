@@ -12,6 +12,11 @@ export interface EmailField {
   isLink?: boolean;
 }
 
+/** Escape text for HTML (form values are untrusted). */
+export function escapeHtml(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
 export function buildRegistryEmailHtml(heading: string, intro: string, fields: EmailField[], closingNote?: string, photoCid?: string): string {
   const photoBlock = photoCid
     ? `
@@ -28,10 +33,12 @@ export function buildRegistryEmailHtml(heading: string, intro: string, fields: E
         <tr>
           <td style="padding:14px 0;border-bottom:1px solid #eee6d3;">
             <div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9a9488;font-weight:700;margin-bottom:4px;">
-              ${f.label}
+              ${escapeHtml(f.label)}
             </div>
             <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1a2744;font-weight:600;word-break:break-word;">
-              ${f.isLink ? `<a href="${f.value}" style="color:#a8873a;text-decoration:none;">${f.value}</a>` : f.value}
+              ${f.isLink && /^https?:\/\//i.test(f.value)
+                ? `<a href="${escapeHtml(f.value)}" style="color:#a8873a;text-decoration:none;">${escapeHtml(f.value)}</a>`
+                : escapeHtml(f.value).replace(/\n/g, "<br />")}
             </div>
           </td>
         </tr>`
@@ -53,14 +60,14 @@ export function buildRegistryEmailHtml(heading: string, intro: string, fields: E
                   Cox's Bazar Boat Club Ltd.
                 </div>
                 <div style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:#ffffff;font-weight:300;margin-top:8px;letter-spacing:0.3px;">
-                  ${heading}
+                  ${escapeHtml(heading)}
                 </div>
               </td>
             </tr>
             <tr>
               <td style="padding:32px 40px 8px 40px;">
                 <p style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555;line-height:1.6;margin:0 0 8px 0;">
-                  ${intro}
+                  ${escapeHtml(intro)}
                 </p>
               </td>
             </tr>
@@ -81,7 +88,7 @@ ${photoBlock}
                     Automated Notice
                   </div>
                   <div style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;color:#4a4636;line-height:1.6;">
-                    ${closingNote}
+                    ${escapeHtml(closingNote)}
                   </div>
                 </div>
               </td>

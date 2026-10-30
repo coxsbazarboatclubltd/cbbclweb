@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { buildRegistryEmailHtml } from "../_lib/emailTemplate.js";
 import { recordApplication } from "../_lib/stats.js";
+import { FormError, enforceLimits, isBot, isEmail, text, webUrl } from "../_lib/guard.js";
 
 const NOMINATION_RECIPIENT = "membership@cbbcl.org";
 const NOMINATION_SENDER = "notifications@cbbcl.org";
@@ -25,22 +26,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const body = req.body || {};
-    const fullName = (body.fullName || "").toString().trim();
-    const email = (body.email || "").toString().trim();
-    const phone = (body.phone || "").toString().trim();
-    const category = (body.category || "").toString().trim();
-    const org = (body.org || "").toString().trim();
-    const designation = (body.designation || "").toString().trim();
-    const dob = (body.dob || "").toString().trim();
-    const proposerCode = (body.proposerCode || "").toString().trim();
-    const seconderCode = (body.seconderCode || "").toString().trim();
-    const facebookLink = (body.facebookLink || "").toString().trim();
-    const linkedinLink = (body.linkedinLink || "").toString().trim();
-    const websiteLink = (body.websiteLink || "").toString().trim();
+    // Hidden honeypot field filled in: answer as if sent, send nothing.
+    if (isBot(body)) return res.status(200).json({ ok: true });
+
+    const fullName = text(body.fullName, 120);
+    const email = text(body.email, 254);
+    const phone = text(body.phone, 40);
+    const category = text(body.category, 60);
+    const org = text(body.org, 150);
+    const designation = text(body.designation, 120);
+    const dob = text(body.dob, 20);
+    const proposerCode = text(body.proposerCode, 40);
+    const seconderCode = text(body.seconderCode, 40);
+    const facebookLink = webUrl(text(body.facebookLink, 300));
+    const linkedinLink = webUrl(text(body.linkedinLink, 300));
+    const websiteLink = webUrl(text(body.websiteLink, 300));
 
     if (!fullName || !email || !phone || !facebookLink) {
       return res.status(400).json({ error: "Full name, email, phone, and Facebook link are required." });
     }
+    if (!isEmail(email)) return res.status(400).json({ error: "Please enter a valid email address." });
+    if (!/^[+0-9()\-\s]{6,40}$/.test(phone)) return res.status(400).json({ error: "Please enter a valid phone number." });
+    if (facebookLink === null || linkedinLink === null || websiteLink === null) {
+      return res.status(400).json({ error: "Please enter profile and website links as web addresses (https://...)." });
+    }
+    if (dob && !/^\d{4}-\d{2}-\d{2}$/.test(dob)) return res.status(400).json({ error: "Please enter a valid date of birth." });
+
+    await enforceLimits("nominate", req, email);
 
     const photo = parseApplicantPhoto(body.photo);
     if (!photo) {
@@ -109,7 +121,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (error) {
       console.error("Error sending nomination email: ", error);
-      return res.status(500).json({ error: "Failed to send nomination request: " + error.message });
+      return res.status(500).json({ error: "We could not send your application. Please try again, or email membership@cbbcl.org." });
     }
 
     // The application reached the Secretariat: count it for the homepage figures.
@@ -137,7 +149,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json({ ok: true });
   } catch (error: any) {
+    if (error instanceof FormError) return res.status(error.status).json({ error: error.message });
     console.error("Error sending nomination email: ", error);
-    res.status(500).json({ error: "Failed to send nomination request: " + error.message });
+    res.status(500).json({ error: "We could not send your application. Please try again, or email membership@cbbcl.org." });
   }
 }

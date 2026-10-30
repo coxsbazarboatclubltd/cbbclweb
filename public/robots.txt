@@ -1,4 +1,10 @@
+# Cox's Bazar Boat Club Ltd. — https://www.cbbcl.org
+# Public pages are open to all crawlers. Account and admin screens are not search pages
+# (robots.txt is not access control; those screens are protected or disabled in the app).
 User-agent: *
 Allow: /
+Disallow: /admin-dashboard
+Disallow: /dashboard
+Disallow: /api/
 
-Sitemap: https://cbbcl.org/sitemap.xml
+Sitemap: https://www.cbbcl.org/sitemap.xml

@@ -56,12 +56,13 @@ export default function Footer({ navigate }: FooterProps) {
                   <ul className="space-y-2 text-xs font-light">
                     {group.links && group.links.map((link, lIdx) => (
                       <li key={lIdx}>
-                        <button
-                          onClick={() => handleLinkClick(link.url as RoutePath)}
+                        <a
+                          href={link.url}
+                          onClick={(e) => { e.preventDefault(); handleLinkClick(link.url as RoutePath); }}
                           className="hover:text-gold transition-colors text-left text-slate-400 hover:text-gold-light text-xs font-light block"
                         >
-                          → {link.name}
-                        </button>
+                          <span aria-hidden="true">→ </span>{link.name}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -154,13 +155,14 @@ export default function Footer({ navigate }: FooterProps) {
 
             <div className="border-t border-white/[0.08] pt-4 mt-6 w-full flex flex-wrap lg:justify-end gap-x-4 gap-y-1 items-center">
               {data.legalLinks && data.legalLinks.map((legal, idx) => (
-                <button
+                <a
                   key={idx}
-                  onClick={() => handleLinkClick(legal.url as RoutePath)}
-                  className="text-slate-500 hover:text-gold text-[10px] font-light tracking-wider uppercase transition-colors cursor-pointer"
+                  href={legal.url}
+                  onClick={(e) => { e.preventDefault(); handleLinkClick(legal.url as RoutePath); }}
+                  className="text-slate-400 hover:text-gold text-[10px] font-light tracking-wider uppercase transition-colors cursor-pointer"
                 >
                   {legal.name}
-                </button>
+                </a>
               ))}
               <div className="flex items-center space-x-2 text-slate-500 text-[10px] font-light tracking-wider uppercase">
                 <ShieldCheck className="w-3.5 h-3.5 text-gold" />

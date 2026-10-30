@@ -136,7 +136,7 @@ export default function NewlyJoinedCoverflow({ navigate, lead = [], news = [] }:
                     <Icon className="w-4 h-4" />
                   </a>
                 ) : (
-                  <span key={key} title={`${label}: ${url}`} aria-label={`${label}: ${url}`} className="p-2 border border-slate-200 text-slate-600 rounded-full">
+                  <span key={key} role="img" title={`${label}: ${url}`} aria-label={`${label}: ${url}`} className="p-2 border border-slate-200 text-slate-600 rounded-full">
                     <Icon className="w-4 h-4" />
                   </span>
                 )

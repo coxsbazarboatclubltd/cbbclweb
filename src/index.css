@@ -20,8 +20,8 @@
   --color-bg-white: #ffffff;
   --color-text-dark: #1a2744;
   --color-text-body: #4a5568;
-  --color-text-light: #8a96a8;
-  --color-text-gold: #c9a84c;
+  --color-text-light: #687588; /* AA contrast for small text on white/cream */
+  --color-text-gold: #8a6d2b; /* deeper gold for small labels on light backgrounds (AA) */
   
   --font-display: "Cormorant Garamond", serif;
   --font-sans: "Jost", sans-serif;

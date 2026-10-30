@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormSafeguards, { honeypotValue } from "./FormSafeguards";
 import { ShieldCheck, Camera, X } from "lucide-react";
 import { getMembershipApplications, saveMembershipApplications } from "../utils/memberStorage";
 import { MEMBERSHIP_CATEGORIES } from "../membershipCategories";
@@ -106,7 +107,7 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
       const res = await fetch("/api/membership/nominate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, photo })
+        body: JSON.stringify({ ...formData, photo, company_website: honeypotValue(e) })
       });
 
       if (!res.ok) {
@@ -154,13 +155,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+            <label htmlFor="apply-fullName" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
               Candidate Full Name *
             </label>
             <input
               type="text"
               required
-              name="fullName"
+              id="apply-fullName" name="fullName"
               value={formData.fullName}
               onChange={handleInputChange}
               className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:ring-1 focus:ring-gold outline-none transition-all"
@@ -169,13 +170,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+            <label htmlFor="apply-email" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
               Email Address *
             </label>
             <input
               type="email"
               required
-              name="email"
+              id="apply-email" name="email"
               value={formData.email}
               onChange={handleInputChange}
               className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:ring-1 focus:ring-gold outline-none transition-all"
@@ -185,11 +186,11 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-category" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Category Preferred *
               </label>
               <select
-                name="category"
+                id="apply-category" name="category"
                 value={formData.category}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs outline-none focus:border-gold"
@@ -200,12 +201,12 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
               </select>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-dob" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Date of Birth
               </label>
               <input
                 type="date"
-                name="dob"
+                id="apply-dob" name="dob"
                 value={formData.dob}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs outline-none"
@@ -215,13 +216,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-org" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Organization *
               </label>
               <input
                 type="text"
                 required
-                name="org"
+                id="apply-org" name="org"
                 value={formData.org}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -229,13 +230,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-designation" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Designation *
               </label>
               <input
                 type="text"
                 required
-                name="designation"
+                id="apply-designation" name="designation"
                 value={formData.designation}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -246,13 +247,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-facebookLink" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Facebook Profile Link *
               </label>
               <input
                 type="url"
                 required
-                name="facebookLink"
+                id="apply-facebookLink" name="facebookLink"
                 value={formData.facebookLink}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -260,12 +261,12 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-linkedinLink" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 LinkedIn Profile Link (Optional)
               </label>
               <input
                 type="url"
-                name="linkedinLink"
+                id="apply-linkedinLink" name="linkedinLink"
                 value={formData.linkedinLink}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -275,12 +276,12 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+            <label htmlFor="apply-websiteLink" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
               Website Link (Optional)
             </label>
             <input
               type="url"
-              name="websiteLink"
+              id="apply-websiteLink" name="websiteLink"
               value={formData.websiteLink}
               onChange={handleInputChange}
               className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -290,12 +291,12 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-proposerCode" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Reference Name/Code (Optional)
               </label>
               <input
                 type="text"
-                name="proposerCode"
+                id="apply-proposerCode" name="proposerCode"
                 value={formData.proposerCode}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none font-mono"
@@ -303,13 +304,13 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+              <label htmlFor="apply-phone" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
                 Telephone/Phone *
               </label>
               <input
                 type="text"
                 required
-                name="phone"
+                id="apply-phone" name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
@@ -319,7 +320,7 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
           </div>
 
           <div className="space-y-1.5">
-            <label htmlFor="membership-photo" className="text-[9px] font-sans font-bold text-slate-400 uppercase tracking-widest">
+            <label htmlFor="membership-photo" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
               Your Photo *
             </label>
             <div className="flex items-center gap-4">
@@ -358,8 +359,10 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
             {photoError && <p className="text-[11px] font-sans text-red-600 font-medium">{photoError}</p>}
           </div>
 
+          <FormSafeguards purpose="to assess your membership application and contact you about it" inbox="the Club Secretariat (membership@cbbcl.org)" />
+
           {submitError && (
-            <p className="text-[11px] font-sans text-red-600 font-medium">{submitError}</p>
+            <p role="alert" className="text-[11px] font-sans text-red-600 font-medium">{submitError}</p>
           )}
 
           <button

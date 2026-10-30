@@ -83,6 +83,8 @@ export interface NewsPost {
   scheduledDate?: string;
   /** Internal path the card opens instead of /news-feed/:id (e.g. past events link to /events). */
   link?: string;
+  /** The event this post covers; that event then gets no separate past-event card in the Gazette. */
+  eventId?: string;
 }
 
 export interface EventItem {

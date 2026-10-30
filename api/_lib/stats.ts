@@ -78,3 +78,18 @@ export async function recordApplication(): Promise<void> {
     console.error("Application counter not updated:", e);
   }
 }
+
+/**
+ * Fixed-window rate limit: true while `key` has been used at most `limit` times in `windowSec`.
+ * Without the store configured (or if it is unreachable) requests are allowed, so forms keep working.
+ */
+export async function rateLimit(key: string, limit: number, windowSec: number): Promise<boolean> {
+  if (!statsConfigured()) return true;
+  try {
+    const [count] = await pipeline([["INCR", key], ["EXPIRE", key, windowSec, "NX"]]);
+    return Number(count) <= limit;
+  } catch (e) {
+    console.error("Rate limit check failed:", e);
+    return true;
+  }
+}

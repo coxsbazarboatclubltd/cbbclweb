@@ -297,7 +297,7 @@ export default function BoardProfile({ directorId = "humayun-kabir-robel", navig
                   </a>
                 ) : (
                   // Profile name only (the director chose not to share a link): icon + name, not clickable.
-                  <span key={key} aria-label={`${label}: ${url}`} title={`${label}: ${url}`} className="flex flex-col items-center space-y-1.5 text-slate-600">
+                  <span key={key} role="img" aria-label={`${label}: ${url}`} title={`${label}: ${url}`} className="flex flex-col items-center space-y-1.5 text-slate-600">
                     <span className="p-2 border border-slate-200 rounded-full">
                       <Icon className="w-4 h-4" />
                     </span>

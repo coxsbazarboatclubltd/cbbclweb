@@ -62,7 +62,7 @@ function getSiteSettings() {
       },
       socialLinks: {
         facebook: "https://www.facebook.com/coxsbazarboatclubltd/",
-        instagram: "https://instagram.com",
+        instagram: "https://www.instagram.com/coxsbazarboatclubltd",
         youtube: "https://youtube.com",
         linkedin: "https://www.linkedin.com/company/cbbcl/",
         twitter: "https://twitter.com"
@@ -99,8 +99,10 @@ function getSiteSettings() {
         }
       ],
       legalLinks: [
-        { name: "Privacy Policy", url: "/about" },
-        { name: "Terms of Service", url: "/about" }
+        { name: "Privacy Policy", url: "/privacy-policy" },
+        { name: "Terms of Use", url: "/terms" },
+        { name: "Cookie Policy", url: "/cookie-policy" },
+        { name: "Data Deletion", url: "/data-deletion" }
       ],
       copyright: "© 2026 Cox's Bazar Boat Club Limited. All Rights Reserved. Incorporated under The Companies Act, 1994, Bangladesh."
     }

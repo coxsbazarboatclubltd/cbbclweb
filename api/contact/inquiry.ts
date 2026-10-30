@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { buildRegistryEmailHtml } from "../_lib/emailTemplate.js";
+import { FormError, enforceLimits, isBot, isEmail, multiline, text, webUrl } from "../_lib/guard.js";
 
 const INQUIRY_RECIPIENT = "info@cbbcl.org";
 const INQUIRY_SENDER = "notifications@cbbcl.org";
@@ -13,16 +14,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const body = req.body || {};
-    const name = (body.name || "").toString().trim();
-    const email = (body.email || "").toString().trim();
-    const phone = (body.phone || "").toString().trim();
-    const subject = (body.subject || "").toString().trim();
-    const message = (body.message || "").toString().trim();
-    const facebookLink = (body.facebookLink || "").toString().trim();
+    // Hidden honeypot field filled in: answer as if sent, send nothing.
+    if (isBot(body)) return res.status(200).json({ ok: true });
+
+    const name = text(body.name, 120);
+    const email = text(body.email, 254);
+    const phone = text(body.phone, 40);
+    const subject = text(body.subject, 120);
+    const message = multiline(body.message, 4000);
+    const facebookLink = webUrl(text(body.facebookLink, 300));
 
     if (!name || !email || !facebookLink || !message) {
       return res.status(400).json({ error: "Name, email, Facebook link, and message are required." });
     }
+    if (!isEmail(email)) return res.status(400).json({ error: "Please enter a valid email address." });
+    if (phone && !/^[+0-9()\-\s]{6,40}$/.test(phone)) return res.status(400).json({ error: "Please enter a valid phone number." });
+    if (facebookLink === null) return res.status(400).json({ error: "Please enter your Facebook profile as a web address (https://...)." });
+
+    await enforceLimits("inquiry", req, email);
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
@@ -66,7 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (error) {
       console.error("Error sending contact inquiry email: ", error);
-      return res.status(500).json({ error: "Failed to send your inquiry: " + error.message });
+      return res.status(500).json({ error: "We could not send your inquiry. Please try again, or email info@cbbcl.org." });
     }
 
     // Send the inquirer a copy of their own submission for their records
@@ -91,7 +100,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json({ ok: true });
   } catch (error: any) {
+    if (error instanceof FormError) return res.status(error.status).json({ error: error.message });
     console.error("Error sending contact inquiry email: ", error);
-    res.status(500).json({ error: "Failed to send your inquiry: " + error.message });
+    res.status(500).json({ error: "We could not send your inquiry. Please try again, or email info@cbbcl.org." });
   }
 }
