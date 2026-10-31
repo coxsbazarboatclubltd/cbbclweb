@@ -396,7 +396,13 @@ export default function Home({ navigate }: HomeProps) {
                         {ov.welcomeText}
                       </p>
 
-                      <div className="pt-4">
+                      <div className="pt-4 flex flex-wrap items-center gap-x-8 gap-y-4">
+                        <button
+                          onClick={() => navigate("/portfolio")}
+                          className="py-3 px-6 bg-navy text-white hover:bg-gold hover:text-navy font-sans text-[10px] font-semibold tracking-widest uppercase transition-colors cursor-pointer"
+                        >
+                          View Club Portfolio
+                        </button>
                         <button
                           onClick={() => navigate("/about")}
                           className="group flex items-center space-x-2 font-sans text-[10px] font-semibold tracking-widest text-[#1a2744] hover:text-gold uppercase cursor-pointer"

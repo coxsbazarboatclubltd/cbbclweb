@@ -104,6 +104,12 @@ export function routeSeo(rawPath: string): RouteSeo {
         description: "Facilities of Cox's Bazar Boat Club Ltd. in Cox's Bazar, including the private hotel, boating and yacht, club lounge and dining for members and their guests.",
         path: "/facilities",
       };
+    case "/portfolio":
+      return {
+        title: withSite("Club Portfolio"),
+        description: "The Cox's Bazar Boat Club Ltd. portfolio: our story, vision and mission, facilities, board of directors, membership and governance.",
+        path: "/portfolio",
+      };
     case "/membership":
       return {
         title: withSite("Membership"),

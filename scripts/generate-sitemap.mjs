@@ -33,6 +33,7 @@ const categories = [...read("src/membershipCategories.ts").matchAll(/^ {4}slug: 
 const paths = [
   "/",
   "/about",
+  "/portfolio",
   "/facilities",
   "/membership",
   ...categories.map((s) => `/membership/${s}`),

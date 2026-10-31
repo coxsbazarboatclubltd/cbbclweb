@@ -526,6 +526,7 @@ export const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
       links: [
         { name: "Home Base", url: "/" },
         { name: "About Our Story", url: "/about" },
+        { name: "Club Portfolio", url: "/portfolio" },
         { name: "Facilities Showcase", url: "/facilities" },
         { name: "Board of Directors", url: "/board" },
         { name: "Club News Feed", url: "/news-feed" },
@@ -556,6 +557,18 @@ export const DEFAULT_FOOTER_SETTINGS: FooterSettings = {
 };
 
 /** Footer policy links point at the real policy pages (older cached settings sent them to /about). */
+function withPortfolioLink<T extends { footerLinks?: { title: string; links?: { name: string; url: string }[] }[] }>(settings: T): T {
+  const groups = settings && Array.isArray(settings.footerLinks) ? settings.footerLinks : [];
+  if (!groups.some((g) => g && Array.isArray(g.links) && g.links.some((l) => l && l.url === "/portfolio"))) {
+    const g = groups.find((x) => x && Array.isArray(x.links) && x.links.some((l) => l && l.url === "/about"));
+    if (g && g.links) {
+      const i = g.links.findIndex((l) => l && l.url === "/about");
+      g.links.splice(i + 1, 0, { name: "Club Portfolio", url: "/portfolio" });
+    }
+  }
+  return settings;
+}
+
 function withPolicyLinks<T extends { legalLinks?: { name: string; url: string }[] }>(settings: T): T {
   if (settings && Array.isArray(settings.legalLinks) && settings.legalLinks.some((l) => l && l.url === "/about")) {
     settings.legalLinks = DEFAULT_FOOTER_SETTINGS.legalLinks;
@@ -597,7 +610,7 @@ export function getFooterSettingsSync(): FooterSettings {
       if (parsed && parsed.contact && parsed.contact.email === "info@cbbcl.org, registration@cbbcl.org") {
         parsed.contact.email = DEFAULT_FOOTER_SETTINGS.contact.email;
       }
-      return withPolicyLinks(parsed);
+      return withPortfolioLink(withPolicyLinks(parsed));
     }
   } catch (e) {}
   return DEFAULT_FOOTER_SETTINGS;
@@ -619,7 +632,7 @@ export async function fetchFooterSettings(): Promise<FooterSettings> {
         if (!data.socialLinks.instagram || /^https?:\/\/(www\.)?instagram\.com\/?$/.test(data.socialLinks.instagram)) {
           data.socialLinks.instagram = "https://www.instagram.com/coxsbazarboatclubltd";
         }
-        withPolicyLinks(data);
+        withPortfolioLink(withPolicyLinks(data));
         localStorage.setItem(FOOTER_DB_SETTINGS_KEY, JSON.stringify(data));
         return data;
       }

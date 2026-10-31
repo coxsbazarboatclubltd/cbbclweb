@@ -24,6 +24,7 @@ import Contact from "./components/pages/Contact";
 // The admin dashboard (browser-only, not secure) is disabled; see AdminDisabled.
 import AdminDisabled from "./components/pages/AdminDisabled";
 import NotFound from "./components/pages/NotFound";
+import Portfolio from "./components/pages/Portfolio";
 import PolicyPage from "./components/pages/PolicyPage";
 import { POLICIES } from "./content/legal";
 import FeatureUnavailable from "./components/pages/FeatureUnavailable";
@@ -281,6 +282,9 @@ export default function App() {
       case "/gallery":
       case "/gallery.html":
         return <Facilities />;
+      case "/portfolio":
+      case "/portfolio.html":
+        return <Portfolio navigate={navigate} />;
       case "/membership":
       case "/membership.html":
         return <Membership navigate={navigate} />;
