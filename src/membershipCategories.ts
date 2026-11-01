@@ -173,10 +173,10 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
     summary: "For diplomats holding the rank of First Secretary or above in a foreign mission accredited to Bangladesh.",
     generalMembership: false,
     fees: {
-      admissionLabel: "Complimentary",
-      admissionDetail: "No admission fee.",
-      subscriptionLabel: "Complimentary",
-      subscriptionDetail: "No monthly subscription."
+      admissionLabel: "Contact Club Secretariat",
+      admissionDetail: "As determined by the Board of Directors.",
+      subscriptionLabel: "As prescribed by the Board",
+      subscriptionDetail: "As determined by the Board of Directors."
     },
     eligibility: ["Diplomats holding the rank of First Secretary or above in a foreign mission accredited to Bangladesh."],
     privileges: ["Exempt from admission fee and monthly subscription."],
@@ -229,10 +229,10 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
     generalMembership: false,
     byInvitation: true,
     fees: {
-      admissionLabel: "Complimentary",
-      admissionDetail: "No admission fee.",
-      subscriptionLabel: "Complimentary",
-      subscriptionDetail: "No monthly subscription."
+      admissionLabel: "Contact Club Secretariat",
+      admissionDetail: "As determined by the Board of Directors.",
+      subscriptionLabel: "As prescribed by the Board",
+      subscriptionDetail: "As determined by the Board of Directors."
     },
     eligibility: ["Distinguished individuals, by invitation of the Board of Directors."],
     privileges: ["Exempt from admission fee and monthly subscription."],

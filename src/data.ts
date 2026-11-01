@@ -42,6 +42,8 @@ import tashinLutfurPortrait from "./assets/images/board/tashin-lutfur.webp";
 // @ts-ignore
 import softOpeningInvitation from "./assets/images/events/club-house-soft-opening-invitation.webp";
 // @ts-ignore
+import softOpeningTtnVideo from "./assets/images/events/club-house-soft-opening-ttn-video.webp";
+// @ts-ignore
 import heroVideo from "./assets/videos/hero.mp4";
 // @ts-ignore
 import heroPoster from "./assets/images/hero-poster.webp";
@@ -974,6 +976,21 @@ export const PRESIDENT_MESSAGE: string[] = [
 
 export const NEWS_DATA: NewsPost[] = [
   {
+    id: "soft-opening-video-ttn-2026",
+    title: "Video: The Club House Soft Opening",
+    date: "November 01, 2026",
+    category: "News",
+    year: "2026",
+    month: "November",
+    excerpt: "Video coverage of the Soft Opening Ceremony of the Club House on 31st October 2026, by Theterritorialnews.com (TTN).",
+    content: "Watch the video coverage of the Soft Opening Ceremony of the Cox's Bazar Boat Club Ltd. Club House, held on Saturday, 31st October 2026, at Anderson Road, Cox's Bazar.\n\nVideo: Theterritorialnews.com (TTN), shared on Facebook.",
+    tags: ["video", "soft opening", "club house", "cbbcl"],
+    image: softOpeningTtnVideo,
+    facebookVideoUrl: "https://www.facebook.com/reel/29422907924000145",
+    likes: 0,
+    commentsCount: 0
+  },
+  {
     id: "soft-opening-ceremony-2026",
     title: "Soft Opening Ceremony of the Club House",
     date: "October 30, 2026",
@@ -981,7 +998,7 @@ export const NEWS_DATA: NewsPost[] = [
     year: "2026",
     month: "October",
     excerpt: "Cox's Bazar Boat Club Ltd. holds the Soft Opening Ceremony of its Club House on Saturday, 31st October 2026, at Anderson Road, Cox's Bazar.",
-    content: "Cox's Bazar Boat Club Ltd. will hold the Soft Opening Ceremony of its Club House on Saturday, 31st October 2026.\n\nVenue: Club House, Anderson Road, 4700, Cox's Bazar, Bangladesh.\n\nThe soft opening marks the Club House opening its doors as the home of Cox's Bazar Boat Club Ltd.",
+    content: "Cox's Bazar Boat Club Ltd. held the Soft Opening Ceremony of its Club House on Saturday, 31st October 2026.\n\nVenue: Club House, Anderson Road, 4700, Cox's Bazar, Bangladesh.\n\nThe soft opening marks the Club House opening its doors as the home of Cox's Bazar Boat Club Ltd.",
     tags: ["soft opening", "club house", "event", "cbbcl"],
     image: softOpeningInvitation,
     // Square invitation in wide cards: frame from the top so the title stays in view.

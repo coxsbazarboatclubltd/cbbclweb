@@ -85,6 +85,8 @@ export interface NewsPost {
   link?: string;
   /** The event this post covers; that event then gets no separate past-event card in the Gazette. */
   eventId?: string;
+  /** Public Facebook video or reel link, shown on the post page (the player loads only when clicked). */
+  facebookVideoUrl?: string;
 }
 
 export interface EventItem {

@@ -194,6 +194,7 @@ export const COOKIE_POLICY: PolicyDoc = {
       paragraphs: [
         "This website does not set any cookies of its own and does not use analytics, advertising or tracking services. Because there are no optional trackers, there is no cookie banner to accept or reject.",
         "The map on the Contact page is provided by Google Maps. When that page loads, Google may set or read its own cookies under Google's privacy policy.",
+        "Some news posts include a video hosted on Facebook. The Facebook player loads only when you choose to play the video; Facebook may then set or read its own cookies under Facebook's privacy policy.",
       ],
     },
     {

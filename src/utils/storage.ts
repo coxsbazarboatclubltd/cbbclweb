@@ -291,7 +291,8 @@ export function getNewsPosts(): NewsPost[] {
             category: corresponding.category,
             content: corresponding.content,
             excerpt: corresponding.excerpt,
-            imagePosition: corresponding.imagePosition
+            imagePosition: corresponding.imagePosition,
+            facebookVideoUrl: corresponding.facebookVideoUrl
           };
         }
         return post;

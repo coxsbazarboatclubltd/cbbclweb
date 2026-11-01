@@ -3,7 +3,7 @@ import { getNewsPosts } from "../../utils/storage";
 import { withoutPlaceholderComments } from "../../utils/newsComments";
 import { NewsPost, RoutePath } from "../../types";
 import CardMedia from "../CardMedia";
-import { Heart, MessageSquare, Tag, Send, Calendar, Anchor, ArrowLeft, ShieldAlert } from "lucide-react";
+import { Heart, MessageSquare, Tag, Send, Calendar, Anchor, ArrowLeft, ShieldAlert, Play, ExternalLink } from "lucide-react";
 import { MASTER_HERO_VIDEO } from "../../data";
 import BackgroundVideo from "../BackgroundVideo";
 
@@ -160,8 +160,11 @@ export default function NewsFeedDetail({ newsId, navigate }: NewsFeedDetailProps
             </div>
           </div>
 
+          {/* Video posts show the player in place of the cover image */}
+          {news.facebookVideoUrl && <FacebookVideo url={news.facebookVideoUrl} title={news.title} poster={news.image} />}
+
           {/* Large Cover Image */}
-          {news.image && (
+          {news.image && !news.facebookVideoUrl && (
             <div className="w-full overflow-hidden rounded-xs border border-slate-200 bg-slate-50/50 flex items-center justify-center py-4 my-2">
               <CardMedia
                 media={news.image}
@@ -287,6 +290,47 @@ export default function NewsFeedDetail({ newsId, navigate }: NewsFeedDetailProps
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+/** Facebook video/reel: a play button first, so Facebook's player (and its cookies) loads only on request. */
+function FacebookVideo({ url, title, poster }: { url: string; title: string; poster?: string }) {
+  // Player width in pixels, measured when Play is pressed (Facebook's player sizes itself to it).
+  const [width, setWidth] = useState(0);
+  const boxRef = React.useRef<HTMLDivElement>(null);
+  const src = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&autoplay=true&width=${width}`;
+  return (
+    <div className="space-y-3">
+      <div ref={boxRef} className="relative w-full aspect-video bg-navy rounded-sm overflow-hidden shadow-md">
+        {width > 0 ? (
+          <iframe
+            src={src}
+            title={`Video: ${title}`}
+            className="w-full h-full border-0"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setWidth(Math.round(boxRef.current?.clientWidth || 640))}
+            className="w-full h-full flex flex-col items-center justify-center gap-4 text-white group"
+          >
+            {poster && <img src={poster} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" />}
+            <span className="relative w-16 h-16 rounded-full bg-gold text-navy flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+              <Play className="w-7 h-7 ml-1 fill-current" />
+            </span>
+            <span className="relative font-sans text-xs uppercase tracking-widest font-semibold drop-shadow">Play video</span>
+            <span className="relative font-sans text-[10px] text-slate-200 px-6 text-center drop-shadow">Loads the Facebook video player</span>
+          </button>
+        )}
+      </div>
+      <p className="text-center">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-sans text-xs text-gold-dark hover:text-gold font-semibold">
+          Watch on Facebook <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </p>
     </div>
   );
 }
