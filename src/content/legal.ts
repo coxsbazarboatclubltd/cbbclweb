@@ -36,7 +36,7 @@ export const PRIVACY_POLICY: PolicyDoc = {
       heading: "2. Information you give us",
       paragraphs: ["We only receive personal information when you choose to send it through one of these forms or by email:"],
       items: [
-        "Membership application: full name, email address, phone number, preferred membership category, date of birth, organization and designation (optional), proposer and seconder codes (optional), Facebook profile link, LinkedIn and website links (optional), and a photograph.",
+        "Membership application: full name, email address, phone number, preferred membership category, date of birth, the city or area you are applying from, organization and designation (optional), the name and club designation of a member who referred you (optional), Facebook profile link, LinkedIn and website links (optional), and a photograph.",
         "Contact and registry inquiry forms: full name, email address, phone number (optional), Facebook profile link, the topic of your inquiry and your message.",
         "Emails you send to any cbbcl.org address.",
       ],

@@ -36,14 +36,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const org = text(body.org, 150);
     const designation = text(body.designation, 120);
     const dob = text(body.dob, 20);
-    const proposerCode = text(body.proposerCode, 40);
-    const seconderCode = text(body.seconderCode, 40);
+    const location = text(body.location, 80);
+    const referenceName = text(body.referenceName, 120);
+    const referenceDesignation = text(body.referenceDesignation, 120);
     const facebookLink = webUrl(text(body.facebookLink, 300));
     const linkedinLink = webUrl(text(body.linkedinLink, 300));
     const websiteLink = webUrl(text(body.websiteLink, 300));
 
-    if (!fullName || !email || !phone || !facebookLink) {
-      return res.status(400).json({ error: "Full name, email, phone, and Facebook link are required." });
+    if (!fullName || !email || !phone || !facebookLink || !location) {
+      return res.status(400).json({ error: "Full name, email, phone, location, and Facebook link are required." });
     }
     if (!isEmail(email)) return res.status(400).json({ error: "Please enter a valid email address." });
     if (!/^[+0-9()\-\s]{6,40}$/.test(phone)) return res.status(400).json({ error: "Please enter a valid phone number." });
@@ -75,11 +76,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `Organization: ${org || "Not specified"}`,
       `Designation: ${designation || "Not specified"}`,
       `Telephone/Phone: ${phone}`,
+      `Applying From: ${location}`,
       `Facebook Profile: ${facebookLink}`,
       `LinkedIn Profile: ${linkedinLink || "Not provided"}`,
       `Website: ${websiteLink || "Not provided"}`,
-      `Proposer Code: ${proposerCode || "Under Committee Review"}`,
-      `Seconder Code: ${seconderCode || "Under Committee Review"}`,
+      `Reference Name: ${referenceName || "Not provided"}`,
+      `Reference Designation (Club): ${referenceDesignation || "Not provided"}`,
     ];
 
     const fields = [
@@ -90,11 +92,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       { label: "Organization", value: org || "Not specified" },
       { label: "Designation", value: designation || "Not specified" },
       { label: "Telephone/Phone", value: phone },
+      { label: "Applying From", value: location },
       { label: "Facebook Profile", value: facebookLink, isLink: true },
       { label: "LinkedIn Profile", value: linkedinLink || "Not provided", isLink: !!linkedinLink },
       { label: "Website", value: websiteLink || "Not provided", isLink: !!websiteLink },
-      { label: "Proposer Code", value: proposerCode || "Under Committee Review" },
-      { label: "Seconder Code", value: seconderCode || "Under Committee Review" },
+      { label: "Reference Name", value: referenceName || "Not provided" },
+      { label: "Reference Designation (Club)", value: referenceDesignation || "Not provided" },
     ];
 
     const html = buildRegistryEmailHtml(

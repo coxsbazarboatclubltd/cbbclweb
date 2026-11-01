@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormSafeguards, { honeypotValue } from "./FormSafeguards";
 import { ShieldCheck, Camera, X } from "lucide-react";
-import { getMembershipApplications, saveMembershipApplications } from "../utils/memberStorage";
 import { MEMBERSHIP_CATEGORIES } from "../membershipCategories";
 
 // Photos are scaled down in the browser so large phone pictures still upload quickly.
@@ -49,8 +48,9 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
     facebookLink: "",
     linkedinLink: "",
     websiteLink: "",
-    proposerCode: "",
-    seconderCode: ""
+    location: "",
+    referenceName: "",
+    referenceDesignation: ""
   };
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -115,21 +115,6 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
         throw new Error(err.error || "Failed to send nomination request.");
       }
 
-      const currentList = getMembershipApplications();
-      const newApp = {
-        id: "app-" + Date.now(),
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        membershipType: formData.category + " Membership",
-        motivation: `Nomination proposing request submitted through web portal. Proposer Code: ${formData.proposerCode || "Under Committee Review"}, Seconder Code: ${formData.seconderCode || "Under Committee Review"}. Facebook: ${formData.facebookLink}${formData.linkedinLink ? `, LinkedIn: ${formData.linkedinLink}` : ""}${formData.websiteLink ? `, Website: ${formData.websiteLink}` : ""}.`,
-        organization: formData.org || "Zenith Enterprise",
-        designation: formData.designation || "Director",
-        dob: formData.dob || "Not specified",
-        status: "pending" as const,
-        submittedAt: new Date().toISOString()
-      };
-      saveMembershipApplications([...currentList, newApp]);
 
       setFormSubmitted(true);
       setTimeout(() => {
@@ -291,17 +276,57 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label htmlFor="apply-proposerCode" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
-                Reference Name/Code (Optional)
+              <label htmlFor="apply-referenceName" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
+                Reference Name
               </label>
               <input
                 type="text"
-                id="apply-proposerCode" name="proposerCode"
-                value={formData.proposerCode}
+                id="apply-referenceName" name="referenceName"
+                value={formData.referenceName}
                 onChange={handleInputChange}
-                className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none font-mono"
-                placeholder="CBBCL-FM-XX"
+                className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
+                placeholder="Optional, club member who referred you"
               />
+            </div>
+            <div className="space-y-1.5">
+              <label htmlFor="apply-referenceDesignation" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
+                Reference's Club Designation
+              </label>
+              <input
+                type="text"
+                id="apply-referenceDesignation" name="referenceDesignation"
+                value={formData.referenceDesignation}
+                onChange={handleInputChange}
+                className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
+                placeholder="Optional, e.g. Director"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <label htmlFor="apply-location" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
+                Applying From (Your Location) *
+              </label>
+              <input
+                type="text"
+                required
+                list="apply-location-options"
+                id="apply-location" name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+                className="w-full bg-white border border-slate-200 px-3 py-2 text-xs focus:border-gold outline-none"
+                placeholder="e.g. Dhaka, Cox's Bazar"
+              />
+              <datalist id="apply-location-options">
+                <option value="Dhaka" />
+                <option value="Cox's Bazar" />
+                <option value="Chattogram" />
+                <option value="Sylhet" />
+                <option value="Khulna" />
+                <option value="Rajshahi" />
+                <option value="Outside Bangladesh" />
+              </datalist>
             </div>
             <div className="space-y-1.5">
               <label htmlFor="apply-phone" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">

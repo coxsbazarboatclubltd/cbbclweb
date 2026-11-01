@@ -310,8 +310,9 @@ app.post("/api/membership/nominate", async (req, res) => {
     const org = (body.org || "").toString().trim();
     const designation = (body.designation || "").toString().trim();
     const dob = (body.dob || "").toString().trim();
-    const proposerCode = (body.proposerCode || "").toString().trim();
-    const seconderCode = (body.seconderCode || "").toString().trim();
+    const location = (body.location || "").toString().trim();
+    const referenceName = (body.referenceName || "").toString().trim();
+    const referenceDesignation = (body.referenceDesignation || "").toString().trim();
     const facebookLink = (body.facebookLink || "").toString().trim();
     const linkedinLink = (body.linkedinLink || "").toString().trim();
     const websiteLink = (body.websiteLink || "").toString().trim();
@@ -343,8 +344,9 @@ app.post("/api/membership/nominate", async (req, res) => {
       `Facebook Profile: ${facebookLink}`,
       `LinkedIn Profile: ${linkedinLink || "Not provided"}`,
       `Website: ${websiteLink || "Not provided"}`,
-      `Proposer Code: ${proposerCode || "Under Committee Review"}`,
-      `Seconder Code: ${seconderCode || "Under Committee Review"}`,
+      `Applying From: ${location || "Not provided"}`,
+      `Reference Name: ${referenceName || "Not provided"}`,
+      `Reference Designation (Club): ${referenceDesignation || "Not provided"}`,
     ];
 
     const fields = [
@@ -358,8 +360,9 @@ app.post("/api/membership/nominate", async (req, res) => {
       { label: "Facebook Profile", value: facebookLink, isLink: true },
       { label: "LinkedIn Profile", value: linkedinLink || "Not provided", isLink: !!linkedinLink },
       { label: "Website", value: websiteLink || "Not provided", isLink: !!websiteLink },
-      { label: "Proposer Code", value: proposerCode || "Under Committee Review" },
-      { label: "Seconder Code", value: seconderCode || "Under Committee Review" },
+      { label: "Applying From", value: location || "Not provided" },
+      { label: "Reference Name", value: referenceName || "Not provided" },
+      { label: "Reference Designation (Club)", value: referenceDesignation || "Not provided" },
     ];
 
     const html = buildRegistryEmailHtml(
