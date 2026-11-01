@@ -386,6 +386,7 @@ const DEFAULT_NAV: NavCMSData = {
     { label: "Events", path: "/events" },
     { label: "News Feed", path: "/news-feed" },
     { label: "Affiliations", path: "/affiliations" },
+    { label: "Portfolio", path: "/portfolio" },
     { label: "Contact", path: "/contact" }
   ]
 };

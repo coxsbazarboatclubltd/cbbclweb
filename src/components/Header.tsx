@@ -139,6 +139,7 @@ export default function Header({ currentPath, navigate, currentUser, onLogout }:
     const eventsItem = findItem("Events") || { label: "Events", path: "/events" as RoutePath };
     const newsItem = findItem("News Feed") || { label: "News Feed", path: "/news-feed" as RoutePath };
     const affiliationsItem = findItem("Affiliations") || { label: "Affiliations", path: "/affiliations" as RoutePath };
+    const portfolioItem = findItem("Portfolio") || { label: "Portfolio", path: "/portfolio" as RoutePath };
     const contactItem = findItem("Contact") || { label: "Contact", path: "/contact" as RoutePath };
     const aboutItem = findItem("About") || { label: "About", path: "/about" as RoutePath };
     const plainAbout = { label: aboutItem.label, path: aboutItem.path };
@@ -155,6 +156,7 @@ export default function Header({ currentPath, navigate, currentUser, onLogout }:
       right: [
         newsItem,
         affiliationsItem,
+        portfolioItem,
         contactItem,
         plainAbout
       ]
