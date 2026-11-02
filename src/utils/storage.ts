@@ -121,7 +121,8 @@ const ROLE_CHANGES: Record<string, { fromLevel: number; level: number; designati
 
 // Directors removed from the board; filtered out of any cached board list.
 // "md-atiqul-islam" was renamed to "atiqul-islam"; the old cached entry is dropped and the new one added.
-const RETIRED_DIRECTOR_IDS = ["syfuddin-khaled", "md-atiqul-islam"];
+// "nurul-absar" is archived for now (see ARCHIVED_DIRECTORS in data.ts).
+const RETIRED_DIRECTOR_IDS = ["syfuddin-khaled", "md-atiqul-islam", "nurul-absar"];
 
 /** Old profile addresses that now live under a new id (/board/<old> opens /board/<new>). */
 export const DIRECTOR_ID_ALIASES: Record<string, string> = {

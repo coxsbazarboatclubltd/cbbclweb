@@ -635,31 +635,6 @@ export const DIRECTORS_DATA: Director[] = [
     ]
   },
   {
-    id: "nurul-absar",
-    name: "Nurul Abser",
-    designation: "Director",
-    membershipCode: "CBBCL-FM-13",
-    memberNumber: "CBBCL-LM-0013",
-    profileSubmitted: true,
-    profileRevision: 3,
-    bio: [
-      "Nurul Abser is a Founder Director of Cox's Bazar Boat Club Limited (CBBCL). He brings a diverse professional background combining humanitarian work, leadership, career development, networking, and training in the tourism and hospitality sector.",
-      "He is an experienced humanitarian professional with extensive experience working with various International Non-Governmental Organizations (INGOs) and United Nations (UN) agencies. Through his professional journey, he has developed strong expertise in coordination, leadership, stakeholder engagement, capacity building, and professional networking.",
-      "As a Founder Director of CBBCL, he is also committed to promoting tourism, hospitality, professional networking, and career development opportunities in Cox's Bazar. His experience across the humanitarian and tourism sectors enables him to connect people, organizations, and opportunities while contributing to the sustainable development of the local community and tourism industry."
-    ],
-    businessProfile: {
-      role: "Executive Director, Admin & Finance",
-      company: "Palong Group",
-      industry: ""
-    },
-    socials: {
-      // Profile names only, as he preferred not to share links.
-      linkedin: "Nurul Abser",
-      facebook: "Nurul Abser",
-      email: "nabsercxb@gmail.com"
-    }
-  },
-  {
     id: "ziaul-haque",
     name: MD_ZIAUL_HOQUE.name,
     designation: "Director",
@@ -885,6 +860,35 @@ export const DIRECTORS_DATA: Director[] = [
       { year: "2012", event: "Completed BA (Hons) in International Business, Coventry University" }
     ]
   },
+];
+
+// Archived directors: kept for the record, not shown anywhere on the site (2026-11-02: Nurul Abser).
+export const ARCHIVED_DIRECTORS: Director[] = [
+  {
+    id: "nurul-absar",
+    name: "Nurul Abser",
+    designation: "Director",
+    membershipCode: "CBBCL-FM-13",
+    memberNumber: "CBBCL-LM-0013",
+    profileSubmitted: true,
+    profileRevision: 3,
+    bio: [
+      "Nurul Abser is a Founder Director of Cox's Bazar Boat Club Limited (CBBCL). He brings a diverse professional background combining humanitarian work, leadership, career development, networking, and training in the tourism and hospitality sector.",
+      "He is an experienced humanitarian professional with extensive experience working with various International Non-Governmental Organizations (INGOs) and United Nations (UN) agencies. Through his professional journey, he has developed strong expertise in coordination, leadership, stakeholder engagement, capacity building, and professional networking.",
+      "As a Founder Director of CBBCL, he is also committed to promoting tourism, hospitality, professional networking, and career development opportunities in Cox's Bazar. His experience across the humanitarian and tourism sectors enables him to connect people, organizations, and opportunities while contributing to the sustainable development of the local community and tourism industry."
+    ],
+    businessProfile: {
+      role: "Executive Director, Admin & Finance",
+      company: "Palong Group",
+      industry: ""
+    },
+    socials: {
+      // Profile names only, as he preferred not to share links.
+      linkedin: "Nurul Abser",
+      facebook: "Nurul Abser",
+      email: "nabsercxb@gmail.com"
+    }
+  }
 ];
 
 export const FACILITIES_DATA: Facility[] = [

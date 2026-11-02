@@ -52,10 +52,12 @@ const DEMO_MEMBER_IDS = [
   // Removed from the board
   "syfuddin-khaled",
   // Renamed to atiqul-islam
-  "md-atiqul-islam"
+  "md-atiqul-islam",
+  // Archived for now
+  "nurul-absar"
 ];
 const MEMBERS_SEED_KEY = "cbbcl_club_members_seed";
-const MEMBERS_SEED_VERSION = "founding-directors-v26";
+const MEMBERS_SEED_VERSION = "founding-directors-v27";
 
 
 export function getClubMembers(): ClubMember[] {
