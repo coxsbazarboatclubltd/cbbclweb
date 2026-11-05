@@ -8,6 +8,7 @@ import { Resend } from "resend";
 import { generateFavicons } from "./src/utils/generateFavicons";
 import { buildRegistryEmailHtml } from "./src/utils/emailTemplate";
 import { readStats, recordApplication, recordVisit } from "./api/_lib/stats";
+import { ageError } from "./api/_lib/age";
 
 const app = express();
 const PORT = 3000;
@@ -320,6 +321,8 @@ app.post("/api/membership/nominate", async (req, res) => {
     if (!fullName || !email || !phone || !facebookLink) {
       return res.status(400).json({ error: "Full name, email, phone, and Facebook link are required." });
     }
+    const dobProblem = ageError(category, dob);
+    if (dobProblem) return res.status(400).json({ error: dobProblem });
 
     const photo = parseApplicantPhoto(body.photo);
     if (!photo) {

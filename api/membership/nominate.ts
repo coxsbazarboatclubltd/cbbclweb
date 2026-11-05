@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { buildRegistryEmailHtml } from "../_lib/emailTemplate.js";
 import { recordApplication } from "../_lib/stats.js";
+import { ageError } from "../_lib/age.js";
 import { FormError, enforceLimits, isBot, isEmail, text, webUrl } from "../_lib/guard.js";
 
 const NOMINATION_RECIPIENT = "membership@cbbcl.org";
@@ -51,7 +52,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (facebookLink === null || linkedinLink === null || websiteLink === null) {
       return res.status(400).json({ error: "Please enter profile and website links as web addresses (https://...)." });
     }
-    if (dob && !/^\d{4}-\d{2}-\d{2}$/.test(dob)) return res.status(400).json({ error: "Please enter a valid date of birth." });
+    const dobProblem = ageError(category, dob);
+    if (dobProblem) return res.status(400).json({ error: dobProblem });
 
     await enforceLimits("nominate", req, email);
 

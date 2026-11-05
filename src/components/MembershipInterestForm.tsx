@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormSafeguards, { honeypotValue } from "./FormSafeguards";
 import { ShieldCheck, Camera, X } from "lucide-react";
-import { MEMBERSHIP_CATEGORIES } from "../membershipCategories";
+import { MEMBERSHIP_CATEGORIES, minimumAgeFor, ageFromDob } from "../membershipCategories";
 
 // Photos are scaled down in the browser so large phone pictures still upload quickly.
 const PHOTO_MAX_SIDE = 1000;
@@ -56,6 +56,8 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState(emptyForm);
+  const [dobError, setDobError] = useState<string | null>(null);
+  const minAge = minimumAgeFor(formData.category);
   const [photo, setPhoto] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
   const photoInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -90,11 +92,21 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "dob" || name === "category") setDobError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.email || !formData.phone || !formData.facebookLink) return;
+    const age = ageFromDob(formData.dob);
+    if (age === null) {
+      setDobError("Please enter your date of birth.");
+      return;
+    }
+    if (age < minAge) {
+      setDobError(`Applicants for ${formData.category} Membership must be at least ${minAge} years of age.`);
+      return;
+    }
     if (!photo) {
       setPhotoError("Please attach your photo before submitting.");
       return;
@@ -187,15 +199,20 @@ export default function MembershipInterestForm({ defaultCategory = "Permanent" }
             </div>
             <div className="space-y-1.5">
               <label htmlFor="apply-dob" className="text-[9px] font-sans font-bold text-slate-500 uppercase tracking-widest">
-                Date of Birth
+                Date of Birth * <span className="normal-case tracking-normal font-normal">(minimum age {minAge})</span>
               </label>
               <input
                 type="date"
                 id="apply-dob" name="dob"
+                required
+                max={new Date().toISOString().slice(0, 10)}
                 value={formData.dob}
                 onChange={handleInputChange}
-                className="w-full bg-white border border-slate-200 px-3 py-2 text-xs outline-none"
+                aria-invalid={dobError ? true : undefined}
+                aria-describedby={dobError ? "apply-dob-error" : undefined}
+                className={`w-full bg-white border px-3 py-2 text-xs outline-none ${dobError ? "border-rose-400" : "border-slate-200"}`}
               />
+              {dobError && <p id="apply-dob-error" role="alert" className="text-[11px] text-rose-600">{dobError}</p>}
             </div>
           </div>
 

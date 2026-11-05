@@ -29,6 +29,28 @@ export interface MembershipCategory {
   privileges: string[];
   restrictions: string[];
   byInvitation?: boolean;
+  /** Minimum applicant age in years, checked on the application form. */
+  minAge: number;
+}
+
+// Minimum age for every category except Associate (club's instruction, 2026-11-05).
+// Associate keeps the AOA's own rule: children aged 21 or above.
+export const MIN_MEMBER_AGE = 30;
+export const MIN_AGE_ELIGIBILITY = `Applicants must be at least ${MIN_MEMBER_AGE} years of age.`;
+
+/** Minimum age for a category, by its form value ("Life", "Associate", ...). */
+export function minimumAgeFor(formValue: string): number {
+  return MEMBERSHIP_CATEGORIES.find((c) => c.formValue === formValue)?.minAge ?? MIN_MEMBER_AGE;
+}
+
+/** Age in whole years on today's date for a YYYY-MM-DD date of birth, or null if invalid. */
+export function ageFromDob(dob: string, today = new Date()): number | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dob);
+  if (!m) return null;
+  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  let age = today.getFullYear() - y;
+  if (today.getMonth() + 1 < mo || (today.getMonth() + 1 === mo && today.getDate() < d)) age--;
+  return age;
 }
 
 const MIN_MEMBERSHIP_FEE_DETAIL =
@@ -55,7 +77,11 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "No monthly subscription",
       subscriptionDetail: "Donor Members are exempt from monthly subscriptions."
     },
-    eligibility: ["Admission is governed by the membership provisions of the Articles of Association."],
+    minAge: 30,
+    eligibility: [
+      MIN_AGE_ELIGIBILITY,
+      "Admission is governed by the membership provisions of the Articles of Association."
+    ],
     // Same facilities as Life Membership (club's instruction, 2026-10-18).
     privileges: [
       "No regular monthly subscription",
@@ -88,7 +114,9 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "No monthly subscription",
       subscriptionDetail: "Life Members are exempt from monthly subscriptions."
     },
+    minAge: 30,
     eligibility: [
+      MIN_AGE_ELIGIBILITY,
       "Membership is governed by the membership provisions of the Articles of Association.",
       "Applicants may initially receive Temporary Membership for at least six months, subject to the provisions of the Articles of Association."
     ],
@@ -122,7 +150,9 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "As prescribed by the Board",
       subscriptionDetail: "Monthly subscription is applicable and is determined by the Board of Directors, who may increase or decrease it."
     },
+    minAge: 30,
     eligibility: [
+      MIN_AGE_ELIGIBILITY,
       "Membership is governed by the membership provisions of the Articles of Association.",
       "Applicants may initially receive Temporary Membership for at least six months, subject to the provisions of the Articles of Association."
     ],
@@ -156,6 +186,7 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "As prescribed by the Board",
       subscriptionDetail: "As determined by the Board of Directors."
     },
+    minAge: 21,
     eligibility: [
       "Children aged 21 or above of a Donor, Life, or Permanent Member.",
       "A Donor, Life, or Permanent Member may sponsor up to two children."
@@ -178,7 +209,11 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "As prescribed by the Board",
       subscriptionDetail: "As determined by the Board of Directors."
     },
-    eligibility: ["Diplomats holding the rank of First Secretary or above in a foreign mission accredited to Bangladesh."],
+    minAge: 30,
+    eligibility: [
+      MIN_AGE_ELIGIBILITY,
+      "Diplomats holding the rank of First Secretary or above in a foreign mission accredited to Bangladesh."
+    ],
     privileges: ["Exempt from admission fee and monthly subscription."],
     restrictions: ["Membership ends when the diplomat's posting concludes."]
   },
@@ -195,7 +230,11 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "Contact Club Secretariat",
       subscriptionDetail: "Not specified in the Articles of Association; refer to the Board of Directors."
     },
-    eligibility: ["Individuals not permanently residing in Bangladesh."],
+    minAge: 30,
+    eligibility: [
+      MIN_AGE_ELIGIBILITY,
+      "Individuals not permanently residing in Bangladesh."
+    ],
     privileges: ["Enjoys the facilities available to Permanent Members."],
     restrictions: [
       "Cannot vote, propose, second, or hold office.",
@@ -214,7 +253,11 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "As prescribed by the Board",
       subscriptionDetail: "Monthly subscription as prescribed by the Board of Directors."
     },
-    eligibility: ["Private and public limited companies."],
+    minAge: 30,
+    eligibility: [
+      `Nominated representatives must be at least ${MIN_MEMBER_AGE} years of age.`,
+      "Private and public limited companies."
+    ],
     privileges: ["Each company may nominate up to three senior representatives through a Board Resolution."],
     restrictions: [
       "Minimum membership period of one year.",
@@ -234,7 +277,11 @@ export const MEMBERSHIP_CATEGORIES: MembershipCategory[] = [
       subscriptionLabel: "As prescribed by the Board",
       subscriptionDetail: "As determined by the Board of Directors."
     },
-    eligibility: ["Distinguished individuals, by invitation of the Board of Directors."],
+    minAge: 30,
+    eligibility: [
+      MIN_AGE_ELIGIBILITY,
+      "Distinguished individuals, by invitation of the Board of Directors."
+    ],
     privileges: ["Exempt from admission fee and monthly subscription."],
     restrictions: ["The number of Honorary Members cannot exceed 10% of the total General Members."]
   }
