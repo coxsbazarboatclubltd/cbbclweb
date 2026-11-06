@@ -110,7 +110,8 @@ const RENAMED_DIRECTORS: Record<string, { name: string; oldNames: string[] }> = 
   "maimunal-karim-jisan": { name: "Maimunul Karim Jisan", oldNames: ["Maimunal Karim Jisan"] },
   "md-rezaul-kabir-reza": { name: "Mohammad Rezaul Kabir Reza", oldNames: ["Md Rezaul Kabir Reza"] },
   "nurul-absar": { name: "Nurul Abser", oldNames: ["Nurul Absar"] },
-  "atiqul-islam": { name: "Atiqul Islam", oldNames: ["Md. Atiqul Islam"] }
+  "atiqul-islam": { name: "Atiqul Islam", oldNames: ["Md. Atiqul Islam"] },
+  "ziaul-haque": { name: "Md. Ziaul Hoque", oldNames: ["MD. Ziaul Hoque"] }
 };
 
 // Directors whose board seat changed; cached lists still holding the old seat are moved.

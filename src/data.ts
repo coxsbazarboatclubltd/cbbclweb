@@ -69,7 +69,7 @@ export const MD_REZAUL_KABIR_REZA_IMAGE = mdRezaulKabirRezaPortrait;
 export const MEHEDI_HASAN_IMAGE = mehediHasanPortrait;
 export const RESHEDUL_EVU_IMAGE = rasadulMaimunEvoPortrait;
 export const MD_ZIAUL_HOQUE = {
-  name: "MD. Ziaul Hoque",
+  name: "Md. Ziaul Hoque",
   image: ziaulHoquePortrait
 };
 export const MASTER_HERO_VIDEO = heroVideo;
@@ -664,7 +664,40 @@ export const DIRECTORS_DATA: Director[] = [
     name: MD_ZIAUL_HOQUE.name,
     designation: "Director",
     membershipCode: "CBBCL-FM-14",
-    memberNumber: "CBBCL-LM-0014"
+    memberNumber: "CBBCL-LM-0014",
+    level: 4,
+    profileSubmitted: true,
+    profileRevision: 3,
+    tagline: "Aviation Professional | Senior Executive, Air Astra Airways Ltd.",
+    photoAlt: "Md. Ziaul Hoque, Director of Cox's Bazar Boat Club Ltd.",
+    bio: [
+      "Md. Ziaul Hoque is an aviation professional currently serving as a Senior Executive at Air Astra Airways Ltd. Based at Cox's Bazar Airport, he has demonstrated professional commitment and performance in the airline industry.",
+      "His dedication to his responsibilities was recognized in 2025 when he received the Best Employee – Ground Operations award from Air Astra. This recognition reflects his contribution to the organization's operational standards and customer commitments.",
+      "In 2026, he was promoted to the position of Senior Executive, marking another milestone in his professional journey.",
+      "As a Director of Cox's Bazar Boat Club Ltd., he brings his professional experience and organizational perspective to the Club's growing network of members and business professionals."
+    ],
+    businessProfile: {
+      role: "Senior Executive",
+      company: "Air Astra Airways Ltd. (Cox's Bazar Airport)",
+      industry: "Aviation & Airline Operations"
+    },
+    achievements: [
+      "2026 — Promoted to Senior Executive, Air Astra Airways Ltd.",
+      "2025 — Best Employee, Ground Operations, Air Astra Airways Ltd. (Certificate of Recognition presented on 4 December 2025)"
+    ],
+    memberships: [
+      "Cox's Bazar Boat Club Ltd. — Director",
+      "JCI Cox's Bazar — Member since 2022"
+    ],
+    socials: {
+      facebook: "https://www.facebook.com/Ziaulcox10"
+    },
+    timeline: [
+      { year: "Current", event: "Director, Cox's Bazar Boat Club Ltd." },
+      { year: "2026", event: "Promoted to Senior Executive, Air Astra Airways Ltd." },
+      { year: "2025", event: "Recognized as Best Employee – Ground Operations, Air Astra Airways Ltd." },
+      { year: "2022", event: "Joined JCI Cox's Bazar" }
+    ]
   },
   {
     id: "reshedul-evu",
