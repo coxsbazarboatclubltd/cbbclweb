@@ -8,6 +8,7 @@ import { getCMSEvents } from "../utils/cmsStorage";
 import { MEMBERSHIP_CATEGORIES } from "../membershipCategories";
 import { EventItem } from "../types";
 import { POLICIES } from "../content/legal";
+import { CLUB_LOCATION, CLUB_MAPS_URL } from "../content/location";
 
 /** Production origin. cbbcl.org (apex) permanently redirects here, so canonicals use www. */
 export const SITE_URL = "https://www.cbbcl.org";
@@ -20,6 +21,7 @@ const CLUB_ADDRESS = {
   postalCode: "4700",
   addressCountry: "BD",
 };
+const CLUB_GEO = { "@type": "GeoCoordinates", latitude: CLUB_LOCATION.lat, longitude: CLUB_LOCATION.lng };
 
 export interface RouteSeo {
   title: string;
@@ -69,7 +71,7 @@ function eventsJsonLd(events: EventItem[]): object[] {
       ...(e.endsAt ? { endDate: e.endsAt } : {}),
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: { "@type": "Place", name: e.venue, address: CLUB_ADDRESS },
+      location: { "@type": "Place", name: e.venue, address: CLUB_ADDRESS, geo: CLUB_GEO, hasMap: CLUB_MAPS_URL },
       ...(absolute(e.banner || e.image) ? { image: [absolute(e.banner || e.image)] } : {}),
       organizer: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     }));

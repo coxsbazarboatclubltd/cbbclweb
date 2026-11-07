@@ -3,6 +3,7 @@ import { RoutePath, FooterSettings } from "../types";
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, ShieldCheck } from "lucide-react";
 import { fetchFooterSettings, getFooterSettingsSync, getNavCMS } from "../utils/cmsStorage";
 import LogoSvg from "./LogoSvg";
+import { CLUB_MAPS_URL } from "../content/location";
 
 interface FooterProps {
   navigate: (path: RoutePath) => void;
@@ -102,7 +103,7 @@ export default function Footer({ navigate }: FooterProps) {
                   <>
                     <li>
                       <span className="text-gold font-semibold tracking-wider block text-xs uppercase mb-0.5">CLUB HOUSE LAND MARK</span>
-                      <span className="leading-relaxed whitespace-pre-line">{data.contact.address}</span>
+                      <a href={CLUB_MAPS_URL} target="_blank" rel="noopener noreferrer" title="Open in Google Maps" className="leading-relaxed whitespace-pre-line hover:text-gold transition-colors">{data.contact.address}</a>
                     </li>
                     <li>
                       <span className="text-gold font-semibold tracking-wider block text-xs uppercase mb-0.5">OFFICIAL EMAIL</span>

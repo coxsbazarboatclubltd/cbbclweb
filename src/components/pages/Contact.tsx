@@ -9,7 +9,7 @@ import { FooterSettings } from "../../types";
 // @ts-ignore
 import cbbclLogoGold from "../../assets/logo-gold.svg";
 
-const CLUB_MAP_LINK = "https://maps.app.goo.gl/xqQd5DFKMVDYocsN9";
+import { CLUB_DIRECTIONS_URL, CLUB_MAPS_URL, CLUB_MAP_EMBED_URL } from "../../content/location";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -317,7 +317,7 @@ export default function Contact() {
               <span>{footerData.contact.address.split("\n")[0]}</span>
             </p>
             <a
-              href={CLUB_MAP_LINK}
+              href={CLUB_DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center justify-center space-x-2 px-5 py-2.5 bg-gold text-navy hover:bg-gold-light font-sans text-[10px] font-extrabold uppercase tracking-widest transition-colors"
@@ -325,12 +325,19 @@ export default function Contact() {
               <Navigation className="w-3.5 h-3.5" />
               <span>Get Directions</span>
             </a>
+            <a
+              href={CLUB_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 block font-sans text-[10px] uppercase tracking-widest text-slate-300 hover:text-gold transition-colors"
+            >
+              View on Google Maps
+            </a>
           </div>
         </div>
         <div className="order-2 h-96 w-full overflow-hidden">
         <iframe
-          // Club location pin: 21.445269302061305, 91.97637131173867
-          src="https://maps.google.com/maps?q=21.445269302061305,91.97637131173867&z=16&output=embed"
+          src={CLUB_MAP_EMBED_URL}
           width="100%"
           height="100%"
           style={{ border: 0, filter: "grayscale(30%) contrast(105%) brightness(95%)" }}
